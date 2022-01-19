@@ -9,7 +9,7 @@ Fundr is an application which will allow the investors and founders to meet via 
 | Name | GitHub ID |
 |------|-----------|
 |Tanishq Shaikh|tanishqshek| 6133-3588|
-|Sumeet Saini|sumeet2807a| |
+|Sumeet Saini|sumeet2807| |
 |Shreya Kasturia|shreyakasturia| |
 |Dhairya Patel|dhairya3patel| |
 
