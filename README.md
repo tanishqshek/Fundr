@@ -1,3 +1,5 @@
+![alt text](https://gust.com/marketing_assets/founders/illustrations/illustration-01-95b432defb91396da68559d437fa033701513b827291d2f976466601ab8f2c6f.png)
+
 # Fundr
 
 ## Idea
