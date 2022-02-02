@@ -13,8 +13,8 @@ class Main extends Component {
             <div>
                 <Routes>
                     <Route path="/" element={<Login/>}></Route>
-                    <Route path="/login" element={<Login/>}></Route>
                     <Route path="/signup" element={<Signup/>}></Route>
+                    <Route path="/test" element={<Test/>}></Route>
                 </Routes>
             </div>
         );

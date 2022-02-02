@@ -13,11 +13,22 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import img1 from './img1.jpeg';
+import { useNavigate } from "react-router-dom";
 import img2 from '../assets/img2.jpeg';
+import Test from './TestComponent';
 
 const theme = createTheme();
 
+
+
 export default function Login() {
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/test`; 
+    navigate(path);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -93,15 +104,12 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={routeChange}
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+              <Grid container justifyContent="center">
+                
                 <Grid item>
                   <Link href='/signup' variant="body2">
                     {"Don't have an account? Sign Up"}
