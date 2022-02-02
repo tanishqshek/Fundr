@@ -1,21 +1,20 @@
 import React from 'react';
 // import './App.css';
 // import Container from './container/Container';
-import SignInSide from './components/LoginComponent';
-import Test from './components/TestComponent';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Component } from 'react';
+import Main from './components/MainComponent';
+import { BrowserRouter } from 'react-router-dom';
 
-
-const App = () => {
-  return (
-    <div className="App cfb">
-      {/* <Container/> */}
-      <SignInSide />
-      {/* <Test /> */}
-
-
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+      <div className="App">
+        <Main />
+      </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

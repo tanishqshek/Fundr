@@ -18,6 +18,7 @@ import img2 from '../assets/img2.jpeg';
 const theme = createTheme();
     
 export default function SignUpComponent() {
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -132,14 +133,18 @@ export default function SignUpComponent() {
                 type="pass2"
                 id="pass2"
               />
+              
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
+                
                 sx={{ mt: 3, mb: 2 }}
-              >
+              ><Link href='/login' style={{ color: '#FFF' }}>
                 Register
+                </Link>
               </Button>
+              
 
             </Box>
           </Box>
