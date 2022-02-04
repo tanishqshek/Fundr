@@ -7,6 +7,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -31,6 +32,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar() {
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/`; 
+    navigate(path);
+  }
+
   const classes = useStyles();
 
   return (
@@ -40,7 +48,7 @@ function Navbar() {
         <Typography variant="h4" className={classes.logo} align="left">
           Fundr
         </Typography>
-        <LogoutIcon />     
+        <LogoutIcon onClick={routeChange}/>     
       </Toolbar>
     </AppBar>
   );
