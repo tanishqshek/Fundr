@@ -1,6 +1,10 @@
 package server
 
 import (
+	"time"
+
+	"github.com/gin-contrib/sessions"
+
 	"Fundr/backend/internal/store"
 
 	"net/http"
@@ -8,6 +12,8 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"crypto/sha256"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 func signUp(c *gin.Context) {
@@ -43,13 +49,14 @@ func signUp(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
 		"message": "Signed up successfully.",
-		"users":   store.Users,
+		//"users":   store.Users,
 	})
 
 }
 
 func signIn(c *gin.Context) {
 
+	// var w http.ResponseWriter
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
 		Password string `json:"password" binding:"required"`
@@ -68,15 +75,32 @@ func signIn(c *gin.Context) {
 	for _, u := range store.Users {
 
 		if u.Username == req.Username && u.Password == password {
+
+			sessionToken, _ := uuid.NewV4() //.String();
+			session := sessions.Default(c)
+			session.Set("id", sessionToken)
+			session.Set("email", req.Username)
+			session.Save()
+
 			c.JSON(http.StatusOK, gin.H{
 				"status":  "200",
 				"message": "Signed in successfully.",
 			})
+			http.SetCookie(c.Writer, &http.Cookie{
+				Name:    "session_token",
+				Value:   sessionToken.String(),
+				Expires: time.Now().Add(120 * time.Second),
+			})
 			return
+
 		}
 	}
 	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 		"status":  "500",
 		"message": "Sign in failed.",
 	})
+}
+
+func getUserData(c *gin.Context) {
+
 }
