@@ -3,7 +3,7 @@ export const SUMMARIES =
         {
         id: 0,
         name:'Skillzy',
-        image: 'https://images-platform.99static.com/7uRT5jSfK2z9eWYQ4Yqgx5vCbO0=/200x200:1800x1800/500x500/top/smart/99designs-contests-attachments/83/83218/attachment_83218186',
+        image: 'https://image.spreadshirtmedia.com/image-server/v1/compositions/T815A1PA3116PT17X5Y1D1007864351FS3767/views/1,width=500,height=500,appearanceId=1,backgroundColor=b5e9e9/skillzy-logo-kids-premium-t-shirt.jpg',
         description:'Especially with the current landscape, more people are turning to virtual education than ever before — both for practical purposes as well as to pursue a hobby or passion. Experts predict e-learning sales will grow to $325 billion by 2025, Skillzy can capture a significant market share and get a first mover advantage before the market gets cluttered i- e  you should enter this scholastic gold rush before the market is oversaturated with competitors. By selling e-guides, online courses, e-books or virtual tutoring sessions, Skillzy can become a million-dollar business for little upfront cost. Since online education doesnt require physical materials, or even an office if youre a team of one, your overhead will be low and your profit will stay high.'                    
         },
         {
