@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/gin-contrib/sessions"
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/tanishqshek/Fundr/backend/internal/store"
 
@@ -11,8 +12,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-
-	"crypto/sha256"
 
 	uuid "github.com/satori/go.uuid"
 )
@@ -35,7 +34,10 @@ func signUp(c *gin.Context) {
 		return
 	}
 
-	password := sha256.Sum256([]byte(req.Password))
+	// password := sha256.Sum256([]byte(req.Password))
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	password := string(hashedPassword)
 
 	user := store.User{
 		Name:     req.Name,
@@ -78,7 +80,10 @@ func signIn(c *gin.Context) {
 		return
 	}
 
-	password := sha256.Sum256([]byte(req.Password))
+	// password := sha256.Sum256([]byte(req.Password))
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	password := string(hashedPassword)
 
 	for _, u := range store.Users {
 
