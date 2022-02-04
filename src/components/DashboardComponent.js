@@ -1,33 +1,35 @@
 import React, { useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import styles from './dashboard.module.css'
+import { SUMMARIES } from '../assets/summaries'
 
-const db = [
-  {
-    name: 'Richard Hendricks',
-    // url: './src/assets/img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    // url: '../assets/img/erlich.jpg'
-  },
-  {
-    name: 'Monica Hall',
-    // url: '../assets/img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    // url: '../assets/img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    // url: '../assets/img/dinesh.jpg'
-	  info: "Hey this is dinesh"
-  }
-]
+// const db = [
+//   {
+//     name: 'Richard Hendricks',
+//     // url: './src/assets/img/richard.jpg'
+//   },
+//   {
+//     name: 'Erlich Bachman',
+//     // url: '../assets/img/erlich.jpg'
+//   },
+//   {
+//     name: 'Monica Hall',
+//     // url: '../assets/img/monica.jpg'
+//   },
+//   {
+//     name: 'Jared Dunn',
+//     // url: '../assets/img/jared.jpg'
+//   },
+//   {
+//     name: 'Dinesh Chugtai',
+//     // url: '../assets/img/dinesh.jpg'
+// 	  info: "Hey this is dinesh"
+//   }
+// ]
 
 function Dashboard () {
-  const companies = db
+  
+  const companies = SUMMARIES
   const [lastDirection, setLastDirection] = useState()
 
   const swiped = (direction, nameToDelete) => {
@@ -51,9 +53,11 @@ function Dashboard () {
             <div className={styles.card}>
               <h3 className={styles.card_h3}>{company.name}</h3>
               <div className={styles.cardImagediv}>
-                <div className={styles.cardImage}></div>
+                {/* <div  > */}
+                  <img className={styles.cardImage} src={company.image} />
+                {/* </div>, */}
               </div>
-			        <p>{company.info}</p>
+			        <p className={styles.para}>{company.description}</p>
             </div>
           </TinderCard>
         )}

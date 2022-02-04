@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import img1 from './img1.jpeg';
 import img2 from '../assets/img2.jpeg';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 const theme = createTheme();
     
@@ -99,12 +101,13 @@ export default function SignUpComponent() {
                 id="linkedin"
                 autoComplete="linkedin"
               />
-                <select id = "myList" margin= "normal" required>  
+                {/* <select id = "myList" margin= "normal" required>  
                 <option margin = "normal"> Select Type</option>  
                 <option> Investor </option>  
                 <option> Founder</option>  
                 </select> 
-
+                 */}
+                
                 <TextField
                 margin="normal"
                 required
@@ -121,7 +124,7 @@ export default function SignUpComponent() {
                 fullWidth
                 name="pass"
                 label="Password"
-                type="pass"
+                type="password"
                 id="pass"
               />
                 <TextField
@@ -130,10 +133,19 @@ export default function SignUpComponent() {
                 fullWidth
                 name="pass2"
                 label="Re-enter Password"
-                type="pass2"
+                type="password"
                 id="pass2"
               />
-              
+              <Select
+                margin='normal'
+                required
+                fullWidth
+                name='type'
+                label="Select Founder or investor*"
+                >
+                <MenuItem value="Founder">Founder</MenuItem>
+                <MenuItem value="Investor">Investor</MenuItem>
+                </Select>
               <Button
                 type="submit"
                 fullWidth
