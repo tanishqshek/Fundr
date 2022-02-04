@@ -53,7 +53,9 @@ function Dashboard () {
             <div className={styles.card}>
               <h3 className={styles.card_h3}>{company.name}</h3>
               <div className={styles.cardImagediv}>
-                <div className={styles.cardImage}></div>
+                {/* <div  > */}
+                  <img className={styles.cardImage} src={company.image} />
+                {/* </div>, */}
               </div>
 			        <p className={styles.para}>{company.description}</p>
             </div>
