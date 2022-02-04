@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import img1 from './img1.jpeg';
 import { useNavigate } from "react-router-dom";
 import img2 from '../assets/img2.jpeg';
-import Test from './TestComponent';
+import Dashboard from "./DashboardComponent";
 
 const theme = createTheme();
 
@@ -25,7 +25,7 @@ export default function Login() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/test`; 
+    let path = `/home`; 
     navigate(path);
   }
 

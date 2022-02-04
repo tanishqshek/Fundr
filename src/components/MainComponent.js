@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "./LoginComponent";
-import Test from "./TestComponent";
+import Dashboard from "./DashboardComponent";
 import Signup from "./SignUpComponent";
 // import ConfigComp from './ConfigComponent';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
@@ -15,9 +15,8 @@ class Main extends Component {
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Login/>}></Route>
-                    <Route path="/signup" element={<Signup/>}></Route>
-                    
-                    <Route path="/test" element={<Test/>}></Route>
+                    <Route path="/signup" element={<Signup/>}></Route>         
+                    <Route path="/home" element={<Dashboard/>}></Route>
                 </Routes>
             </div>
         );

@@ -68,9 +68,9 @@ h2 {
   height: 100%;
 }
 
-.swipe:last-of-type {
+/* .swipe:last-of-type {
 
-}
+} */
 
 .card_h3 {
   position: relative;
@@ -82,6 +82,7 @@ h2 {
   height: 50px;
   background-color: rgb(81, 84, 241);
   text-align: center;
+  vertical-align:middle;
 }
 
 .infoText {
