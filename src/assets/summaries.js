@@ -23,7 +23,7 @@ export const SUMMARIES =
         name:'Milo Insurance',
         image: 'https://images-platform.99static.com/HzlkUAaKpZPZ5G18Sg4CqVo9J28=/163x114:1078x1029/500x500/top/smart/99designs-contests-attachments/99/99833/attachment_99833222',
         description:'The worldwide pet insurance market is expected to rise from USD 3.62 billion in 2021 to USD 6.65 billion by 2026. The market is expected to develop at a 13.73 percent CAGR. The pet insurance market is being driven by rising demand and expenditure on pets. Scooby Doos pet insurance is a type of specialised property and casualty insurance plan purchased by pet owners to cover unforeseen expenditures like as surgical treatments, injury accidents, and prescription pet medications. Milo insurance provides pet owners with useful pet plans. The market has experienced promising expansion, bringing with it sophisticated service options to satisfy large new appetites.'
-        }
+        },
         {
         id: 4,
         name:'Nidera',

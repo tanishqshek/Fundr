@@ -6,6 +6,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -38,7 +39,8 @@ function Navbar() {
       <Toolbar >
         <Typography variant="h4" className={classes.logo} align="left">
           Fundr
-        </Typography>     
+        </Typography>
+        <LogoutIcon />     
       </Toolbar>
     </AppBar>
   );

@@ -68,6 +68,20 @@ h2 {
   height: 100%;
 }
 
+.cardImagediv{
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #ccc;
+  overflow:auto;
+}
+
+.cardImage{
+  width: 100px;
+  height: 100px;
+  border-style: solid;
+  margin: 5px 5px 5px 5px;
+  padding: 1px 1px 1px 1px;
+}
 /* .swipe:last-of-type {
 
 } */
@@ -80,7 +94,7 @@ h2 {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 50px;
-  background-color: rgb(81, 84, 241);
+  background-color: rgb(0, 0, 0);
   text-align: center;
   vertical-align:middle;
 }
@@ -89,8 +103,8 @@ h2 {
   width: 100%;
   height: 28px;
   justify-content: center;
-  display: flex;
-  color: #fff;
+  display: block;
+  color: #000;
   animation-name: popup;
   animation-duration: 800ms;
 }

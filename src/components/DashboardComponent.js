@@ -46,11 +46,14 @@ function Dashboard () {
       <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' /> */}
       {/* <h1>React Tinder Card</h1> */}
       <div className={styles.cardContainer}>
-        {companies.map((character) =>
-          <TinderCard className={styles.swipe} key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className={styles.card}>
-              <h3 className={styles.card_h3}>{character.name}</h3>
-			  <p>{character.info}</p>
+        {companies.map((company) =>
+          <TinderCard className={styles.swipe} key={company.name} onSwipe={(dir) => swiped(dir, company.name)} onCardLeftScreen={() => outOfFrame(company.name)}>
+            <div className={styles.card}>
+              <h3 className={styles.card_h3}>{company.name}</h3>
+              <div className={styles.cardImagediv}>
+                <div className={styles.cardImage}></div>
+              </div>
+			        <p>{company.info}</p>
             </div>
           </TinderCard>
         )}
