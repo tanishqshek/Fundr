@@ -1,7 +1,7 @@
 package server
 
 import (
-	"Fundr/backend/internal/store"
+	"github.com/tanishqshek/Fundr/backend/internal/store"
 
 	"net/http"
 
