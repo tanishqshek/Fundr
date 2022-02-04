@@ -13,32 +13,26 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import img1 from './img1.jpeg';
-import { useNavigate } from "react-router-dom";
 import img2 from '../assets/img2.jpeg';
-import Dashboard from "./DashboardComponent";
 
 const theme = createTheme();
-
-
-
-export default function Login() {
-
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/home`; 
-    navigate(path);
-  }
-
+    
+export default function SignUpComponent() {
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      fname: data.get('fname'),
+      lname: data.get('lname'),
+      fname: data.get('email'),
+      lname: data.get('pass'),
+      fname: data.get('pass2')
     });
   };
 
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -72,50 +66,86 @@ export default function Login() {
               {/* <LockOutlinedIcon /> */}
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="fname"
+                label="First Name"
+                name="fname"
+                autoComplete="fname"
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="lname"
+                label="Last Name"
+                type="lname"
+                id="lname"
+                autoComplete="lname"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="linkedin"
+                label="LinkedIn Profile Link"
+                type="linkedin"
+                id="linkedin"
+                autoComplete="linkedin"
+              />
+                <select id = "myList" margin= "normal" required>  
+                <option margin = "normal"> Select Type</option>  
+                <option> Investor </option>  
+                <option> Founder</option>  
+                </select> 
+
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="email"
+                label="Email Address"
+                type="email"
+                id="email"
+                autoComplete="email"
+              />
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="pass"
                 label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                type="pass"
+                id="pass"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="pass2"
+                label="Re-enter Password"
+                type="pass2"
+                id="pass2"
               />
+              
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={routeChange}
-              >
-                Sign In
-              </Button>
-              <Grid container justifyContent="center">
                 
-                <Grid item>
-                  <Link href='/signup' variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
+                sx={{ mt: 3, mb: 2 }}
+              ><Link href='/login' style={{ color: '#FFF' }}>
+                Register
+                </Link>
+              </Button>
+              
+
             </Box>
           </Box>
         </Grid>
