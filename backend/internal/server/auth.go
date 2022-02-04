@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/sessions"
 
-	"Fundr/backend/internal/store"
+	"github.com/tanishqshek/Fundr/backend/internal/store"
 
 	"net/http"
 
@@ -76,7 +76,7 @@ func signIn(c *gin.Context) {
 
 		if u.Username == req.Username && u.Password == password {
 
-			sessionToken, _ := uuid.NewV4() //.String();
+			sessionToken := uuid.NewV4().String()
 			session := sessions.Default(c)
 			session.Set("id", sessionToken)
 			session.Set("email", req.Username)
@@ -88,7 +88,7 @@ func signIn(c *gin.Context) {
 			})
 			http.SetCookie(c.Writer, &http.Cookie{
 				Name:    "session_token",
-				Value:   sessionToken.String(),
+				Value:   sessionToken,
 				Expires: time.Now().Add(120 * time.Second),
 			})
 			return
@@ -99,8 +99,4 @@ func signIn(c *gin.Context) {
 		"status":  "500",
 		"message": "Sign in failed.",
 	})
-}
-
-func getUserData(c *gin.Context) {
-
 }
