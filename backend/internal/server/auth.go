@@ -7,6 +7,7 @@ import (
 
 	"github.com/tanishqshek/Fundr/backend/internal/store"
 
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -42,6 +43,13 @@ func signUp(c *gin.Context) {
 		Password: password,
 		Mobile:   req.Mobile,
 		UserType: req.UserType,
+	}
+
+	createdUser := DB.DB.Create(user)
+	var errMessage = createdUser.Error
+
+	if createdUser.Error != nil {
+		fmt.Println(errMessage)
 	}
 
 	store.Users = append(store.Users, &user)
