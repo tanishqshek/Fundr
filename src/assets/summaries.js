@@ -27,7 +27,7 @@ export const SUMMARIES =
         {
         id: 4,
         name:'Nidera',
-        image: 'http://www.smartcard.com.ar/wp-content/uploads/2016/10/clientes-1-24.jpg',
+        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fnidera&psig=AOvVaw1nkVVKEnyrcGGb0LwVHUC7&ust=1644094107900000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLDCpP315vUCFQAAAAAdAAAAABAD',
         description:'Nidera provides financial independence to Generation Z. Nidera allows children to make payments on their own, saving parents the inconvenience of handing them cash or a debit/credit card. Have the flexibility of paying anytime, anyplace without a bank account, with safety and security, while also providing children with financial freedom in a regulated manner. Manage your finances, save money, and earn incentives on every purchase. Nidera offers a limitless number of cards to improve your online and smartphone buying experience. Our goal is to move the smart generation away from cash and toward digital. From ordering your favourite burgers to purchasing gifts for friends, parents, or those special ones (shhhh - we got it for you), the possibilities are limitless'
         }
     ];
