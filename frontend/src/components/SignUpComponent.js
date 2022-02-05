@@ -142,9 +142,10 @@ export default function SignUpComponent() {
                 fullWidth
                 name='type'
                 label="Select Founder or investor*"
+                floatingLabelText="Founder or Investor"
                 >
-                <MenuItem value="Founder">Founder</MenuItem>
-                <MenuItem value="Investor">Investor</MenuItem>
+                <MenuItem value="Founder" primaryText="Founder">Founder</MenuItem>
+                <MenuItem value="Investor" primaryText="Investor">Investor</MenuItem>
                 </Select>
               <Button
                 type="submit"
@@ -152,7 +153,7 @@ export default function SignUpComponent() {
                 variant="contained"
                 
                 sx={{ mt: 3, mb: 2 }}
-              ><Link href='/login' style={{ color: '#FFF' }}>
+              ><Link href='/home' style={{ color: '#FFF' }}>
                 Register
                 </Link>
               </Button>

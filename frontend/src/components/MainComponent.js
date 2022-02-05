@@ -12,10 +12,13 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                
                 <Routes>
                     <Route path="/" element={<Login/>}></Route>
-                    <Route path="/signup" element={<Signup/>}></Route>         
+                    <Route path="/signup" element={<Signup/>}></Route> 
+                </Routes>
+                <Navbar />
+                <Routes>
                     <Route path="/home" element={<Dashboard/>}></Route>
                 </Routes>
             </div>

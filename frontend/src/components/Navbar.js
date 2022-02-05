@@ -48,7 +48,7 @@ function Navbar() {
         <Typography variant="h4" className={classes.logo} align="left">
           Fundr
         </Typography>
-        <LogoutIcon onClick={routeChange}/>     
+        <LogoutIcon onClick={routeChange} />Logout     
       </Toolbar>
     </AppBar>
   );
