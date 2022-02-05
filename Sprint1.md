@@ -37,7 +37,7 @@ The major goals achieved for backend in this sprint were-
 4) Creation of database tables for storing user authentication data.
 
 
-[Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
+[Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
 
 [Frontend demo](https://drive.google.com/file/d/1cVPDzt5knC0sZTtrooPgBjx3v-RULk4n/view?usp=sharing)
 
