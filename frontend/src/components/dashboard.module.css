@@ -9,14 +9,14 @@
   background: linear-gradient(#000000, #c6d3ff);
 }
 
-#root>div {
+#root > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.test>div {
+.test > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,14 +27,14 @@
   flex-direction: row !important;
 }
 
-.row>* {
+.row > * {
   margin: 5px;
 }
 
 h1 {
-  font-family: 'Damion', cursive;
+  font-family: "Damion", cursive;
   color: #fff;
-  text-shadow: 0px 0px 50px 0px rgba(0,0,0,0.30);
+  text-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -53,12 +53,13 @@ h2 {
 
 .card {
   position: relative;
-  left:20px; bottom:40px;
+  left: 20px;
+  bottom: 40px;
   background-color: #fff;
   /* width: 80vw; */
   width: 800px;
   height: 460px;
-  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.30);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   background-size: cover;
   background-position: center;
@@ -69,14 +70,14 @@ h2 {
   height: 100%;
 }
 
-.cardImagediv{
+.cardImagediv {
   width: 100%;
   height: 130px;
   border-bottom: 1px solid #ccc;
-  overflow:auto;
+  overflow: auto;
 }
 
-.cardImage{
+.cardImage {
   width: 100px;
   height: 100px;
   border-style: solid;
@@ -97,10 +98,10 @@ h2 {
   height: 35px;
   background-color: rgb(0, 0, 0);
   text-align: center;
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
-.para{
+.para {
   margin: 10px 20px 10px 20px;
 }
 
@@ -115,7 +116,6 @@ h2 {
   position: absolute;
   bottom: 0px;
   left: 0px;
-
 }
 
 .buttons {
@@ -135,7 +135,7 @@ h2 {
   margin: 0 10px;
   font-weight: bolder;
   width: 160px;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
 }
 
 .buttons button:hover {
@@ -143,11 +143,25 @@ h2 {
 }
 
 @keyframes popup {
-  0%   { transform: scale(1,1) }
-  10%  { transform: scale(1.1,1.1) }
-  30%  { transform: scale(.9,.9) }
-  50%  { transform: scale(1,1) }
-  57%  { transform: scale(1,1) }
-  64%  { transform: scale(1,1) }
-  100% { transform: scale(1,1) }
+  0% {
+    transform: scale(1, 1);
+  }
+  10% {
+    transform: scale(1.1, 1.1);
+  }
+  30% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  57% {
+    transform: scale(1, 1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

@@ -6,15 +6,14 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-
   navlinks: {
     marginLeft: theme.spacing(10),
   },
- logo: {
+  logo: {
     flexGrow: "2",
     cursor: "pointer",
   },
@@ -26,29 +25,28 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "black",
       borderBottom: "1px solid white",
-      
     },
   },
 }));
 
 function Navbar() {
-
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/`; 
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/`;
     navigate(path);
-  }
+  };
 
   const classes = useStyles();
 
   return (
-    <AppBar position="static" style={{ background: '#000' }}>
+    <AppBar position="static" style={{ background: "#000" }}>
       <CssBaseline />
-      <Toolbar >
+      <Toolbar>
         <Typography variant="h4" className={classes.logo} align="left">
           Fundr
         </Typography>
-        <LogoutIcon onClick={routeChange} />Logout     
+        <LogoutIcon onClick={routeChange} />
+        Logout
       </Toolbar>
     </AppBar>
   );
