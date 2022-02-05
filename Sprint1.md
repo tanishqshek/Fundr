@@ -32,7 +32,7 @@ Sprint 1 of this project focuses on the SignUp/Login feature as well as the Home
 
 The major goals achieved for backend in this sprint were-
 1) Creation of Login and Signup Pages.
-2) Creation of Home page which has the cards stack with dummy data of companies.
+2) Creation of Home page which has the cards stack with mocked up data of companies.
 3) Adding swipe functionality to the cards and keeping function placeholders for action performed by the user.
 4) All the buttons have been used to mock the behaviour of backend (Register, Sign In, Logout).
 
@@ -53,6 +53,6 @@ The major goals achieved for backend in this sprint were-
 
 [Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
 
-[Backend demo](https://drive.google.com/file/d/1yRukGp_m29PJIZgvf6Jmpy44AZ3HQzWF/view?usp=sharing)
+[Backend demo](https://drive.google.com/file/d/1IQQ0DDr4YYR4nRZQsLgDhev-UM42C03s/view?usp=sharin)
 
 
