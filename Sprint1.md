@@ -31,13 +31,13 @@ Sprint 1 of this project focuses on the SignUp/Login feature as well as the Home
 ## Fundr Frontend Status
 
 The major goals achieved for backend in this sprint were-
-1) Creating of rest API for handling user authentication in the backend.
-2) Creation of rest API for handling user creation in the backend
-3) Integrating Sqlite as main database for the application 
-4) Creation of database tables for storing user authentication data.
+1) Creation of Login and Signup Pages.
+2) Creation of Home page which has the cards stack with dummy data of companies.
+3) Adding swipe functionality to the cards and keeping function placeholders for action performed by the user.
+4) All the buttons have been used to mock the behaviour of backend (Register, Sign In, Logout).
 
 
-[Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
+[Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22user+story+-+frontend%22+is%3Aclosed)
 
 [Frontend demo](https://drive.google.com/file/d/1cVPDzt5knC0sZTtrooPgBjx3v-RULk4n/view?usp=sharing)
 
