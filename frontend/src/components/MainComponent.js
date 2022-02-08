@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Login from "./LoginComponent";
+import Signin from "./SignInComponent";
 import Dashboard from "./DashboardComponent";
+import Signup from "./SignUpComponent";
 import Signup from "./SignUpComponent";
 // import ConfigComp from './ConfigComponent';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -15,6 +16,7 @@ class Main extends Component {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/signin" element={<Signin />}></Route>
         </Routes>
         <Navbar />
         <Routes>
