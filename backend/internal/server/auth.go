@@ -1,14 +1,21 @@
 package server
 
 import (
+	"fmt"
+
+	"github.com/gin-contrib/sessions"
+
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/tanishqshek/Fundr/backend/internal/store"
+	"Fundr/backend/internal/store"
 
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/google/uuid"
+
+	"time"
 )
 
 func signUp(c *gin.Context) {
@@ -81,29 +88,30 @@ func signIn(c *gin.Context) {
 	if err := bcrypt.CompareHashAndPassword([]byte(fetched_user.Password), []byte(req.Password)); err != nil {
 		// If the two passwords don't match, return a 401 status
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"status":  fetched_user.Username,
+			"status":  "401",
 			"message": "Sign in failed.",
 		})
-
-		return
 	}
 
-	// sessionToken := uuid.NewV4().String()
-	// session := sessions.Default(c)
-	// session.Set("id", sessionToken)
-	// session.Set("email", req.Username)
-	// session.Save()
+	sessionToken := uuid.NewString()
+	session := sessions.Default(c)
+	session.Set("id", sessionToken)
+	session.Set("email", req.Username)
+	session.Save()
 
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"status":  "200",
-	// 	"message": "Signed in successfully.",
-	// })
-	// http.SetCookie(c.Writer, &http.Cookie{
-	// 	Name:    "session_token",
-	// 	Value:   sessionToken,
-	// 	Expires: time.Now().Add(120 * time.Second),
-	// })
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:    req.Username,
+		Value:   sessionToken,
+		Expires: time.Now().Add(120 * time.Second),
+	})
 
+	// c.SetCookie(req.Username, sessionToken, 9999999, "/", "localhost", false, true)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "200",
+		"message": "Signed in successfully.",
+	})
+	return
 }
 
 // 	for _, u := range store.Users {
