@@ -1,8 +1,9 @@
 package server
 
 import (
+	"Fundr/backend/internal/store"
+
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/tanishqshek/Fundr/backend/internal/store"
 )
 
 // type App struct {

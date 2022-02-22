@@ -1,19 +1,21 @@
 package server
 
 import (
-	"time"
+	"fmt"
 
 	"github.com/gin-contrib/sessions"
 
-	"github.com/tanishqshek/Fundr/backend/internal/store"
+	"golang.org/x/crypto/bcrypt"
+
+	"Fundr/backend/internal/store"
 
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 
-	"crypto/sha256"
+	"github.com/google/uuid"
 
-	uuid "github.com/satori/go.uuid"
+	"time"
 )
 
 func signUp(c *gin.Context) {
@@ -34,7 +36,10 @@ func signUp(c *gin.Context) {
 		return
 	}
 
-	password := sha256.Sum256([]byte(req.Password))
+	// password := sha256.Sum256([]byte(req.Password))
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	password := string(hashedPassword)
 
 	user := store.User{
 		Name:     req.Name,
@@ -44,7 +49,14 @@ func signUp(c *gin.Context) {
 		UserType: req.UserType,
 	}
 
-	store.Users = append(store.Users, &user)
+	createdUser := DB.DB.Create(user)
+	var errMessage = createdUser.Error
+
+	if createdUser.Error != nil {
+		fmt.Println(errMessage)
+	}
+
+	// store.Users = append(store.Users, &user)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
@@ -56,6 +68,7 @@ func signUp(c *gin.Context) {
 
 func signIn(c *gin.Context) {
 
+	var fetched_user store.User
 	// var w http.ResponseWriter
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
@@ -70,33 +83,33 @@ func signIn(c *gin.Context) {
 		return
 	}
 
-	password := sha256.Sum256([]byte(req.Password))
+	DB.DB.First(&fetched_user, "Username = ?", req.Username)
 
-	for _, u := range store.Users {
-
-		if u.Username == req.Username && u.Password == password {
-
-			sessionToken := uuid.NewV4().String()
-			session := sessions.Default(c)
-			session.Set("id", sessionToken)
-			session.Set("email", req.Username)
-			session.Save()
-
-			c.JSON(http.StatusOK, gin.H{
-				"status":  "200",
-				"message": "Signed in successfully.",
-			})
-			http.SetCookie(c.Writer, &http.Cookie{
-				Name:    "session_token",
-				Value:   sessionToken,
-				Expires: time.Now().Add(120 * time.Second),
-			})
-			return
-
-		}
+	if err := bcrypt.CompareHashAndPassword([]byte(fetched_user.Password), []byte(req.Password)); err != nil {
+		// If the two passwords don't match, return a 401 status
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "Sign in failed.",
+		})
 	}
-	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-		"status":  "500",
-		"message": "Sign in failed.",
+
+	sessionToken := uuid.NewString()
+	session := sessions.Default(c)
+	session.Set("id", sessionToken)
+	session.Set("email", req.Username)
+	session.Save()
+
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:    req.Username,
+		Value:   sessionToken,
+		Expires: time.Now().Add(120 * time.Second),
 	})
+
+	// c.SetCookie(req.Username, sessionToken, 9999999, "/", "localhost", false, true)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "200",
+		"message": "Signed in successfully.",
+	})
+	return
 }
