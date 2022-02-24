@@ -162,7 +162,7 @@ export default function SignUpComponent() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                <Link href="/" style={{ color: "#FFF" }}>
+                <Link href="/home" style={{ color: "#FFF" }}>
                   Register
                 </Link>
               </Button>
