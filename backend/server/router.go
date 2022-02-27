@@ -1,11 +1,12 @@
 package server
 
 import (
+	"github.com/tanishqshek/Fundr/backend/API"
+	"github.com/tanishqshek/Fundr/backend/internal/session-redis/src/middleware"
+
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-
-	"github.com/tanishqshek/Fundr/backend/internal/session-redis/src/middleware"
 
 	"github.com/gin-contrib/sessions"
 
@@ -21,8 +22,8 @@ func setRouter() *gin.Engine {
 	api := router.Group("/api")
 	{
 		// Add /hello GET route to router and define route handler function
-		api.POST("/signup", signUp)
-		api.POST("/signin", signIn)
+		api.POST("/signup", API.SignUp)
+		api.POST("/signin", API.SignIn)
 		auth := api.Group("/auth")
 		auth.Use(middleware.Authentication())
 		{
