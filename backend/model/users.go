@@ -1,4 +1,4 @@
-package store
+package model
 
 type User struct {
 	// UserId   string `json:"userid"`

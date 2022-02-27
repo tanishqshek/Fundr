@@ -20,7 +20,7 @@ jobs:
 
     - name: Build
       run: |
-        cd backend/cmd
+        cd backend
         go build main.go
 
 #     - name: Test
