@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"Fundr/backend/internal/session-redis/src/middleware"
+	"github.com/tanishqshek/Fundr/backend/internal/session-redis/src/middleware"
 
 	"github.com/gin-contrib/sessions"
 

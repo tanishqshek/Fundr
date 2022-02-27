@@ -7,7 +7,7 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"Fundr/backend/internal/store"
+	"github.com/tanishqshek/Fundr/backend/internal/store"
 
 	"net/http"
 
