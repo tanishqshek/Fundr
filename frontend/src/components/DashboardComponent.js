@@ -2,30 +2,7 @@ import React, { useState } from "react";
 import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
 import { SUMMARIES } from "../assets/summaries";
-
-// const db = [
-//   {
-//     name: 'Richard Hendricks',
-//     // url: './src/assets/img/richard.jpg'
-//   },
-//   {
-//     name: 'Erlich Bachman',
-//     // url: '../assets/img/erlich.jpg'
-//   },
-//   {
-//     name: 'Monica Hall',
-//     // url: '../assets/img/monica.jpg'
-//   },
-//   {
-//     name: 'Jared Dunn',
-//     // url: '../assets/img/jared.jpg'
-//   },
-//   {
-//     name: 'Dinesh Chugtai',
-//     // url: '../assets/img/dinesh.jpg'
-// 	  info: "Hey this is dinesh"
-//   }
-// ]
+import Button from "@mui/material/Button";
 
 function Dashboard() {
   const companies = SUMMARIES;
@@ -38,6 +15,11 @@ function Dashboard() {
 
   const outOfFrame = (name) => {
     console.log(name + " left the screen!");
+  };
+
+  const saveClicked = (direction, nameToDelete) => {
+    console.log("removing: " + nameToDelete);
+    // setLastDirection(direction);
   };
 
   return (
@@ -55,7 +37,9 @@ function Dashboard() {
               onCardLeftScreen={() => outOfFrame(company.name)}
             >
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.name}</h3>
+                <h3 className={styles.card_h3}>{company.name}
+                </h3>
+                
                 <div className={styles.cardImagediv}>
                   {/* <div  > */}
                   <img className={styles.cardImage} src={company.image} />
@@ -66,10 +50,10 @@ function Dashboard() {
             </TinderCard>
           ))}
         </div>
-        {lastDirection ? (
+        {lastDirection != 'down' ? (
           <h2 className={styles.infoText}>You swiped {lastDirection}</h2>
         ) : (
-          <h2 className={styles.infoText} />
+          <h2 className={styles.infoText} >This item has been saved for later</h2>
         )}
       </div>
     </div>
