@@ -4,30 +4,6 @@ import styles from "./dashboard.module.css";
 import { SUMMARIES } from "../assets/summaries";
 import Button from "@mui/material/Button";
 
-// const db = [
-//   {
-//     name: 'Richard Hendricks',
-//     // url: './src/assets/img/richard.jpg'
-//   },
-//   {
-//     name: 'Erlich Bachman',
-//     // url: '../assets/img/erlich.jpg'
-//   },
-//   {
-//     name: 'Monica Hall',
-//     // url: '../assets/img/monica.jpg'
-//   },
-//   {
-//     name: 'Jared Dunn',
-//     // url: '../assets/img/jared.jpg'
-//   },
-//   {
-//     name: 'Dinesh Chugtai',
-//     // url: '../assets/img/dinesh.jpg'
-// 	  info: "Hey this is dinesh"
-//   }
-// ]
-
 function Dashboard() {
   const companies = SUMMARIES;
   const [lastDirection, setLastDirection] = useState();
@@ -39,6 +15,11 @@ function Dashboard() {
 
   const outOfFrame = (name) => {
     console.log(name + " left the screen!");
+  };
+
+  const saveClicked = (direction, nameToDelete) => {
+    console.log("removing: " + nameToDelete);
+    // setLastDirection(direction);
   };
 
   return (
@@ -57,10 +38,7 @@ function Dashboard() {
             >
               <div className={styles.card}>
                 <h3 className={styles.card_h3}>{company.name}
-                <Button type="submit"
-                variant="contained"
-                style={{background: "white", color: "black", height: "30px", float: 'right', marginRight: "10px"}}
-                >Save For Later</Button></h3>
+                </h3>
                 
                 <div className={styles.cardImagediv}>
                   {/* <div  > */}
@@ -72,10 +50,10 @@ function Dashboard() {
             </TinderCard>
           ))}
         </div>
-        {lastDirection ? (
+        {lastDirection != 'down' ? (
           <h2 className={styles.infoText}>You swiped {lastDirection}</h2>
         ) : (
-          <h2 className={styles.infoText} />
+          <h2 className={styles.infoText} >This item has been saved for later</h2>
         )}
       </div>
     </div>
