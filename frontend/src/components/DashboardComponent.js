@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
 import { SUMMARIES } from "../assets/summaries";
+import Button from "@mui/material/Button";
 
 // const db = [
 //   {
@@ -55,7 +56,12 @@ function Dashboard() {
               onCardLeftScreen={() => outOfFrame(company.name)}
             >
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.name}</h3>
+                <h3 className={styles.card_h3}>{company.name}
+                <Button type="submit"
+                variant="contained"
+                style={{background: "white", color: "black", height: "30px", float: 'right', marginRight: "10px"}}
+                >Save For Later</Button></h3>
+                
                 <div className={styles.cardImagediv}>
                   {/* <div  > */}
                   <img className={styles.cardImage} src={company.image} />
