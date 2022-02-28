@@ -27,7 +27,7 @@ func setRouter() *gin.Engine {
 		auth := api.Group("/auth")
 		auth.Use(middleware.Authentication())
 		{
-			auth.POST("/test")
+			auth.POST("/swipe", API.HandleSwipe)
 		}
 	}
 
