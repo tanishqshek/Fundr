@@ -8,5 +8,3 @@ type User struct {
 	Mobile   string `json:"mobile" binding:"required"`
 	UserType string `json:"usertype" binding:"required"`
 }
-
-var Users []*User

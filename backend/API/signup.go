@@ -49,12 +49,9 @@ func SignUp(c *gin.Context) {
 		fmt.Println(errMessage)
 	}
 
-	// store.Users = append(store.Users, &user)
-
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
 		"message": "Signed up successfully.",
-		//"users":   store.Users,
 	})
 
 }
