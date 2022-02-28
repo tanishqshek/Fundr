@@ -9,6 +9,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/google/uuid"
 )
 
 func SignUp(c *gin.Context) {
@@ -34,7 +36,10 @@ func SignUp(c *gin.Context) {
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
 	password := string(hashedPassword)
 
+	user_id := uuid.NewString()
+
 	user := model.User{
+		UserId:   user_id,
 		Name:     req.Name,
 		Username: req.Username,
 		Password: password,
