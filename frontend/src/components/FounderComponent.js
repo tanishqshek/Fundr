@@ -1,50 +1,42 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
+import React, { Component } from "react";
+// import TinderCard from "react-tinder-card";
+import styles from "./dashboard.module.css";
+// import { SUMMARIES } from "../assets/summaries";
 import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Avatar from "@mui/material/Avatar";
+// import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import img1 from './img1.jpeg';
 import img2 from "../assets/img2.jpeg";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import BusinessIdea from './BusinessIdea';
 
 const theme = createTheme();
 
-export default function SignUpComponent() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      fname: data.get("fname"),
-      lname: data.get("lname"),
-      fname: data.get("email"),
-      lname: data.get("pass"),
-      fname: data.get("pass2"),
-    });
-  };
-
+class Founder extends Component{
+  render(){
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh" }} >
         <CssBaseline />
-        <Grid
+        {/* <Grid
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${img2})`,
+            // backgroundImage: `url(${img2})`,
             // backgroundImage: 'url(https://source.unsplash.com/random)',
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
@@ -54,8 +46,8 @@ export default function SignUpComponent() {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        /> */}
+        <Grid item component={Paper} elevation={6} square md={{ span: 6, offset: 3 }}>
           <Box
             sx={{
               my: 8,
@@ -65,18 +57,16 @@ export default function SignUpComponent() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              {/* <LockOutlinedIcon /> */}
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+            //   onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
+
+                <Typography component="h1" variant="h5" style={{color: "black"}}>
+                    Founder details
+                </Typography>
               <TextField
                 margin="normal"
                 required
@@ -163,7 +153,7 @@ export default function SignUpComponent() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                <Link href="/businessidea" style={{ color: "#FFF" }}>
+                <Link href="/home" style={{ color: "#FFF" }}>
                   Register
                 </Link>
               </Button>
@@ -173,4 +163,6 @@ export default function SignUpComponent() {
       </Grid>
     </ThemeProvider>
   );
-}
+}}
+
+export default Founder;
