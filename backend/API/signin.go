@@ -1,7 +1,7 @@
 package API
 
 import (
-	"github.com/gin-contrib/sessions"
+	//"github.com/gin-contrib/sessions"
 	"github.com/tanishqshek/Fundr/backend/model"
 
 	"golang.org/x/crypto/bcrypt"
@@ -9,10 +9,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-
-	"github.com/google/uuid"
-
-	"time"
+	//"github.com/google/uuid"
+	//"time"
 )
 
 func SignIn(c *gin.Context) {
@@ -40,19 +38,20 @@ func SignIn(c *gin.Context) {
 			"status":  "401",
 			"message": "Sign in failed.",
 		})
+		return
 	}
 
-	sessionToken := uuid.NewString()
-	session := sessions.Default(c)
-	session.Set("id", sessionToken)
-	session.Set("email", req.Username)
-	session.Save()
+	// sessionToken := uuid.NewString()
+	// session := sessions.Default(c)
+	// session.Set("id", sessionToken)
+	// session.Set("email", req.Username)
+	// session.Save()
 
-	http.SetCookie(c.Writer, &http.Cookie{
-		Name:    req.Username,
-		Value:   sessionToken,
-		Expires: time.Now().Add(120 * time.Second),
-	})
+	// http.SetCookie(c.Writer, &http.Cookie{
+	// 	Name:    req.Username,
+	// 	Value:   sessionToken,
+	// 	Expires: time.Now().Add(120 * time.Second),
+	// })
 
 	// c.SetCookie(req.Username, sessionToken, 9999999, "/", "localhost", false, true)
 
