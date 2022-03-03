@@ -31,7 +31,6 @@ func HandleSwipe(c *gin.Context) {
 	}
 
 	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	// model.DB.DB.First(&investor, "User_id = ?", fetched_user.UserId)
 	model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
 	model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
 	model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
