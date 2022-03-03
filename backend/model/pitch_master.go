@@ -5,7 +5,7 @@ import (
 )
 
 type Pitch_master struct {
-	Id            uint
+	Id            uint `gorm:"primaryKey"`
 	Username      string
 	Creation_date time.Time
 	Creation_time time.Time

@@ -1,6 +1,6 @@
 package model
 
 type Pitch_description struct {
-	Id          uint
+	Id          uint `gorm:"primaryKey"`
 	Description string
 }

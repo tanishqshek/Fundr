@@ -10,7 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-  "github.com/google/uuid"
+	"github.com/google/uuid"
 )
 
 func SignUp(c *gin.Context) {
@@ -38,7 +38,7 @@ func SignUp(c *gin.Context) {
 
 	user_id := uuid.NewString()
 
-  user := model.User{
+	user := model.User{
 		UserId:   user_id,
 		Name:     req.Name,
 		Username: req.Username,

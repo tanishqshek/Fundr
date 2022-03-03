@@ -5,7 +5,7 @@ import (
 )
 
 type Matches struct {
-	Id            uint
+	Id            uint `gorm:"primaryKey"`
 	Investor_id   string
 	Founder_id    string
 	Pitch_id      string
