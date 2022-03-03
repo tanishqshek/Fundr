@@ -5,9 +5,8 @@ import (
 )
 
 type Founder_targets struct {
-	Id            uint `gorm:"primaryKey"`
-	Founder_id    string
-	Investor_id   string
+	Founder_id    string `gorm:"primaryKey"`
+	Investor_id   string `gorm:"primaryKey"`
 	Creation_date time.Time
 	Creation_time time.Time
 }

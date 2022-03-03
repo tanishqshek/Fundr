@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetFounderData(c *gin.Context) {
+func SetFounderData(c *gin.Context) {
 
 	// var founder_targets model.Founder_targets
 	// var founder model.User
