@@ -11,18 +11,16 @@ type User struct {
 }
 
 type Founder struct {
-	FounderId string    `gorm:"primaryKey" json:"founder_id"`
-	User      User      `json:"id" gorm:"ForeignKey: UserId"`
-	Pitch     string    `json:"pitch" default:""`
-	Matches   []Matches `json:"matches" gorm:"ForeignKey: Investor_id"`
+	Id      User   `json:"id" gorm:"ForeignKey: UserId"`
+	Pitch   string `json:"pitch" default:""`
+	Matches string `json:"matches" default:"[]"`
 }
 
 type Investor struct {
-	InvestorId string    `gorm:"primaryKey" json:"investor_id"`
-	User       User      `json:"id" gorm:"ForeignKey: UserId"`
-	Matches    []Matches `json:"matches" gorm:"ForeignKey: Founder_id"`
-	Rejects    []Rejects `json:"rejects" gorm:"ForeignKey: Founder_id"`
-	Archive    []Archive `json:"archive" gorm:"ForeignKey: Founder_id"`
+	Id      User   `json:"id" gorm:"ForeignKey: UserId"`
+	Matches string `json:"matches" default:"[]"`
+	Rejects string `json:"rejects" default:"[]"`
+	Archive string `json:"archive" default:"[]"`
 }
 
 var Users []*User
