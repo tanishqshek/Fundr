@@ -27,8 +27,6 @@ type Archive struct {
 	Investor      Investor `gorm:"ForeignKey:InvestorId"`
 	Founder       Founder  `gorm:"ForeignKey:FounderId"`
 	Pitch_id      string
-	Investor_id   string `gorm:"primaryKey"`
-	Founder_id    string `gorm:"primaryKey"`
 	Creation_date time.Time
 	Creation_time time.Time
 }
