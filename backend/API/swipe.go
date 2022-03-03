@@ -4,12 +4,17 @@ import (
 	"github.com/tanishqshek/Fundr/backend/model"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/google/uuid"
+
+	"net/http"
 )
 
 func HandleSwipe(c *gin.Context) {
 
 	var fetched_user model.User
 	var investor model.Investor
+	var founder model.Founder
 
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
@@ -17,17 +22,82 @@ func HandleSwipe(c *gin.Context) {
 		Target   string `json:"target" binding:"required"`
 	}
 
-	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	model.DB.DB.First(&investor, "User_id = ?", fetched_user.UserId)
-
-	if req.Action == "right" {
-		investor.Matches = investor.Matches + "," + req.Target
-		var founder model.Founder
-		model.DB.DB.First(&founder, "User_id = ?", fetched_user.UserId)
-		founder.Matches = founder.Matches + "," + req.Username
-	} else if req.Action == "left" {
-		investor.Rejects = investor.Rejects + "," + req.Target
-	} else {
-		investor.Archive = investor.Archive + "," + req.Target
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "400",
+			"message": err.Error(),
+		})
+		return
 	}
+
+	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
+	// model.DB.DB.First(&investor, "User_id = ?", fetched_user.UserId)
+	model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
+	model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
+	model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
+
+	action := ""
+	if req.Action == "right" {
+		action = "Match"
+		match := model.Matches{
+			Id:       uuid.NewString(),
+			Investor: investor,
+			Founder:  founder,
+		}
+
+		result := model.DB.DB.Create(match)
+		err := result.Error
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  "500",
+				"message": err.Error(),
+			})
+			return
+		}
+
+	} else if req.Action == "left" {
+
+		action = "Reject"
+		match := model.Rejects{
+			Id:       uuid.NewString(),
+			Investor: investor,
+			Founder:  founder,
+		}
+
+		result := model.DB.DB.Create(match)
+		err := result.Error
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  "500",
+				"message": err.Error(),
+			})
+			return
+		}
+	} else {
+
+		action = "Archive"
+		match := model.Archive{
+			Id:       uuid.NewString(),
+			Investor: investor,
+			Founder:  founder,
+		}
+
+		result := model.DB.DB.Create(match)
+		err := result.Error
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  "500",
+				"message": err.Error(),
+			})
+			return
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "200",
+		"message": action + "Succesfull",
+	})
+	return
 }
