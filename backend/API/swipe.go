@@ -4,23 +4,23 @@ import (
 	"github.com/tanishqshek/Fundr/backend/model"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/google/uuid"
+
+	"net/http"
 )
 
 func HandleSwipe(c *gin.Context) {
 
 	var fetched_user model.User
 	var investor model.Investor
+	var founder model.Founder
 
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
 		Action   string `json:"action" binding:"required"`
 		Target   string `json:"target" binding:"required"`
 	}
-
-	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
-	model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
-	model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
 
 	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
 	model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
