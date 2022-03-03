@@ -1,6 +1,7 @@
 package model
 
 type User_description struct {
+	Id          string `gorm:"primaryKey"`
 	Name        string
 	Username    string
 	Mobile      string
