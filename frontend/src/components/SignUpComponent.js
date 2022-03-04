@@ -1,6 +1,7 @@
-import * as React from "react";
+import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import { Navigate } from 'react-router';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,22 +17,92 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import img2 from "../assets/img2.jpeg";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import BusinessIdea from './BusinessIdea';
+import axios from 'axios';
+import { renderMatches } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function SignUpComponent() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      fname: data.get("fname"),
-      lname: data.get("lname"),
-      fname: data.get("email"),
-      lname: data.get("pass"),
-      fname: data.get("pass2"),
+class SignUpComponent extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+        // userToken: null,
+        fname: "",
+        lname: "",
+        linkedin: "",
+        email: "",
+        password: "",
+        mobile: "",
+        typeOfUser: "",
+        isSignedUp: false
+    };
+};
+
+  handleChange (event) {
+    // this.setState({ 
+      // fname: event.target.value,
+      // lname: event.target.value,
+      // linkedin: event.target.value,
+      // email: event.target.value,
+      // password: event.target.value,
+      // typeOfUser: event.target.value});
+
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
     });
-  };
+  }
+
+
+  handleSubmit (event)  {
+    event.preventDefault();
+    
+    const user = {
+      "Name": this.state.fname,
+      "LastName": this.state.lname,
+      "Username": this.state.email,
+      "Password": this.state.password,
+      "Mobile":   this.state.mobile,
+      "UserType": this.state.typeOfUser
+    };
+    // console.log(user);
+
+
+    axios.post('/api/signup', { 
+      "Name": this.state.fname,
+      // "LastName": this.state.lname,
+      "Username": this.state.email,
+      "Password": this.state.password,
+      "Mobile":   this.state.mobile,
+      "UserType": this.state.typeOfUser
+     })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+        }
+      
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+      });
+  }
+
+  
+  render(){
+
+    if (this.state.isSignedUp) {
+      // redirect to home if signed up
+      return <Navigate to = {{ pathname: "/home" }} />;
+    }
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,7 +144,7 @@ export default function SignUpComponent() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={this.handleSubmit}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -85,6 +156,7 @@ export default function SignUpComponent() {
                 name="fname"
                 autoComplete="fname"
                 autoFocus
+                onChange={this.handleChange}
               />
               <TextField
                 margin="normal"
@@ -95,6 +167,7 @@ export default function SignUpComponent() {
                 type="lname"
                 id="lname"
                 autoComplete="lname"
+                onChange={this.handleChange}
               />
               <TextField
                 margin="normal"
@@ -122,34 +195,52 @@ export default function SignUpComponent() {
                 type="email"
                 id="email"
                 autoComplete="email"
+                onChange={this.handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="pass"
+                name="mobile"
+                label="Mobile Number"
+                type="number"
+                id="mobile"
+                autoComplete="mobile"
+                onChange={this.handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="pass1"
                 label="Password"
                 type="password"
                 id="pass"
+                // onChange={this.handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="pass2"
+                name="password"
                 label="Re-enter Password"
                 type="password"
-                id="pass2"
+                id="password"
+                onChange={this.handleChange}
               />
               <Select
                 margin="normal"
                 required
                 fullWidth
-                name="type"
+                displayEmpty
+                name="typeOfUser"
+                value={this.state.typeOfUser}
+                defaultValue="Investor"
                 label="Select Founder or investor*"
                 floatingLabelText="Founder or Investor"
+                onChange={this.handleChange}
               >
-                <MenuItem value="Founder" primaryText="Founder">
+                <MenuItem value="Founder" primaryText="Founder" selected>
                   Founder
                 </MenuItem>
                 <MenuItem value="Investor" primaryText="Investor">
@@ -161,10 +252,10 @@ export default function SignUpComponent() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onSubmit={this.handleSubmit}
               >
-                <Link href="/businessidea" style={{ color: "#FFF" }}>
                   Register
-                </Link>
+                {/* </Link> */}
               </Button>
             </Box>
           </Box>
@@ -173,3 +264,6 @@ export default function SignUpComponent() {
     </ThemeProvider>
   );
 }
+}
+
+export default SignUpComponent;
