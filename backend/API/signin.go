@@ -2,18 +2,23 @@ package API
 
 import (
 	//"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions"
 	"github.com/tanishqshek/Fundr/backend/model"
+
+	"github.com/tanishqshek/Fundr/backend/internal/middleware"
 
 	"golang.org/x/crypto/bcrypt"
 
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	//"github.com/google/uuid"
+	"github.com/google/uuid"
 	//"time"
 )
 
 func SignIn(c *gin.Context) {
+
+	session := sessions.Default(c)
 
 	var fetched_user model.User
 	// var w http.ResponseWriter
@@ -41,7 +46,14 @@ func SignIn(c *gin.Context) {
 		return
 	}
 
-	// sessionToken := uuid.NewString()
+	sessionToken := uuid.NewString()
+	session.Set(middleware.SESSIONKEY, sessionToken)
+	middleware.SessionMap[sessionToken] = fetched_user.UserId
+	if err := session.Save(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save session"})
+		return
+	}
+
 	// session := sessions.Default(c)
 	// session.Set("id", sessionToken)
 	// session.Set("email", req.Username)
