@@ -9,6 +9,15 @@
   background: linear-gradient(#000000, #c6d3ff);
 }
 
+#idea {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(#000000, #c6d3ff);
+}
+
 #root > div {
   display: flex;
   flex-direction: column;
@@ -117,6 +126,7 @@ h2 {
   bottom: 0px;
   left: 0px;
 }
+
 
 .buttons {
   margin: 20px;
