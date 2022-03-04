@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import { Navigate } from 'react-router';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -36,7 +37,8 @@ class SignUpComponent extends Component {
         email: "",
         password: "",
         mobile: "",
-        typeOfUser: ""
+        typeOfUser: "",
+        isSignedUp: false
     };
 };
 
@@ -70,7 +72,9 @@ class SignUpComponent extends Component {
       "Mobile":   this.state.mobile,
       "UserType": this.state.typeOfUser
     };
-    console.log(user);
+    // console.log(user);
+
+
     axios.post('/api/signup', { 
       "Name": this.state.fname,
       // "LastName": this.state.lname,
@@ -82,6 +86,9 @@ class SignUpComponent extends Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+        }
       
       })
       .catch(function (error) {
@@ -91,6 +98,12 @@ class SignUpComponent extends Component {
 
   
   render(){
+
+    if (this.state.isSignedUp) {
+      // redirect to home if signed up
+      return <Navigate to = {{ pathname: "/home" }} />;
+    }
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
