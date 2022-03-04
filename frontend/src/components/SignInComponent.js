@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,29 +13,86 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import img1 from './img1.jpeg';
-import { useNavigate } from "react-router-dom";
+import { renderMatches, useNavigate } from "react-router-dom";
 import img2 from "../assets/img2.jpeg";
 import Dashboard from "./DashboardComponent";
+import { Navigate } from "react-router-dom";
+import axios from 'axios';
 
 const theme = createTheme();
 
-export default function Login() {
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/home`;
-    navigate(path);
-  };
+class Login extends Component {
 
-  const handleSubmit = (event) => {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+        // userToken: null,
+        fname: "",
+        lname: "",
+        linkedin: "",
+        email: "",
+        password: "",
+        mobile: "",
+        typeOfUser: "",
+        isSignedIn: false
+    };
+};
+
+    handleChange (event) {
+
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+
+      this.setState({
+        [name]: value
+      });
+    }
+  // let navigate = useNavigate();
+  // const routeChange = () => {
+  //   let path = `/home`;
+  //   navigate(path);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   // eslint-disable-next-line no-console
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // }
+
+  handleSubmit (event)  {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
 
+    axios.post('/api/signin', { 
+      
+      "Username": this.state.email,
+      "Password": this.state.password,
+     })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.status === 200) {
+          this.setState({ isSignedIn: true }); // after signing up, set the state to true. This will trigger a re-render
+        }
+      
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+      });
+  }
+
+render(){
+
+  if (this.state.isSignedIn) {
+    // redirect to home if signed up
+    return <Navigate to = {{ pathname: "/home" }} />;
+  }
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -76,7 +133,7 @@ export default function Login() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              // onSubmit={this.handleSubmit}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -88,6 +145,7 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={this.handleChange}
               />
               <TextField
                 margin="normal"
@@ -98,6 +156,7 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={this.handleChange}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -108,7 +167,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={routeChange}
+                onClick={this.handleSubmit}
               >
                 Sign In
               </Button>
@@ -126,3 +185,6 @@ export default function Login() {
     </ThemeProvider>
   );
 }
+}
+
+export default Login;
