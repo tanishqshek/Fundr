@@ -36,7 +36,10 @@ func AuthRequired(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 		return
 	}
+	b := SessionMap[key.(string)]
+	if b == "" {
 
+	}
 	if SessionMap[key.(string)] == "" {
 		// Abort the request with the appropriate error code
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})

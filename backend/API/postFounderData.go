@@ -9,23 +9,9 @@ import (
 	"github.com/tanishqshek/Fundr/backend/model"
 )
 
-func SetFounderData(c *gin.Context) {
+func PostFounderData(c *gin.Context) {
 
 	var founder model.User_description
-
-	// var req struct {
-	// 	Name        string
-	// 	Username    string
-	// 	Mobile      string
-	// 	UserType    string
-	// 	Description string
-	// 	Gender      string
-	// 	Education   string
-	// 	City        string
-	// 	State       string
-	// 	Country     string
-	// 	Address     string
-	// }
 
 	if err := c.ShouldBindJSON(&founder); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -38,8 +24,7 @@ func SetFounderData(c *gin.Context) {
 	session := sessions.Default(c)
 	key := session.Get(middleware.SESSIONKEY)
 
-	SessionId := middleware.SessionMap[key.(string)]
-	UserId := middleware.SessionMap[SessionId]
+	UserId := middleware.SessionMap[key.(string)]
 
 	founder.Id = UserId
 	model.DB.DB.Save(&founder)
