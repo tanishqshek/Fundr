@@ -1,28 +1,40 @@
 package API
 
 import (
-	"net/http"
-
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/tanishqshek/Fundr/backend/internal/middleware"
+	"github.com/tanishqshek/Fundr/backend/model"
 )
 
 func GetFounderData(c *gin.Context) {
 
-	// var founder_targets model.Founder_targets
-	// var founder model.User
+	var founder_targets model.Founder_targets
+	var founder model.User_description
 
-	var req struct {
-		Username  string `json:"username" binding:"required,email"`
-		Authtoken string `json:"authtoken" binding:"required"`
-	}
+	session := sessions.Default(c)
+	key := session.Get(middleware.SESSIONKEY)
 
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  "400",
-			"message": err.Error(),
-		})
-		return
-	}
+	SessionId := middleware.SessionMap[key.(string)]
+	UserId := middleware.SessionMap[SessionId]
+
+	model.DB.DB.Find(&founder_targets, "Founder_id = ?", UserId)
+	model.DB.DB.Find(&founder, "Id = ?", UserId)
+
+	// c.JSON(200, gin.H{"count": count})
+
+	// var req struct {
+	// 	Username  string `json:"username" binding:"required,email"`
+	// 	Authtoken string `json:"authtoken" binding:"required"`
+	// }
+
+	// if err := c.ShouldBindJSON(&req); err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{
+	// 		"status":  "400",
+	// 		"message": err.Error(),
+	// 	})
+	// 	return
+	// }
 
 	// model.DB.DB.Find(&founder, "Username = ?", req.Username)
 	// if founder.AuthId != req.Authtoken {
