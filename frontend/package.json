@@ -2,6 +2,7 @@
   "name": "fundr",
   "version": "0.1.0",
   "private": true,
+  
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -50,5 +51,6 @@
   },
   "devDependencies": {
     "cypress": "^9.4.1"
-  }
+  },
+  "proxy": "http://127.0.0.1:8080/"
 }
