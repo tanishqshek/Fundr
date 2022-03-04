@@ -254,7 +254,6 @@ class SignUpComponent extends Component {
                 sx={{ mt: 3, mb: 2 }}
                 onSubmit={this.handleSubmit}
               >
-                {/* <Link href="/businessidea" style={{ color: "#FFF" }}> */}
                   Register
                 {/* </Link> */}
               </Button>

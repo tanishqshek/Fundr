@@ -47,11 +47,25 @@ func SignUp(c *gin.Context) {
 		UserType: req.UserType,
 	}
 
+	user_data := model.User_description{
+		Id:       user_id,
+		Name:     req.Name,
+		Username: req.Username,
+		Mobile:   req.Mobile,
+		UserType: req.UserType,
+	}
+
 	createdUser := model.DB.DB.Create(user)
-	var errMessage = createdUser.Error
+	var errMessage1 = createdUser.Error
+	createdDescription := model.DB.DB.Create(user_data)
+	var errMessage2 = createdUser.Error
 
 	if createdUser.Error != nil {
-		fmt.Println(errMessage)
+		fmt.Println(errMessage1)
+	}
+
+	if createdDescription.Error != nil {
+		fmt.Println(errMessage2)
 	}
 
 	c.JSON(http.StatusOK, gin.H{

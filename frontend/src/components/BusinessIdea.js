@@ -25,21 +25,25 @@ export default function BusinessIdea() {
     // eslint-disable-next-line no-console
     console.log({
       companyname: data.get("companyname"),
+      tags: data.get("tags"),
       idea: data.get("idea"),
     });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh"}} id={styles["root"]}
+      <Grid container component="main" sx={{ height: "100vh"}} id={styles["idea"]}
   spacing={0}
   direction="row"
   alignItems="center"
   justifyContent="center" style=  {{textAlign: "center", display: "flex", alignItems: "center" }} >
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <Typography component="h1" variant="h5" color={"black"}>
+            <Typography component="h1" variant="h4" fontFamily= {"Garamond"} color={"black"}>
               Business Idea
+            </Typography>
+            <Typography component="h1" variant="h6" fontFamily= {"Garamond"} color={"black"}>
+              Give your company a name, enter the related tags and write a brief decription of your business idea.
             </Typography>
             <Box
               component="form"
@@ -49,15 +53,36 @@ export default function BusinessIdea() {
               noValidate
               autoComplete="off"
             >
+            <Box
+            sx={{
+              my: 2,
+              mx: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            </Box>
               <TextField 
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                id="companyname"
                 label="Company Name"
                 name="companyname"
                 autoComplete="companyname"
                 placeholder="Enter your company name"
+                autoFocus
+              />
+                <TextField 
+                margin="normal"
+                required
+                fullWidth
+                id="tags"
+                label="Tags"
+                name="tags"
+                autoComplete="tags"
+                placeholder="Give tags using commas"
                 autoFocus
               />
               <TextField
