@@ -6,7 +6,7 @@ import (
 
 type Pitch_master struct {
 	Id            string `gorm:"primaryKey"`
-	Username      string
+	UserId        string
 	Creation_date time.Time
 	Creation_time time.Time
 	Deleted       bool

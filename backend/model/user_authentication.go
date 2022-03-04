@@ -25,4 +25,4 @@ type Investor struct {
 	Archive    []Archive `json:"archive" gorm:"ForeignKey: Founder_id"`
 }
 
-var Users []*User
+// var Users []*User
