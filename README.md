@@ -23,16 +23,3 @@ Our application focuses on fulfilling this purpose with the help of a card-swipi
 
 - Golang
 - ReactJs
-
- ## MUI setup
-MUI is one of the most adopted ReactJs development framwork.
-To install MUI on your computer:
-```
-npm install @mui/material @emotion/react @emotion/styled @mui/styled-engine-sc styled-components @mui/icons-material
-```
-This will automatically update your package.json dependencies.
-more information: https://mui.com/getting-started/installation/
-
- ## To run react
-1. cd frontend
-2. npm start
