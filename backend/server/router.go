@@ -33,6 +33,7 @@ func setRouter() *gin.Engine {
 		{
 			auth.POST("/swipe", API.HandleSwipe)
 			auth.POST("/postfdata", API.PostFounderData)
+			auth.POST("/postfdata", API.PostPitch)
 		}
 	}
 
