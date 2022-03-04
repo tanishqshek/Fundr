@@ -50,7 +50,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^9.4.1"
+    "cypress": "^9.5.1"
   },
   "proxy": "http://127.0.0.1:8080/"
 }
