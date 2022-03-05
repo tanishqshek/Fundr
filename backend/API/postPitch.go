@@ -38,7 +38,7 @@ func PostPitch(c *gin.Context) {
 
 	pitch_description := model.Pitch_description{
 		Id:          req.Id,
-		Name:        req.Pitch_Name,
+		CompanyName: req.Pitch_Name,
 		Description: req.Description,
 	}
 
