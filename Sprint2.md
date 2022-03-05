@@ -20,4 +20,8 @@ Sprint 2 of this project focuses on the Founder's side of functionalities and co
 The major goals achieved for frontend in this sprint were-
 1) Creation of Founder Page.
 2) Adding review later functionality for investors.
-3) Cypress testing for frontend
+3) Cypress testing for frontend.
+
+[![Frontend Demo](https://i9.ytimg.com/vi/YAJ-xZWfXVs/mqdefault.jpg?v=6222ce9d&sqp=CICbi5EG&rs=AOn4CLDW4V_OY58ABxxyNcDbnrYGVxtpYw)](https://youtu.be/YAJ-xZWfXVs)
+
+https://youtu.be/YAJ-xZWfXVs
