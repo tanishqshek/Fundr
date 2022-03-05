@@ -16,6 +16,10 @@ Sprint 2 of this project focuses on the Founder's side of functionalities and co
 2. As a user, I should be redirected to the correct page i.e. Founder/Investor and provide the associated functions accordingly.
 3. As an investor, I can save the idea card for later if I am unsure about the decision and wish to review it later.
 
+[Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22user+story+-+frontend%22+is%3Aclosed)
+
+[Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
+
 ## Cypress Testing
 [![Cypress](https://i9.ytimg.com/vi/YAJ-xZWfXVs/mqdefault.jpg?v=6222ce9d&sqp=COCti5EG&rs=AOn4CLCSW4A-nOB21ETw2X63OzFewSZCUg)](https://youtu.be/YAJ-xZWfXVs)
 
