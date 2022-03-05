@@ -78,7 +78,7 @@ class Login extends Component {
       })
       .catch(function (error) {
         console.log(error.toJSON());
-        
+        alert(error);
       });
   }
 
