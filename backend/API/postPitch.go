@@ -13,11 +13,12 @@ import (
 func PostPitch(c *gin.Context) {
 
 	var req struct {
-		Id            string `json:"Id" binding:"required"`
+		Id            string `json:"id" binding:"required"`
 		Creation_date time.Time
 		Creation_time time.Time
-		Pitch_Name    string
-		Description   string
+		CompanyName   string `json:"company_name" binding:"required"`
+		Description   string `json:"description" binding:"required"`
+		ImageUrl      string `json:"image_url" binding:"required"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -38,7 +39,8 @@ func PostPitch(c *gin.Context) {
 
 	pitch_description := model.Pitch_description{
 		Id:          req.Id,
-		CompanyName: req.Pitch_Name,
+		ImageUrl:    req.ImageUrl,
+		CompanyName: req.CompanyName,
 		Description: req.Description,
 	}
 
