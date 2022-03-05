@@ -21,12 +21,12 @@ Sprint 2 of this project focuses on the Founder's side of functionalities and co
 [Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
 
 ## Cypress Testing
-[![Cypress](https://i9.ytimg.com/vi/YAJ-xZWfXVs/mqdefault.jpg?v=6222ce9d&sqp=COCti5EG&rs=AOn4CLCSW4A-nOB21ETw2X63OzFewSZCUg)](https://youtu.be/YAJ-xZWfXVs)
+[![Cypress](https://i.ytimg.com/vi/YAJ-xZWfXVs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC6S6_sUPZJ-3OLGlVbCsoYiG5Ptw)](https://youtu.be/YAJ-xZWfXVs)
 
 https://youtu.be/YAJ-xZWfXVs
 
 ## Frontend and Backend Intergrated
-[![Intergrated](https://i9.ytimg.com/vi/0p5Wfq40jfg/mqdefault.jpg?v=6222d6c2&sqp=COCti5EG&rs=AOn4CLDSK7MKBuqX7e4lhWJKE5v9DRrGxA)](https://youtu.be/0p5Wfq40jfg)
+[![Intergrated](https://i.ytimg.com/vi/0p5Wfq40jfg/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDyvox_VfeEZlzn9QMD-XK055wDVw)](https://youtu.be/0p5Wfq40jfg)
 
 https://youtu.be/0p5Wfq40jfg
 
