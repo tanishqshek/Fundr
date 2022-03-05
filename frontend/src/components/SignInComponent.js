@@ -30,7 +30,8 @@ class Login extends Component {
     this.state = {
         email: "",
         password: "",
-        isSignedIn: false
+        isSignedIn: false,
+        userType: ""
     };
 };
 
@@ -72,23 +73,28 @@ class Login extends Component {
         console.log(res);
         console.log(res.data);
         if (res.status === 200) {
-          this.setState({ isSignedIn: true }); // after signing up, set the state to true. This will trigger a re-render
+          this.setState({ isSignedIn: true });
+          // userType = localStorage.getItem(); 
+          this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
         }
       
       })
       .catch(function (error) {
-        console.log(error.toJSON());
+        // console.log(error.toJSON());
         alert(error);
       });
   }
 
 render(){
 
-  if (this.state.isSignedIn) {
+  if (this.state.userType == "Investor") {
     // redirect to home if signed up
     return <Navigate to = {{ pathname: "/home" }} />;
   }
-  return (
+  else if (this.state.userType == "Founder"){
+    return <Navigate to = {{ pathname: "/businessidea" }} />;
+  }
+  else{  return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -181,5 +187,5 @@ render(){
   );
 }
 }
-
+}
 export default Login;
