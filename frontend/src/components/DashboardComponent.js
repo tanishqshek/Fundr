@@ -3,8 +3,6 @@ import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
 import { SUMMARIES } from "../assets/summaries";
 import Button from "@mui/material/Button";
-import axios from 'axios';
-import Cookies from 'js-cookie';
 
 function Dashboard() {
   const companies = SUMMARIES;
@@ -23,19 +21,6 @@ function Dashboard() {
     console.log("removing: " + nameToDelete);
     // setLastDirection(direction);
   };
-
-  axios.get("/api/auth/getpitch",{
-    headers: {
-      "Cookie": Cookies.get('mysession')
-    }
-  })
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
 
   return (
     <div className={styles.test}>
