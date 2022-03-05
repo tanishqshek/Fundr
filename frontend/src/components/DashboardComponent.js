@@ -24,19 +24,6 @@ function Dashboard() {
     // setLastDirection(direction);
   };
 
-  axios.get("/api/auth/getpitch",{
-    headers: {
-      "Cookie": Cookies.get('mysession')
-    }
-  })
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-
   return (
     <div className={styles.test}>
       <div id={styles["root"]}>
