@@ -3,6 +3,8 @@ import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
 import { SUMMARIES } from "../assets/summaries";
 import Button from "@mui/material/Button";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Dashboard() {
   const companies = SUMMARIES;
