@@ -28,14 +28,8 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-        // userToken: null,
-        fname: "",
-        lname: "",
-        linkedin: "",
         email: "",
         password: "",
-        mobile: "",
-        typeOfUser: "",
         isSignedIn: false
     };
 };
@@ -84,6 +78,7 @@ class Login extends Component {
       })
       .catch(function (error) {
         console.log(error.toJSON());
+        
       });
   }
 
