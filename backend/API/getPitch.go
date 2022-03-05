@@ -3,17 +3,22 @@ package API
 import (
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/tanishqshek/Fundr/backend/internal/middleware"
 	"github.com/tanishqshek/Fundr/backend/model"
 )
 
 func GetPitch(c *gin.Context) {
 
-	id := c.Param("id")
+	session := sessions.Default(c)
+	key := session.Get(middleware.SESSIONKEY)
+
+	UserId := middleware.SessionMap[key.(string)]
 
 	var fetched_user model.User
 
-	model.DB.DB.First(&fetched_user, "user_id = ?", id)
+	model.DB.DB.First(&fetched_user, "user_id = ?", UserId)
 
 	if fetched_user.UserType == "I" {
 
