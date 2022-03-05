@@ -87,12 +87,16 @@ class SignUpComponent extends Component {
         console.log(res);
         console.log(res.data);
         if (res.status === 200) {
-          this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+          this.setState({ isSignedUp: true });
+          localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
         }
       
       })
       .catch(function (error) {
         console.log(error.toJSON());
+        // alert(error);
+        if(error.response.status == 400)
+          alert("Please enter all the required information");
       });
   }
 
@@ -101,7 +105,7 @@ class SignUpComponent extends Component {
 
     if (this.state.isSignedUp) {
       // redirect to home if signed up
-      return <Navigate to = {{ pathname: "/home" }} />;
+      return <Navigate to = {{ pathname: "/signin" }} />;
     }
 
   return (
