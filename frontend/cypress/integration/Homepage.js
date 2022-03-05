@@ -1,6 +1,7 @@
 describe("renders the home page and sign up page", () => {
     it("renders correctly", () => {
       cy.visit("/");
+      cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
     });
 
     it('is redirected to the sign up', () => {
@@ -14,6 +15,7 @@ describe("renders the home page and sign up page", () => {
 describe('Sign Up', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/signup')
+    cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
   })
 
   it('successfully registers', () => {
@@ -63,6 +65,7 @@ describe('Sign Up', () => {
 describe('Business Idea', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/businessidea')
+    cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
   })
 
   it('takes business idea as input', () => {
@@ -89,6 +92,7 @@ describe('Business Idea', () => {
 describe("renders the home page and sign in page", () => {
   it("renders correctly", () => {
     cy.visit("/");
+    cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
   });
 
   it('is redirected to the sign in', () => {
@@ -102,6 +106,7 @@ describe("renders the home page and sign in page", () => {
 describe('Sign In', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/signin')
+    cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
   })
 
   it('successfully logs in', () => {
