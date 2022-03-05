@@ -46,4 +46,9 @@ func PostPitch(c *gin.Context) {
 
 	model.DB.DB.Save(&pitch)
 	model.DB.DB.Save(&pitch_description)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "200",
+		"message": "Pitch added successfully.",
+	})
+	return
 }
