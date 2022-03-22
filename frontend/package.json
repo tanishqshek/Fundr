@@ -2,6 +2,7 @@
   "name": "fundr",
   "version": "0.1.0",
   "private": true,
+  
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -26,6 +27,7 @@
     "react-select": "^5.2.2",
     "react-sidebar": "^3.0.2",
     "react-swipe-card": "^0.1.4",
+    "react-test-renderer": "^17.0.2",
     "react-tinder-card": "^1.4.5",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.3"
