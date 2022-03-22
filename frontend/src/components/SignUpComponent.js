@@ -4,9 +4,6 @@ import Button from "@mui/material/Button";
 import { Navigate } from 'react-router';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -17,9 +14,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import img2 from "../assets/img2.jpeg";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import BusinessIdea from './BusinessIdea';
+// import BusinessIdea from './BusinessIdea';
 import axios from 'axios';
-import { renderMatches } from "react-router-dom";
+// import { renderMatches } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -87,12 +84,16 @@ class SignUpComponent extends Component {
         console.log(res);
         console.log(res.data);
         if (res.status === 200) {
-          this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+          this.setState({ isSignedUp: true });
+          localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
         }
       
       })
       .catch(function (error) {
         console.log(error.toJSON());
+        // alert(error);
+        if(error.response.status == 400)
+          alert("Please enter all the required information");
       });
   }
 
@@ -101,7 +102,7 @@ class SignUpComponent extends Component {
 
     if (this.state.isSignedUp) {
       // redirect to home if signed up
-      return <Navigate to = {{ pathname: "/home" }} />;
+      return <Navigate to = {{ pathname: "/signin" }} />;
     }
 
   return (
