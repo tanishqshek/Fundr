@@ -29,7 +29,7 @@ func GetPitch(c *gin.Context) {
 			"status":  "200",
 			"message": pitches,
 		})
-
+		return
 	}
 
 	// var pitch model.Pitch_master
