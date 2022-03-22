@@ -7,6 +7,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from '@mui/icons-material/Login';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -20,7 +21,7 @@ import Logout from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import icon from '../assets/icon.png';
+// import icon from '../assets/icon.png';
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -43,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+function Navbar({isSignedIn, setIsSignedIn}) {
   let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/`;
+  const routeChange = (url) => {
+    let path = `/` + url;
     navigate(path);
   };
 
@@ -63,7 +64,7 @@ function Navbar() {
     <AppBar position="static" style={{ background: "#000" }}>
       <CssBaseline />
       <Toolbar>
-        <Typography variant="h4" className={classes.logo} align="left">
+        <Typography variant="h4" className={classes.logo} align="left" onClick={() => routeChange('')}>
           Fundr
         </Typography>
         <div className={classes.navlinks}> 
@@ -116,21 +117,32 @@ function Navbar() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => routeChange('settings')}>
           <Avatar /> My account
         </MenuItem>
         <Divider /> 
+        <div onClick={() => routeChange('privacy')}>
         <MenuItem>
           <ListItemIcon>
+            
             <Settings fontSize="small" />
+            
           </ListItemIcon>
-          Settings
+          Privacy Settings
         </MenuItem>
-        <MenuItem  onClick= {routeChange}>
+        </div>
+        <MenuItem  onClick= {() => {
+          if (isSignedIn) {
+            routeChange('')
+            setIsSignedIn(false)
+          } else {
+            routeChange('signin')
+          }
+        }}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            {isSignedIn?<Logout fontSize="small" />:<LoginIcon fontSize="small" />}
           </ListItemIcon>
-          Logout
+          {isSignedIn? "Logout": "Login"}
         </MenuItem>
       </Menu>
         </div>

@@ -4,12 +4,16 @@ export const SUMMARIES = [
     name: "Nidera",
     image:
       "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fnidera&psig=AOvVaw1nkVVKEnyrcGGb0LwVHUC7&ust=1644094107900000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLDCpP315vUCFQAAAAAdAAAAABAD",
+    tags:
+    "Banking",
     description:
       "Nidera provides financial independence to Generation Z. Nidera allows children to make payments on their own, saving parents the inconvenience of handing them cash or a debit/credit card. Have the flexibility of paying anytime, anyplace without a bank account, with safety and security, while also providing children with financial freedom in a regulated manner. Manage your finances, save money, and earn incentives on every purchase. Nidera offers a limitless number of cards to improve your online and smartphone buying experience. Our goal is to move the smart generation away from cash and toward digital. From ordering your favourite burgers to purchasing gifts for friends, parents, or those special ones (shhhh - we got it for you), the possibilities are limitless",
   },
   {
     id: 1,
     name: "Skillzy",
+    tags:
+    "Services",
     image:
       "https://image.spreadshirtmedia.com/image-server/v1/compositions/T815A1PA3116PT17X5Y1D1007864351FS3767/views/1,width=500,height=500,appearanceId=1,backgroundColor=b5e9e9/skillzy-logo-kids-premium-t-shirt.jpg",
     description:
@@ -18,6 +22,8 @@ export const SUMMARIES = [
   {
     id: 2,
     name: "Meal Dash",
+    tags:
+    "Food & Beverage",
     image:
       "https://www.zarla.com/images/zarla-meal-dash-1x1-2400x2400-20210604-t4wm46hd93bvbhgrgxvt.png?crop=1:1,smart&width=250&dpr=2",
     description:
@@ -26,6 +32,8 @@ export const SUMMARIES = [
   {
     id: 3,
     name: "The Food Truck",
+    tags:
+    "Food & Beverage",
     image:
       "https://i.pinimg.com/564x/31/e4/02/31e402a88633ec7029c97dce840d643a.jpg",
     description:
@@ -34,6 +42,8 @@ export const SUMMARIES = [
   {
     id: 4,
     name: "Milo Insurance",
+    tags:
+    "Miscellaneous",
     image:
       "https://images-platform.99static.com/HzlkUAaKpZPZ5G18Sg4CqVo9J28=/163x114:1078x1029/500x500/top/smart/99designs-contests-attachments/99/99833/attachment_99833222",
     description:
