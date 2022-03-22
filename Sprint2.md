@@ -16,8 +16,19 @@ Sprint 2 of this project focuses on the Founder's side of functionalities and co
 2. As a user, I should be redirected to the correct page i.e. Founder/Investor and provide the associated functions accordingly.
 3. As an investor, I can save the idea card for later if I am unsure about the decision and wish to review it later.
 
-## Fundr Frontend Status
-The major goals achieved for frontend in this sprint were-
-1) Creation of Founder Page.
-2) Adding review later functionality for investors.
-3) Cypress testing for frontend
+[Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22user+story+-+frontend%22+is%3Aclosed)
+
+[Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
+
+## Cypress Testing
+[![Cypress](https://i.ytimg.com/vi/YAJ-xZWfXVs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC6S6_sUPZJ-3OLGlVbCsoYiG5Ptw)](https://youtu.be/YAJ-xZWfXVs)
+
+https://youtu.be/YAJ-xZWfXVs
+
+## Frontend and Backend Intergrated
+[![Intergrated](https://i.ytimg.com/vi/0p5Wfq40jfg/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDyvox_VfeEZlzn9QMD-XK055wDVw)](https://youtu.be/0p5Wfq40jfg)
+
+https://youtu.be/0p5Wfq40jfg
+
+## API Documentation
+[API Documentation](https://github.com/tanishqshek/Fundr/wiki/API-Documentation)

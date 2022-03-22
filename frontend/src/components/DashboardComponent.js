@@ -25,9 +25,7 @@ function Dashboard() {
   return (
     <div className={styles.test}>
       <div id={styles["root"]}>
-        {/* <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
-      <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' /> */}
-        {/* <h1>React Tinder Card</h1> */}
+        
         <div className={styles.cardContainer}>
           {companies.map((company) => (
             <TinderCard

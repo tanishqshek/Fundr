@@ -7,12 +7,14 @@ import BusinessIdea from "./BusinessIdea"
 // import ConfigComp from './ConfigComponent';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
+import ScrollButton from "./ScrollButton";
 
 class Main extends Component {
   render() {
     return (
       <div>
         <Navbar />
+        <ScrollButton/>
         <Routes>
         <Route path="/home" element={<Dashboard />}></Route>
           <Route path="/" element={<Login />}></Route>
