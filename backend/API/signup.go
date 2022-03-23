@@ -55,9 +55,13 @@ func SignUp(c *gin.Context) {
 		UserType: req.UserType,
 	}
 
-	createdUser := model.DB.DB.Create(user)
+	if res := model.DB.DB.Exec("PRAGMA foreign_keys = ON", nil); res.Error != nil {
+		fmt.Println(res.Error)
+	}
+
+	createdUser := model.DB.DB.Create(&user)
 	var errMessage1 = createdUser.Error
-	createdDescription := model.DB.DB.Create(user_data)
+	createdDescription := model.DB.DB.Create(&user_data)
 	var errMessage2 = createdUser.Error
 
 	if createdUser.Error != nil {
@@ -66,6 +70,31 @@ func SignUp(c *gin.Context) {
 
 	if createdDescription.Error != nil {
 		fmt.Println(errMessage2)
+	}
+
+	if req.UserType == "Founder" {
+		founder := model.Founder{
+			FounderId: uuid.NewString(),
+			User:      user,
+		}
+		createFounder := model.DB.DB.Create(&founder)
+		var errFounder = createFounder.Error
+
+		if errFounder != nil {
+			fmt.Println(errFounder)
+		}
+
+	} else {
+		investor := model.Investor{
+			InvestorId: uuid.NewString(),
+			User:       user,
+		}
+		createInvestor := model.DB.DB.Create(&investor)
+		var errInvestor = createInvestor.Error
+
+		if errInvestor != nil {
+			fmt.Println(errInvestor)
+		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{
