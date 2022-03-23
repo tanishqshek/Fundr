@@ -12,12 +12,12 @@ Our application focuses on fulfilling this purpose with the help of a card-swipi
 
 ## Authors
 
-| Name | GitHub ID |
-|------|-----------|
-|Tanishq Shaikh|tanishqshek| 6133-3588|
-|Sumeet Saini|sumeet2807| |
-|Shreya Kasturia|shreyakasturia| |
-|Dhairya Patel|dhairya3patel| |
+| Name | GitHub ID | Developer |
+|------|-----------|-----------|
+|Tanishq Shaikh|tanishqshek| FrontEnd |
+|Shreya Kasturia|shreyakasturia| FrontEnd |
+|Sumeet Saini|sumeet2807| BackEnd | 
+|Dhairya Patel|dhairya3patel| BackEnd |
 
 ## Technology Stack
 
