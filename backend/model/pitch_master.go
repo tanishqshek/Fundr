@@ -5,9 +5,9 @@ import (
 )
 
 type Pitch_master struct {
-	Id            string `gorm:"primaryKey"`
+	Id            string //`gorm:"primaryKey"`
 	UserId        string
-	Description   Pitch_description `gorm:"ForeignKey:Id"`
+	Description   Pitch_description //`gorm:"ForeignKey:Id"`
 	Creation_date time.Time
 	Creation_time time.Time
 	Deleted       bool

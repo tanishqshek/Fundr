@@ -6,8 +6,8 @@ import (
 
 type Matches struct {
 	Id            string
-	Investor      Investor `gorm:"ForeignKey:InvestorId"`
-	Founder       Founder  `gorm:"ForeignKey:FounderId"`
+	Investor      Investor //`gorm:"ForeignKey:InvestorId"`
+	Founder       Founder  //`gorm:"ForeignKey:FounderId"`
 	Pitch_id      string
 	Creation_date time.Time
 	Creation_time time.Time
@@ -15,8 +15,8 @@ type Matches struct {
 
 type Rejects struct {
 	Id            string
-	Investor      Investor `gorm:"ForeignKey:InvestorId"`
-	Founder       Founder  `gorm:"ForeignKey:FounderId"`
+	Investor      Investor //`gorm:"ForeignKey:InvestorId"`
+	Founder       Founder  //`gorm:"ForeignKey:FounderId"`
 	Pitch_id      string
 	Creation_date time.Time
 	Creation_time time.Time
@@ -24,8 +24,8 @@ type Rejects struct {
 
 type Archive struct {
 	Id            string
-	Investor      Investor `gorm:"ForeignKey:InvestorId"`
-	Founder       Founder  `gorm:"ForeignKey:FounderId"`
+	Investor      Investor //`gorm:"ForeignKey:InvestorId"`
+	Founder       Founder  //`gorm:"ForeignKey:FounderId"`
 	Pitch_id      string
 	Creation_date time.Time
 	Creation_time time.Time
