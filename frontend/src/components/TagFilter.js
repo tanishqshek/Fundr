@@ -89,10 +89,10 @@ export default function TagFilter() {
   justifyContent="center" style=  {{textAlign: "center", display: "flex", alignItems: "center" }} >
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <Typography component="h1" variant="h4" fontFamily= {"Garamond"} color={"black"}>
+            <Typography component="h1" variant="h4" color={"black"}>
               Enter Tags
             </Typography>
-            <Typography component="h1" variant="h6" fontFamily= {"Garamond"} color={"black"}>
+            <Typography component="h1" variant="h6" color={"black"}>
               Enter tags to filter your cards.
             </Typography>
             <Box

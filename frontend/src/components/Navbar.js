@@ -117,7 +117,7 @@ function Navbar({isSignedIn, setIsSignedIn}) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={() => routeChange('settings')}>
+        {isSignedIn?<div><MenuItem onClick={() => routeChange('settings')}>
           <Avatar /> My account
         </MenuItem>
         <Divider /> 
@@ -131,6 +131,7 @@ function Navbar({isSignedIn, setIsSignedIn}) {
           Privacy Settings
         </MenuItem>
         </div>
+        </div>:<div> </div>}
         <MenuItem  onClick= {() => {
           if (isSignedIn) {
             routeChange('')
