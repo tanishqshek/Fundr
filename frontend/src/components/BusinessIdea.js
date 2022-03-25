@@ -1,4 +1,5 @@
 import * as React from "react";
+import Creatable from 'react-select/creatable';
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,6 +12,55 @@ import { useNavigate } from "react-router-dom";
 import styles from "./dashboard.module.css";
 
 const theme = createTheme();
+
+const businesscategory = [
+  { label: 'Automotive', value: 'Automotive' },
+  { label: 'Banking', value: 'Banking' },
+  { label: 'Financial Services', value: 'Financial Service' },
+  { label: 'Cement', value: 'Cement' },
+  { label: 'Chemicals', value: 'Chemicals' },
+  { label: 'Conglomerates', value: 'Conglomerates' },
+  { label: 'Consumer Durables', value: 'Consumer Durables' },
+  { label: 'Consumer Non-Durables', value: 'Consumer Non-Durables' },
+  { label: 'Engineering', value: 'Engineering' },
+  { label: 'Food & Beverage', value: 'Food & Beverage' },
+  { label: 'Technology', value: 'Technology' },
+  { label: 'Manufacturing', value: 'Manufacturing' },
+  { label: 'Media', value: 'Media' },
+  { label: 'Metals & Mining', value: 'Metals & Mining' },
+  { label: 'Oil & Gas', value: 'Oil & Gas' },
+  { label: 'Pharmaceuticals', value: 'Pharmaceuticals' },
+  { label: 'Real Estate', value: 'Real Estate' },
+  { label: 'Services', value: 'Services' },
+  { label: 'Telecom', value: 'Telecom' },
+  { label: 'Tobacco', value: 'Tobacco' },
+  { label: 'Utilities', value: 'Utilities' },
+  { label: 'Miscellaneous', value: 'Miscellaneous' }
+];
+
+<Creatable
+  options={businesscategory}
+/>
+
+const colourStyles = {
+  menuList: styles => ({
+      ...styles,
+      background: 'white'
+  }),
+  option: (styles, {isFocused, isSelected}) => ({
+      ...styles,
+      background: isFocused
+          ? '#0001'
+          : isSelected
+              ? 'hsla(291, 64%, 42%, 1)'
+              : undefined,
+      zIndex: 1
+  }),
+  menu: base => ({
+      ...base,
+      zIndex: 100
+  })
+  }
 
 export default function BusinessIdea() {
   let navigate = useNavigate();
@@ -74,17 +124,20 @@ export default function BusinessIdea() {
                 placeholder="Enter your company name"
                 autoFocus
               />
-                <TextField 
-                margin="normal"
-                required
-                fullWidth
-                id="tags"
-                label="Tags"
-                name="tags"
-                autoComplete="tags"
-                placeholder="Give tags using commas"
-                autoFocus
-              />
+              <div  style={{m: 1, width: '61ch', paddingLeft: '10px', textAlign: 'left'}}>
+                  <Creatable
+                  options={businesscategory}
+                  isMulti
+                  onChange={(opt, meta) => console.log(opt, meta)}
+                  required
+                  name="tags"
+                  fullWidth
+                  label="Tags"
+                  id="tags"
+                  placeholder="Select tags for investors to find you"
+                  styles={colourStyles}
+                  />
+              </div>
               <TextField
                 required
                 name="idea"
