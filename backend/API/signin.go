@@ -41,7 +41,7 @@ func SignIn(c *gin.Context) {
 		// If the two passwords don't match, return a 401 status
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 			"status":  "401",
-			"message": "Sign in failed.",
+			"message": err.Error(), //"Sign in failed.",
 		})
 		return
 	}

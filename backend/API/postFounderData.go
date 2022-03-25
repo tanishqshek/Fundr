@@ -26,6 +26,6 @@ func PostFounderData(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
-	founder.Id = UserId
+	founder.UserId = UserId
 	model.DB.DB.Save(&founder)
 }

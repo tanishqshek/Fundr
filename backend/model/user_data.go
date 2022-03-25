@@ -1,7 +1,7 @@
 package model
 
 type User_description struct {
-	Id          string //`gorm:"primaryKey"`
+	UserId      string //`gorm:"primaryKey"`
 	Username    string
 	Name        string
 	Mobile      string
