@@ -20,14 +20,27 @@ func GetPitch(c *gin.Context) {
 
 	model.DB.DB.First(&fetched_user, "user_id = ?", UserId)
 
-	if fetched_user.UserType == "I" {
+	if fetched_user.UserType == "Investor" {
 
 		var pitches []model.Pitch_description
-		model.DB.DB.Find(&pitches)
+
+		sub1 := model.DB.DB.Table("matches").Select("pitch_id").Where("investor_id = ?", UserId).SubQuery()
+
+		sub2 := model.DB.DB.Table("rejects").Select("pitch_id").Where("investor_id = ?", UserId).SubQuery()
+
+		sub3 := model.DB.DB.Table("archives").Select("pitch_id").Where("investor_id = ?", UserId).SubQuery()
+
+		model.DB.DB.Table("pitch_descriptions").Where("pitch_id NOT IN ?", sub1).Where("pitch_id NOT IN ?", sub2).Where("pitch_id NOT IN ?", sub3).Find(&pitches)
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "200",
 			"message": pitches,
+		})
+		return
+	} else {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "You cannot view this page",
 		})
 		return
 	}

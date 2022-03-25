@@ -33,12 +33,13 @@ func PostPitch(c *gin.Context) {
 	UserId := middleware.SessionMap[key.(string)]
 
 	pitch := model.Pitch_master{
-		Id:     req.Id,
-		UserId: UserId,
+		PitchId: req.Id,
+		UserId:  UserId,
 	}
 
 	pitch_description := model.Pitch_description{
-		Id:          req.Id,
+		UserId:      UserId,
+		PitchId:     req.Id,
 		ImageUrl:    req.ImageUrl,
 		CompanyName: req.CompanyName,
 		Description: req.Description,

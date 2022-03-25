@@ -1,9 +1,10 @@
 package API
 
 import (
-	"github.com/tanishqshek/Fundr/backend/model"
-
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/tanishqshek/Fundr/backend/internal/middleware"
+	"github.com/tanishqshek/Fundr/backend/model"
 
 	"github.com/google/uuid"
 
@@ -12,28 +13,43 @@ import (
 
 func HandleSwipe(c *gin.Context) {
 
-	var fetched_user model.User
-	var investor model.Investor
-	var founder model.Founder
+	// var fetched_user model.User
+	// var investor model.Investor
+	// var founder model.Founder
 
 	var req struct {
-		Username string `json:"username" binding:"required,email"`
-		Action   string `json:"action" binding:"required"`
-		Target   string `json:"target" binding:"required"`
+		// Username string `json:"username" binding:"required,email"`
+		Action  string `json:"action" binding:"required"`
+		Target  string `json:"target" binding:"required"`
+		PitchId string `json:"pitch_id" binding:"required"`
 	}
 
-	model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
-	model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
-	model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "400",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	session := sessions.Default(c)
+	key := session.Get(middleware.SESSIONKEY)
+
+	UserId := middleware.SessionMap[key.(string)]
+
+	// model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
+	// model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
+	// model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
+	// model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
 
 	action := ""
 	if req.Action == "right" {
 		action = "Match"
 		match := model.Matches{
-			Id:       uuid.NewString(),
-			Investor: investor,
-			Founder:  founder,
+			MatchId:    uuid.NewString(),
+			InvestorId: UserId,
+			FounderId:  req.Target,
+			PitchId:    req.PitchId,
 		}
 
 		result := model.DB.DB.Create(match)
@@ -51,9 +67,10 @@ func HandleSwipe(c *gin.Context) {
 
 		action = "Reject"
 		match := model.Rejects{
-			Id:       uuid.NewString(),
-			Investor: investor,
-			Founder:  founder,
+			RejectId:   uuid.NewString(),
+			InvestorId: UserId,
+			FounderId:  req.Target,
+			PitchId:    req.PitchId,
 		}
 
 		result := model.DB.DB.Create(match)
@@ -70,9 +87,10 @@ func HandleSwipe(c *gin.Context) {
 
 		action = "Archive"
 		match := model.Archive{
-			Id:       uuid.NewString(),
-			Investor: investor,
-			Founder:  founder,
+			ArchiveId:  uuid.NewString(),
+			InvestorId: UserId,
+			FounderId:  req.Target,
+			PitchId:    req.PitchId,
 		}
 
 		result := model.DB.DB.Create(match)
@@ -88,7 +106,7 @@ func HandleSwipe(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
-		"message": action + "Succesfull",
+		"message": action + " Succesfull",
 	})
 	return
 }

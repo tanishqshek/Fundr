@@ -48,7 +48,7 @@ func SignUp(c *gin.Context) {
 	}
 
 	user_data := model.User_description{
-		Id:       user_id,
+		UserId:   user_id,
 		Name:     req.Name,
 		Username: req.Username,
 		Mobile:   req.Mobile,
@@ -72,30 +72,30 @@ func SignUp(c *gin.Context) {
 		fmt.Println(errMessage2)
 	}
 
-	if req.UserType == "Founder" {
-		founder := model.Founder{
-			FounderId: uuid.NewString(),
-			User:      user,
-		}
-		createFounder := model.DB.DB.Create(&founder)
-		var errFounder = createFounder.Error
+	// if req.UserType == "Founder" {
+	// 	founder := model.Founder{
+	// 		FounderId: uuid.NewString(),
+	// 		//			User:      user,
+	// 	}
+	// 	createFounder := model.DB.DB.Create(&founder)
+	// 	var errFounder = createFounder.Error
 
-		if errFounder != nil {
-			fmt.Println(errFounder)
-		}
+	// 	if errFounder != nil {
+	// 		fmt.Println(errFounder)
+	// 	}
 
-	} else {
-		investor := model.Investor{
-			InvestorId: uuid.NewString(),
-			User:       user,
-		}
-		createInvestor := model.DB.DB.Create(&investor)
-		var errInvestor = createInvestor.Error
+	// } else {
+	// 	investor := model.Investor{
+	// 		InvestorId: uuid.NewString(),
+	// 		//			User:       user,
+	// 	}
+	// 	createInvestor := model.DB.DB.Create(&investor)
+	// 	var errInvestor = createInvestor.Error
 
-		if errInvestor != nil {
-			fmt.Println(errInvestor)
-		}
-	}
+	// 	if errInvestor != nil {
+	// 		fmt.Println(errInvestor)
+	// 	}
+	// }
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
