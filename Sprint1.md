@@ -30,16 +30,17 @@ Sprint 1 of this project focuses on the SignUp/Login feature as well as the Home
 
 ## Fundr Frontend Status
 
-The major goals achieved for backend in this sprint were-
+The major goals achieved for frontend in this sprint were-
 1) Creation of Login and Signup Pages.
 2) Creation of Home page which has the cards stack with mocked up data of companies.
 3) Adding swipe functionality to the cards and keeping function placeholders for action performed by the user.
 4) All the buttons have been used to mock the behaviour of backend (Register, Sign In, Logout).
 
+[![Frontend Demo](https://i.ytimg.com/vi/y0wXWjQ76xA/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAx17824MX2gpKLwXiao0_W8Ozcag)](https://youtu.be/y0wXWjQ76xA)
+
+https://youtu.be/y0wXWjQ76xA
 
 [Frontend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22user+story+-+frontend%22+is%3Aclosed)
-
-[Frontend demo](https://drive.google.com/file/d/1cVPDzt5knC0sZTtrooPgBjx3v-RULk4n/view?usp=sharing)
 
 
 ## Fundr Backend Status
@@ -50,9 +51,8 @@ The major goals achieved for backend in this sprint were-
 3) Integrating Sqlite as main database for the application 
 4) Creation of database tables for storing user authentication data.
 
+[![Frontend Demo](https://i.ytimg.com/vi/tVEKdBvL3TE/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBckzFjjnlrJS0BuX6TJKrOXKW6oQ)](https://youtu.be/tVEKdBvL3TE)
+
+https://youtu.be/tVEKdBvL3TE
 
 [Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=label%3A%22User+Story+-+Backend%22+is%3Aclosed)
-
-[Backend demo](https://drive.google.com/file/d/1IQQ0DDr4YYR4nRZQsLgDhev-UM42C03s/view?usp=sharin)
-
-

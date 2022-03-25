@@ -13,7 +13,7 @@ import (
 	"github.com/gin-contrib/sessions"
 )
 
-func setRouter() *gin.Engine {
+func SetRouter() *gin.Engine {
 	// Creates default gin router with Logger and Recovery middleware already attached
 	router := gin.Default()
 	// store, _ := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
@@ -22,10 +22,17 @@ func setRouter() *gin.Engine {
 
 	router.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 
+	router.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
 	// Create API route group
 	api := router.Group("/api")
 	{
 		// Add /hello GET route to router and define route handler function
+
 		api.POST("/signup", API.SignUp)
 		api.POST("/signin", API.SignIn)
 		auth := api.Group("/auth")
@@ -34,6 +41,7 @@ func setRouter() *gin.Engine {
 			auth.POST("/swipe", API.HandleSwipe)
 			auth.POST("/postfdata", API.PostFounderData)
 			auth.POST("/postpitch", API.PostPitch)
+			auth.GET("/getpitch", API.GetPitch)
 		}
 	}
 
