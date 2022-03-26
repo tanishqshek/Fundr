@@ -11,6 +11,7 @@ import ScrollButton from "./ScrollButton";
 import TagFilter from "./TagFilter";
 import SettingsPage from "./Pages/Settings/SettingsPage";
 import PrivacyPage from "./Pages/Settings/PrivacySettings";
+import FounderDashboard from "./FounderDashboard";
 
 function Main() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -27,6 +28,7 @@ function Main() {
           <Route path="/tagfilter" element={<TagFilter />}></Route>
           <Route path="/settings" element={<SettingsPage />}></Route>
           <Route path="/privacy" element={<PrivacyPage />}></Route>
+          <Route path="/founderdash" element={<FounderDashboard />}></Route>
         </Routes>
       </div>
     );
