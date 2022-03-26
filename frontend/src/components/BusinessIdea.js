@@ -65,7 +65,7 @@ const colourStyles = {
 export default function BusinessIdea() {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = `/home`;
+    let path = `/founderdash`;
     navigate(path);
   };
 
