@@ -12,6 +12,7 @@ import TagFilter from "./TagFilter";
 import SettingsPage from "./Pages/Settings/SettingsPage";
 import PrivacyPage from "./Pages/Settings/PrivacySettings";
 import FounderDashboard from "./FounderDashboard";
+import Process from "./process";
 
 function Main() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -29,6 +30,7 @@ function Main() {
           <Route path="/settings" element={<SettingsPage />}></Route>
           <Route path="/privacy" element={<PrivacyPage />}></Route>
           <Route path="/founderdash" element={<FounderDashboard />}></Route>
+          <Route path="/process" element={<Process />}></Route>
         </Routes>
       </div>
     );
