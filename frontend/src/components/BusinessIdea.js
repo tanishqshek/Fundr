@@ -65,7 +65,7 @@ const colourStyles = {
 export default function BusinessIdea() {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = `/home`;
+    let path = `/founderdash`;
     navigate(path);
   };
 
@@ -89,10 +89,10 @@ export default function BusinessIdea() {
   justifyContent="center" style=  {{textAlign: "center", display: "flex", alignItems: "center" }} >
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <Typography component="h1" variant="h4" fontFamily= {"Garamond"} color={"black"}>
+            <Typography component="h1" variant="h4" color={"black"}>
               Business Idea
             </Typography>
-            <Typography component="h1" variant="h6" fontFamily= {"Garamond"} color={"black"}>
+            <Typography component="h1" variant="h6" color={"black"}>
               Give your company a name, enter the related tags and write a brief decription of your business idea.
             </Typography>
             <Box
@@ -113,8 +113,7 @@ export default function BusinessIdea() {
             }}
           >
             </Box>
-              <TextField 
-                margin="normal"
+              <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
                 required
                 fullWidth
                 id="companyname"
