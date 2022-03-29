@@ -25,6 +25,7 @@ export default function Login(){
   <a href="/signin"><div align="center"><Button variant="contained" disableElevation>Sign In</Button></div></a> <br/>
   <div align="center"><Typography variant="body3" color="black"> Already Existing User</Typography></div><br/> <br/>
   </div>
+
   </Container>
   <Box
         sx={{
@@ -60,6 +61,10 @@ export default function Login(){
             <Typography sx={{paddingRight:'3vw',paddingLeft:'4vw'}}variant="body1" gutterBottom>
                Our application focuses on fulfilling this purpose with the help of a card-swiping feature. The founders will be able to post their pitch which will be displayed as cards to the investors and the investor can either left swipe to reject or right swipe to accept the match. Once there is a successful match, both the parties will be able to mutually interact with each other and go forward with the process.
         </Typography>
+        <br/>
+        <div class="Process">
+  <a href="/process"><div align="center" style={{paddingRight:'3vw',paddingLeft:'4vw', color:"#5781DB", fontSize:'25px' }} gutterBottom>The Process</div></a> <br/>
+  </div>  
         </Grid>
     </Grid>
 
@@ -68,10 +73,13 @@ export default function Login(){
         <Grid item md={6}>
             <Box sx={{ fontWeight: 'bold', marginTop: 5, fontSize: 'h3.fontSize',paddingLeft:'5vw' }}>About Us</Box>
             <Typography sx={{ paddingLeft:'5vw' }} variant="body1" gutterBottom>
-          Tanishq Shaikh <br/>
-          Shreya Kasturia <br/>
-          Sumeet Saini <br/>
-          Dhairya Patel <br/>
+          
+          <h2 style={{color:'black'}}> FRONTEND DEVELOPERS: </h2>
+          <body1>Tanishq Shaikh <br/>
+          Shreya Kasturia </body1><br/>
+          <h2 style={{color:'black'}}>BACKEND DEVELOPERS: </h2>
+          <body1> Sumeet Saini <br/>
+          Dhairya Patel </body1><br/>
         </Typography>
         </Grid>
     </Grid>
