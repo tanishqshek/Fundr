@@ -6,4 +6,5 @@ type Pitch_description struct {
 	ImageUrl    string
 	CompanyName string
 	Description string
+	Tags        string
 }
