@@ -1,3 +1,4 @@
 backend/main.exe
 backend/backend.exe
 *.db
+.vscode
