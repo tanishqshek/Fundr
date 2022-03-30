@@ -2,6 +2,7 @@ package API
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -48,6 +49,16 @@ func PostPitch(c *gin.Context) {
 
 	model.DB.DB.Save(&pitch)
 	model.DB.DB.Save(&pitch_description)
+
+	var pitch_tags model.Pitch_tags
+	tags := strings.Split(req.Tags, ",")
+	for i := 0; i < len(tags); i++ {
+		pitch_tags.PitchId = pitchId
+		pitch_tags.TagId = strings.TrimSpace(tags[i])
+
+		model.DB.DB.Save(&pitch_tags)
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "201",
 		"message": "Pitch added successfully.",
