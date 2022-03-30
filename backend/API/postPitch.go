@@ -2,7 +2,6 @@ package API
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -14,12 +13,10 @@ import (
 func PostPitch(c *gin.Context) {
 
 	var req struct {
-		Creation_date time.Time
-		Creation_time time.Time
-		CompanyName   string `json:"company_name" binding:"required"`
-		Description   string `json:"description" binding:"required"`
-		ImageUrl      string `json:"image_url" binding:"required"`
-		Tags          string `json:"tags" binding:"required"`
+		CompanyName string `json:"company_name" binding:"required"`
+		Description string `json:"description" binding:"required"`
+		ImageUrl    string `json:"image_url" binding:"required"`
+		Tags        string `json:"tags" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -52,7 +49,7 @@ func PostPitch(c *gin.Context) {
 	model.DB.DB.Save(&pitch)
 	model.DB.DB.Save(&pitch_description)
 	c.JSON(http.StatusOK, gin.H{
-		"status":  "200",
+		"status":  "201",
 		"message": "Pitch added successfully.",
 	})
 	return
