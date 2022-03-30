@@ -66,6 +66,11 @@ func SignUp(c *gin.Context) {
 
 	if createdUser.Error != nil {
 		fmt.Println(errMessage1)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "400",
+			"message": "User could not be created.",
+		})
+		return
 	}
 
 	if createdDescription.Error != nil {
