@@ -1,7 +1,7 @@
 package model
 
 type User struct {
-	Username string `gorm:"primaryKey" json:"username" binding:"required,email"`
+	Username string `gorm:"primary_key" json:"username" binding:"required,email"`
 	UserId   string
 	AuthId   string
 	Name     string `json:"name" binding:"required"`
