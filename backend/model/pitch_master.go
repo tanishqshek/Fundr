@@ -5,7 +5,8 @@ import (
 )
 
 type Pitch_master struct {
-	PitchId       string `gorm:"primaryKey"`
+	// gorm.Model
+	PitchId       string `gorm:"primary_key"`
 	UserId        string
 	Description   Pitch_description //`gorm:"ForeignKey:Id"`
 	Creation_date time.Time
