@@ -1,6 +1,8 @@
 package API
 
 import (
+	"fmt"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/tanishqshek/Fundr/backend/internal/middleware"
@@ -9,6 +11,8 @@ import (
 	"github.com/google/uuid"
 
 	"net/http"
+
+	mail "github.com/xhit/go-simple-mail/v2"
 )
 
 func HandleSwipe(c *gin.Context) {
@@ -62,6 +66,9 @@ func HandleSwipe(c *gin.Context) {
 			})
 			return
 		}
+		var fetched_user model.User
+		model.DB.DB.First(&fetched_user, "user_id = ?", UserId)
+		sendMail(fetched_user.Username)
 
 	} else if req.Action == "left" {
 
@@ -109,4 +116,53 @@ func HandleSwipe(c *gin.Context) {
 		"message": action + " Succesfull",
 	})
 	return
+}
+
+func sendMail(to string) {
+
+	fmt.Println(to)
+
+	server := mail.NewSMTPClient()
+	server.Host = "smtp.gmail.com"
+	server.Port = 587
+	server.Username = "noreply.fundr@gmail.com"
+	server.Password = "Fundr@1234"
+	server.Encryption = mail.EncryptionTLS
+
+	smtpClient, err := server.Connect()
+	if err != nil {
+		// log.Fatal(err)
+		fmt.Println(err)
+	}
+
+	var htmlBody = `
+	<html>
+	<head>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	   <title>Match Notification</title>
+	</head>
+	<body>
+	   <p>Hello</p>
+	   <p></p>
+	   <p>You have matched with the following Investor:</p>
+	</body>
+	`
+	// Create email
+	email := mail.NewMSG()
+	email.SetFrom("noreply.fundr@gmail.com")
+	email.AddTo(to)
+	// email.AddCc("another_you@example.com")
+	email.SetSubject("Match Notification")
+
+	email.SetBody(mail.TextHTML, htmlBody)
+	// email.AddAttachment("super_cool_file.png")
+
+	// Send email
+	fmt.Println("Sending mail to " + to)
+	err = email.Send(smtpClient)
+	if err != nil {
+		// log.Fatal(err)
+		fmt.Println(err)
+	}
+	fmt.Println("Mail Sent")
 }
