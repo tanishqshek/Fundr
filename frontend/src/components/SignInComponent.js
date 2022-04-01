@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -75,6 +74,8 @@ class Login extends Component {
         console.log(res.data);
         if (res.status === 200) {
           this.setState({ isSignedIn: true });
+          this.props.setIsSignedIn(true);
+          this.props.setUser(res.data.user)
           // userType = localStorage.getItem(); 
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
         }
@@ -189,4 +190,5 @@ render(){
 }
 }
 }
+
 export default Login;
