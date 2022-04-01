@@ -1,6 +1,8 @@
 package API
 
 import (
+	"fmt"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/tanishqshek/Fundr/backend/internal/middleware"
@@ -9,13 +11,11 @@ import (
 	"github.com/google/uuid"
 
 	"net/http"
+
+	mail "github.com/xhit/go-simple-mail/v2"
 )
 
 func HandleSwipe(c *gin.Context) {
-
-	// var fetched_user model.User
-	// var investor model.Investor
-	// var founder model.Founder
 
 	var req struct {
 		// Username string `json:"username" binding:"required,email"`
@@ -37,11 +37,6 @@ func HandleSwipe(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	// model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
-	// model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
-
 	action := ""
 	if req.Action == "right" {
 		action = "Match"
@@ -62,6 +57,13 @@ func HandleSwipe(c *gin.Context) {
 			})
 			return
 		}
+		var fetched_investor model.User
+		var fetched_founder model.User
+		var fetched_pitch model.Pitch_description
+		model.DB.DB.First(&fetched_investor, "user_id = ?", UserId)
+		model.DB.DB.First(&fetched_founder, "user_id = ?", req.Target)
+		model.DB.DB.First(&fetched_pitch, "pitch_id = ?", req.PitchId)
+		sendMail(fetched_investor, fetched_founder, fetched_pitch)
 
 	} else if req.Action == "left" {
 
@@ -109,4 +111,54 @@ func HandleSwipe(c *gin.Context) {
 		"message": action + " Succesfull",
 	})
 	return
+}
+
+func sendMail(to model.User, founder model.User, pitch model.Pitch_description) {
+
+	server := mail.NewSMTPClient()
+	server.Host = "smtp.gmail.com"
+	server.Port = 587
+	server.Username = "noreply.fundr@gmail.com"
+	server.Password = "Fundr@1234"
+	server.Encryption = mail.EncryptionTLS
+
+	smtpClient, err := server.Connect()
+	if err != nil {
+		// log.Fatal(err)
+		fmt.Println(err)
+	}
+
+	var htmlBody = `
+	<html>
+	<head>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	   <title>Match Notification</title>
+	</head>
+	<body>
+	   <p>Hello ` + to.Name + `,</p>
+	   <p></p>
+	   <p>You have matched with the following Company:</p>
+	   <p> Company: ` + pitch.CompanyName + `</p>
+	   <p> Founder: ` + founder.Name + `</p>
+	   <p> Email: ` + founder.Username + `</p>
+	</body>
+	`
+	// Create email
+	email := mail.NewMSG()
+	email.SetFrom("noreply.fundr@gmail.com")
+	email.AddTo(to.Username)
+	// email.AddCc("another_you@example.com")
+	email.SetSubject("Match Notification")
+
+	email.SetBody(mail.TextHTML, htmlBody)
+	// email.AddAttachment("super_cool_file.png")
+
+	// Send email
+	fmt.Println("Sending mail to " + to.Username)
+	err = email.Send(smtpClient)
+	if err != nil {
+		// log.Fatal(err)
+		fmt.Println(err)
+	}
+	fmt.Println("Mail Sent")
 }
