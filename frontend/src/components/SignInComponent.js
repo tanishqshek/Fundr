@@ -33,7 +33,8 @@ class Login extends Component {
         email: "",
         password: "",
         isSignedIn: false,
-        userType: ""
+        userType: "",
+        companyData: ""
     };
 };
 
@@ -77,9 +78,27 @@ class Login extends Component {
         if (res.status == 200) {
           this.setState({ isSignedIn: true });
           // userType = localStorage.getItem(); 
-          console.log("Local: ", localStorage.getItem(this.state.email));
+          // console.log("Local: ", localStorage.getItem(this.state.email));
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
-
+          axios.get("/api/auth/getpitch",{
+            // headers: {
+            //   "Cookie": Cookies.get('mysession')
+            // }
+          })
+          .then(response => {
+            // console.log(res);
+            // console.log(res.data.message);
+            if (response.status == 200) {
+              // this.setState({ isSignedUp: true });
+              // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
+              // this.setState.companyData = res.data.message;
+              this.setState({companyData: response.data.message})
+            }
+          
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
           
           if (this.state.userType == "Investor") {

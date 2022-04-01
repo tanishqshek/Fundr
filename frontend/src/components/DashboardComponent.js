@@ -98,6 +98,8 @@ import { Component } from "react";
 import { renderMatches } from "react-router-dom";
 
 let companies = SUMMARIES;
+var temp = [];
+var tempList = [];
 
 class Dashboard extends Component {
 
@@ -109,7 +111,7 @@ class Dashboard extends Component {
     // this.handleChange = this.handleChange.bind(this);
     this.state = {
       lastDirection: "",
-      companyData: "",
+      companyData: [],
         isSignedIn: false,
         userType: ""
     };
@@ -131,56 +133,74 @@ class Dashboard extends Component {
     // setLastDirection(direction);
   };
 
-  
+  componentDidMount(){
+    axios.get("/api/auth/getpitch",{
+      // headers: {
+      //   "Cookie": Cookies.get('mysession')
+      // }
+    })
+    .then(res => {
+      // console.log(res);
+      // console.log(res.data.message);
+      if (res.status == 200) {
+        // this.setState({ isSignedUp: true });
+        // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
+        // this.setState.companyData = res.data.message;
+        console.log(res.data.message);
+        this.setState({companyData: res.data.message});
+        temp.push(res.data.message);
+        
+        for(let x of temp){
+          // console.log("companyData: ", x);
+          tempList = x;
+          
+        }
+        console.log("companyData: ", tempList);
+        console.log("SAMPLE: ", companies);
+      }
+    
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    // temp.map((items, index) =>{console.log("companyData: ", items );})
+    
+  }
 
 
 render(){
+  // console.log(this.props.companyData);
 
-  axios.get("/api/auth/getpitch",{
-    // headers: {
-    //   "Cookie": Cookies.get('mysession')
-    // }
-  })
-  .then(res => {
-    console.log(res);
-    console.log(res.data.message);
-    if (res.status === 200) {
-      // this.setState({ isSignedUp: true });
-      // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
-      // setCompanyData(res.data.message)
-    }
   
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
 
-  // console.log("Company data: ",companyData);
+  // console.log("Company data: ",this.state.companyData);
+  // console.log("Companies: ",companies);
 
   return (
+    
     <div className={styles.test}>
       <div id={styles["root"]}>
-        
+      {/* {console.log("Return: ", this.companyData)} */}
         <div className={styles.cardContainer}>
-          {companies.map((company) => (
+          {tempList.map((company) => (
             <TinderCard
               className={styles.swipe}
-              key={company.name}
-              onSwipe={(dir) => this.swiped(dir, company.name)}
-              onCardLeftScreen={() => this.outOfFrame(company.name)}
+              key={company.CompanyName}
+              onSwipe={(dir) => this.swiped(dir, company.CompanyName)}
+              onCardLeftScreen={() => this.outOfFrame(company.CompanyName)}
             >
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.name}
+                <h3 className={styles.card_h3}>{company.CompanyName}
                 </h3>
-                <h3 className={styles.h3}>Tags: {company.tags}
+                <h3 className={styles.h3}>Tags: {company.Tags}
                 </h3>
                 <div className={styles.cardImagediv} >
                   {/* <div  > */}
                   
-                  <img className={styles.cardImage} src={company.image} />
+                  <img className={styles.cardImage} src={company.ImageUrl} />
                   {/* </div>, */}
                 </div>
-                <p className={styles.para}>{company.description}</p>
+                <p className={styles.para}>{company.Description}</p>
               </div>
             </TinderCard>
           ))}
