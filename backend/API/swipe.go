@@ -17,10 +17,6 @@ import (
 
 func HandleSwipe(c *gin.Context) {
 
-	// var fetched_user model.User
-	// var investor model.Investor
-	// var founder model.Founder
-
 	var req struct {
 		// Username string `json:"username" binding:"required,email"`
 		Action  string `json:"action" binding:"required"`
@@ -40,11 +36,6 @@ func HandleSwipe(c *gin.Context) {
 	key := session.Get(middleware.SESSIONKEY)
 
 	UserId := middleware.SessionMap[key.(string)]
-
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	// model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
-	// model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
 
 	action := ""
 	if req.Action == "right" {
@@ -66,9 +57,13 @@ func HandleSwipe(c *gin.Context) {
 			})
 			return
 		}
-		var fetched_user model.User
-		model.DB.DB.First(&fetched_user, "user_id = ?", UserId)
-		sendMail(fetched_user.Username)
+		var fetched_investor model.User
+		var fetched_founder model.User
+		var fetched_pitch model.Pitch_description
+		model.DB.DB.First(&fetched_investor, "user_id = ?", UserId)
+		model.DB.DB.First(&fetched_founder, "user_id = ?", req.Target)
+		model.DB.DB.First(&fetched_pitch, "pitch_id = ?", req.PitchId)
+		sendMail(fetched_investor, fetched_founder, fetched_pitch)
 
 	} else if req.Action == "left" {
 
@@ -118,9 +113,7 @@ func HandleSwipe(c *gin.Context) {
 	return
 }
 
-func sendMail(to string) {
-
-	fmt.Println(to)
+func sendMail(to model.User, founder model.User, pitch model.Pitch_description) {
 
 	server := mail.NewSMTPClient()
 	server.Host = "smtp.gmail.com"
@@ -142,15 +135,18 @@ func sendMail(to string) {
 	   <title>Match Notification</title>
 	</head>
 	<body>
-	   <p>Hello</p>
+	   <p>Hello ` + to.Name + `,</p>
 	   <p></p>
-	   <p>You have matched with the following Investor:</p>
+	   <p>You have matched with the following Company:</p>
+	   <p> Company: ` + pitch.CompanyName + `</p>
+	   <p> Founder: ` + founder.Name + `</p>
+	   <p> Email: ` + founder.Username + `</p>
 	</body>
 	`
 	// Create email
 	email := mail.NewMSG()
 	email.SetFrom("noreply.fundr@gmail.com")
-	email.AddTo(to)
+	email.AddTo(to.Username)
 	// email.AddCc("another_you@example.com")
 	email.SetSubject("Match Notification")
 
@@ -158,7 +154,7 @@ func sendMail(to string) {
 	// email.AddAttachment("super_cool_file.png")
 
 	// Send email
-	fmt.Println("Sending mail to " + to)
+	fmt.Println("Sending mail to " + to.Username)
 	err = email.Send(smtpClient)
 	if err != nil {
 		// log.Fatal(err)
