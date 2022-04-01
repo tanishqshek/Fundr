@@ -1,3 +1,5 @@
+
+
 import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -72,12 +74,21 @@ class Login extends Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if (res.status === 200) {
+        if (res.status == 200) {
           this.setState({ isSignedIn: true });
-          this.props.setIsSignedIn(true);
-          this.props.setUser(res.data.user)
           // userType = localStorage.getItem(); 
+          console.log("Local: ", localStorage.getItem(this.state.email));
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
+
+
+          
+          if (this.state.userType == "Investor") {
+            // redirect to home if signed up
+            return <Navigate to = {{ pathname: "/home" }} />;
+          }
+          else if (this.state.userType == "Founder"){
+            return <Navigate to = {{ pathname: "/businessidea" }} />;
+          }
         }
       
       })
@@ -89,6 +100,7 @@ class Login extends Component {
 
 render(){
 
+  // console.log(this.userType);
   if (this.state.userType == "Investor") {
     // redirect to home if signed up
     return <Navigate to = {{ pathname: "/home" }} />;
@@ -96,7 +108,8 @@ render(){
   else if (this.state.userType == "Founder"){
     return <Navigate to = {{ pathname: "/businessidea" }} />;
   }
-  else{  return (
+  else{
+  return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />

@@ -218,6 +218,7 @@ export default function BusinessIdea() {
                   styles={colourStyles}
                   />
               </div>
+              <div  style={{m: 1, width: '61ch', paddingLeft: '10px', textAlign: 'left'}}>
               <TextField
                 // required
                 name="Description"
@@ -232,6 +233,7 @@ export default function BusinessIdea() {
                 placeholder="Enter your business idea in not more than 10 lines"
                 multiline              
                 />
+                </div>
                 <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
                 // required
                 fullWidth
