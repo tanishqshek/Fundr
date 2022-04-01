@@ -6,9 +6,9 @@
  import Tabs from '@mui/material/Tabs';
  import Tab from '@mui/material/Tab';
  import Header from '../assets/Header.png';
- import Search from '../assets/search.jpeg';
- import Interview from '../assets/interview.png';
- import Job from '../assets/job.jpeg';
+ import funding from '../assets/funding.jpeg';
+ import extend from '../assets/extend.png';
+ import build from '../assets/build.jpeg';
  import Footer from './Footer';
 
  function TabPanel(props) {
@@ -80,45 +80,52 @@
          <Grid sx={{marginTop:"-50vh"}} item md={30}  align= 'center'>
            <Box sx={{ width: '60%'}} align= 'center'>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}> 
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-           <Tab label="The Search" {...a11yProps(0)}/>
-           <Tab label="The Interview " {...a11yProps(1)} />
-           <Tab label="The Job" {...a11yProps(2)} />
+        <Tabs value={value} onChange={handleChange} aria-label="tabs">
+           <Tab label="Raising Funds" {...a11yProps(0)}/>
+           <Tab label="Extend Your Reach " {...a11yProps(1)} />
+           <Tab label="Build Your Business" {...a11yProps(2)} />
          </Tabs>
        </Box>
 
        <TabPanel value={value} index={0}>
-       <h1 style={{color:'black', position:'relative'}}> The Search</h1>
-       <h2 style={{color:'black' , position:'relative'}}> Why is searching for an online job is important? </h2>
-       <img src={Search}></img><br/>
-       The whole process of looking for a job is a great exercise in self-awareness. As you craft your resume, go on interviews, research companies, etc., you’re trying to find the fit that will make the most of your strengths, align with your values and help your grow in your career. If you’re being mindful of all that as you pursue your next job, you’ll not only find the right environment, but you’ll work with people and on projects that allow you to use your best skills and abilities
-       <br/><br/> You can’t really find the perfect job if you don’t know what you’re looking for, right?  You may already know in what area of hospitality you’d like to work, but that really isn’t enough to find a job that’s really fulfilling. You need to understand what motivates you, what your goals are, what kind of work environment you want and what qualities you want to develop.
-       <br/><br/>When you have a clear understanding of what strengths you bring to the job, you’re better able to work on things where you can contribute in a meaningful way and not waste time on the things you can’t. That’s not to say you shouldn’t work on your weaknesses, but honing your strengths is where you’ll really shine.
-       <br/><br/>If you aspire to management, you’ll find that understanding your triggers and reactions to particular situations will go a long way toward making you an effective leader. Hospitality and customer service can be chaotic at times and knowing how you react to stress and learning to manage your emotions will directly improve your productivity.
-       <br/><br/>Self-awareness unlocks your competitive advantage. When you take the time to explore this during your job search, you’ll be much better equipped to find the company, job and manager that align with your personal goals and career plan.
+       <h1 style={{color:'black', position:'relative'}}> Raising Funds</h1>
+       <h2 style={{color:'black' , position:'relative'}}> Series A, B, C Funding: How It Works</h2>
+       <img src={funding}style={{
+                aspectRatio: 4,
+                width: "100%"
+            }}></img><br/>
+       A startup with a brilliant business idea is aiming to get its operations up and running. From humble beginnings, the company proves the worthiness of its model and products, steadily growing thanks to the generosity of friends, family and the founders' own financial resources. Over time, its customer base begins to grow, and the business begins to expand its operations and its aims. Before long, the company has risen through the ranks of its competitors to become highly valued, opening the possibilities for future expansion to include new offices, employees and even an initial public offering (IPO).
+      <br/><br/>If the early stages of the hypothetical business detailed above seem too good to be true, it's because they generally are. While there are a very small number of fortunate companies that grow according to the model described above (and with little or no "outside" help), the large majority of successful startups have engaged in many efforts to raise capital through rounds of external funding. These funding rounds provide outside investors the opportunity to invest cash in a growing company in exchange for equity, or partial ownership of that company. When you hear discussions of Series A, Series B and Series C funding rounds, these terms are referring to this process of growing a business through outside investment.
+      <br/><br/>There are other types of funding rounds available to startups, depending upon the industry and the level of interest among potential investors. It's not uncommon for startups to engage in what is known as "seed" funding or angel investor funding at the outset. Next, these funding rounds can be followed by Series A, B and C funding rounds, as well as additional efforts to earn capital as well, if appropriate. Series A, B and C are necessary ingredients for a business that decides bootstrapping, or merely surviving off of the generosity of friends, family and the depth of their own pockets, will not suffice.       <br/><br/> You can’t really find the perfect job if you don’t know what you’re looking for, right?  You may already know in what area of hospitality you’d like to work, but that really isn’t enough to find a job that’s really fulfilling. You need to understand what motivates you, what your goals are, what kind of work environment you want and what qualities you want to develop.
        </TabPanel>
        
        <TabPanel value={value} index={1}>
-       <h1 style={{color:'black', position:'relative'}}> The Interview</h1>
-       <h2 style={{color:'black' , position:'relative'}}> Why is an interview necessary for a job?  </h2>
-       <img src={Interview} style={{
+       <h1 style={{color:'black', position:'relative'}}> Extend Your Reach</h1>
+       <h2 style={{color:'black' , position:'relative'}}> How to Increase Customer Retention </h2>
+       <img src={extend} style={{
                 aspectRatio: 4,
                 width: "100%"
             }}></img><br/>
-       The candidate interview is a vital component of the hiring process. To hire the most qualified candidates, human resource professionals and hiring managers must be well informed on how to conduct interviews effectively. This article provides an overview of various interviewing methods, both structured and unstructured. It discusses the most widely used types of interviewing—telephone prescreen, direct one-on-one and panel interviews—and explains the objectives and techniques of behavioral, competency-based and situational approaches to interviewing.
-       <br/><br/>Employers must be aware of federal and state prohibitions on asking certain types of questions during employment interviews. This article presents some basic guidelines for interviewers to follow to avoid claims of discrimination or bias in hiring, and it lists examples of questions not to ask job applicants.
-       <br/><br/>With careful preparation, HR professionals and hiring managers can make the most of employment interviews and obtain the information they need. Preparatory steps include selecting a method of interviewing, drafting useful questions, phrasing questions properly and sharpening one's listening skills.</TabPanel>
-       
+      It's not enough to just get new customers for your business. You also need to keep your existing customers coming back. When you increase customer retention, you're building customer loyalty, which can increase sales.
+ <br/><br/>Considering it costs five-times as much to get a new customer than it does to keep a current one, focusing on retaining customers means your business won’t spend money on something that isn’t a guaranteed investment.
+ <br/><br/>You can increase your customer retention by:
+ <br/>1. Prioritizing customer service: If you don’t treat your customers right, they won’t want to support your business. Making sure you address their concerns and give them the best experience possible shows you value them as a customer.
+ <br/><br/>2. Using a customer relations management (CRM) system: CRM systems help your business manage relationships with existing and potential customers. They help you maintain customer information and identify sales opportunities. One of the biggest benefits is that the data gets stored in one place, so you and other employees who need it can access it.
+ <br/><br/>3. Creating a customer loyalty program: These programs reward your existing customers for supporting your business. They can also help you attract new customers or get back those that left your business.
+ <br/><br/>4. Launching an email campaign: Using an email campaign can help make sure your business stays on top of customers’ minds. It’s also a great way to move existing and potential customers through your sales funnel.
+ <br/><br/>5. Engaging with customers on social media: Your customers may reach out to your business on social media with a question or to share feedback, pain points or complaints. Taking the time to respond and engage with them shows you value their thoughts and take their concerns seriously.
+ <br/><br/>6. Keep your promises: No one likes feeling forgotten. If you tell a customer you’ll follow up with them with more information or contact them at a later date, do it. If you don’t, it can give your customers a bad impression of your business.
+ </TabPanel>
        <TabPanel value={value} index={2}>
-       <h1 style={{color:'black', position:'relative'}}> The Job</h1>
-       <h2 style={{color:'black' , position:'relative'}}>Why negotiating your offer, thriving in a new job, and building a career you’ll love is important?</h2>
-       <img src={Job} style={{
+       <h1 style={{color:'black', position:'relative'}}> Build Your Business</h1>
+       <h2 style={{color:'black' , position:'relative'}}>What are the key factors to build a business?</h2>
+       <img src={build} style={{
                 aspectRatio: 4,
                 width: "100%"
             }}></img><br/>
-       Salary negotiation is a critical step in the hiring process. By taking the time to talk through why you feel you need more compensation, you can help employers better understand the value you provide. As with any new skill, the more you negotiate, the more you'll improve and the easier it will become.
-       <br/><br/>Thriving at work is all about vitality and learning. People who are thriving at work feel energized on the job. They also feel that they are constantly learning and applying their new knowledge. Thriving employees are motivated by their work and experience great personal growth on the job. 
-       <br/><br/> If you can't be authentic, you're not believable. A dream career is a job you love, are good at, passionate about, and would like to do long term. It's not the money or prestige it brings, but the hit you in your heart and soul because you'll love what you do!</TabPanel>
+You can’t build a strong business without investing time and money into it. You’ll also need to promote your business and establish a strong marketing plan.
+<br/><br/>In today’s world, building a business also means you’ll need a strong website and social media presence. These can help you learn your customers better. With them, you can even request customers’ email addresses so you can reach them directly as you promote your business. 
+<br/><br/>If you’re looking to add employees to your team right away, be sure to hire the best startup team who will support your operation and set it up for success.</TabPanel>
        </Box>
         <Typography sx={{ fontWeight: 500 }} variant="h5"></Typography>
          </Grid>
