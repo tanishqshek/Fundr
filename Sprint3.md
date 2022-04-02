@@ -25,7 +25,7 @@ Sprint 3 of this project focuses on adding extra features to the website.
 [Backend user stories](https://github.com/tanishqshek/Fundr/issues?q=is%3Aissue+label%3A%22user+story+-+backend%22+is%3Aclosed)
 
 ## Frontend and Backend Intergrated
-[![Intergrated](https://i.ytimg.com/vi/URe6ILaEOgE/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAfeCZ0RobLwiS_gYXQRUppMPO7wg)
+![Intergrated](https://i.ytimg.com/vi/URe6ILaEOgE/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAfeCZ0RobLwiS_gYXQRUppMPO7wg)
 
 https://youtu.be/URe6ILaEOgE
 
