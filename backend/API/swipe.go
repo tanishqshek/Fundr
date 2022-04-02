@@ -108,7 +108,7 @@ func HandleSwipe(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
-		"message": action + " Succesfull",
+		"message": action + " Succesful",
 	})
 	return
 }
