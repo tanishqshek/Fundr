@@ -1,4 +1,4 @@
-# Fundr – Sprint 2
+# Fundr – Sprint 3
 
 ## Idea
 In the current generation, where time is a very limited resource, it is very essential to have an application which will serve the purpose of matching the founders of upcoming startups with the investors in the most convenient approach. 
