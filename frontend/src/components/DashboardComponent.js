@@ -151,11 +151,11 @@ class Dashboard extends Component {
         temp.push(res.data.message);
         
         for(let x of temp){
-          // console.log("companyData: ", x);
+          console.log("companyDataX: ", x);
           tempList = x;
           
         }
-        console.log("companyData: ", tempList);
+        console.log("companyData: ", tempList[0].ImageUrl);
         console.log("SAMPLE: ", companies);
       }
     
@@ -180,27 +180,29 @@ render(){
     
     <div className={styles.test}>
       <div id={styles["root"]}>
-      {/* {console.log("Return: ", this.companyData)} */}
+      
         <div className={styles.cardContainer}>
-          {tempList.map((company) => (
+          {companies.map((company) => (
+            // console.log("Return: ", company.ImageUrl)
             <TinderCard
               className={styles.swipe}
-              key={company.CompanyName}
-              onSwipe={(dir) => this.swiped(dir, company.CompanyName)}
-              onCardLeftScreen={() => this.outOfFrame(company.CompanyName)}
+              key={company.id}
+              onSwipe={(dir) => this.swiped(dir, company.name)}
+              onCardLeftScreen={() => this.outOfFrame(company.name)}
             >
+              
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.CompanyName}
+                <h3 className={styles.card_h3}>{company.name}
                 </h3>
-                <h3 className={styles.h3}>Tags: {company.Tags}
+                <h3 className={styles.h3}>Tags: {company.tags}
                 </h3>
                 <div className={styles.cardImagediv} >
                   {/* <div  > */}
                   
-                  <img className={styles.cardImage} src={company.ImageUrl} />
+                  <img className={styles.cardImage} src={company.image} />
                   {/* </div>, */}
                 </div>
-                <p className={styles.para}>{company.Description}</p>
+                <p className={styles.para}>{company.description}</p>
               </div>
             </TinderCard>
           ))}
