@@ -99,7 +99,7 @@ import { renderMatches } from "react-router-dom";
 
 let companies = SUMMARIES;
 var temp = [];
-var tempList = [];
+// var tempList = [];
 
 class Dashboard extends Component {
 
@@ -113,7 +113,8 @@ class Dashboard extends Component {
       lastDirection: "",
       companyData: [],
         isSignedIn: false,
-        userType: ""
+        userType: "",
+        tempList: []
     };
 };
   
@@ -150,7 +151,8 @@ class Dashboard extends Component {
   swiped (direction, nameToDelete)  {
     console.log("removing: " + nameToDelete);
     // setLastDirection(direction);
-    this.state.lastDirection = direction;
+    // this.state.lastDirection = direction;
+    this.setState({lastDirection : direction});
   }
 
   outOfFrame (name) {
@@ -162,81 +164,91 @@ class Dashboard extends Component {
     // setLastDirection(direction);
   };
 
-  componentDidMount(){
-    axios.get("/api/auth/getpitch",{
+  async componentDidMount(){
+    await fetch("/api/auth/getpitch",{
       // headers: {
       //   "Cookie": Cookies.get('mysession')
       // }
     })
-    .then(res => {
+    .then(response => response.json())
+    .then(data => this.setState({ tempList: [...this.state.tempList, data.message] }))
+    // .then(console.log("templist: " ,this.state.tempList))
       // console.log(res);
       // console.log(res.data.message);
-      if (res.status == 200) {
-        // this.setState({ isSignedUp: true });
-        // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
-        // this.setState.companyData = res.data.message;
-        console.log(res.data.message);
-        this.setState({companyData: res.data.message});
-        temp.push(res.data.message);
+  //     if (res.status == 200) {
+  //       // this.setState({ isSignedUp: true });
+  //       // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
+  //       // this.setState.companyData = res.data.message;
+  //       console.log(res.json());
+  //       this.setState({ tempList: [...this.state.tempList, res.data.message] })
+  //       // temp.push(res.data.message);
         
-        for(let x of temp){
-          console.log("companyDataX: ", x);
-          tempList = x;
+  //       // for(let x of temp){
+  //       //   // console.log("companyDataX: ", x);
+  //       //   // tempList = x;
+  //       //   this.setState({ tempList: [...this.state.tempList, x] })
+  //       //   console.log("tempList: ", this.state.tempList);
           
-        }
-        console.log("companyData: ", tempList[0].ImageUrl);
-        console.log("SAMPLE: ", companies);
-      }
+  //       // }
+        
+  //       console.log("SAMPLE: ", companies);
+  //     }
     
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    // temp.map((items, index) =>{console.log("companyData: ", items );})
-    
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  //   // temp.map((items, index) =>{console.log("companyData: ", items );})
+  //   console.log("tempList: ", this.state.tempList);
   }
 
 
 render(){
-  // console.log(this.props.companyData);
 
-  
-
-  // console.log("Company data: ",this.state.companyData);
-  // console.log("Companies: ",companies);
-
+  console.log("templist: " ,this.state.tempList[0]);
   return (
     
     <div className={styles.test}>
       <div id={styles["root"]}>
       
         <div className={styles.cardContainer}>
-          {companies.map((company) => (
+          
+          {
+          this.state.tempList.length !== 0 
+          ?
+          <>
+          {
+          this.state.tempList[0].map((company) => (
             // console.log("Return: ", company.ImageUrl)
             <TinderCard
               className={styles.swipe}
-              key={company.id}
-              onSwipe={(dir) => this.swiped(dir, company.name)}
-              onCardLeftScreen={() => this.outOfFrame(company.name)}
+              key={company.PitchId}
+              onSwipe={(dir) => this.swiped(dir, company.CompanyName)}
+              onCardLeftScreen={() => this.outOfFrame(company.CompanyName)}
             >
               
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.name}
+                <h3 className={styles.card_h3}>{company.CompanyName}
                 </h3>
-                <h3 className={styles.h3}>Tags: {company.tags}
+                <h3 className={styles.h3}>Tags: {company.Tags}
                 </h3>
                 <div className={styles.cardImagediv} >
                   {/* <div  > */}
                   
-                  <img className={styles.cardImage} src={company.image} />
+                  <img className={styles.cardImage} src={company.ImageUrl} />
                   {/* </div>, */}
                 </div>
-                <p className={styles.para}>{company.description}</p>
+                <p className={styles.para}>{company.Description}</p>
               </div>
             </TinderCard>
-          ))}
+          ))
+}
+          </>
+          :
+          <> Loading...</>
+        }
         </div>
-        {this.lastDirection != 'down' ? (
+        {this.lastDirection !== 'down' ? (
           <h2 className={styles.infoText}>You swiped {this.lastDirection}</h2>
         ) : (
           <h2 className={styles.infoText} >This item has been saved for later</h2>

@@ -103,8 +103,8 @@ export default function BusinessIdea() {
       
     }
     setCompanyTags(tempList);
-    console.log("Temp list: ", tempList);
-    console.log("Company tags: ", companyTags);
+    // console.log("Temp list: ", tempList);
+    // console.log("Company tags: ", companyTags);
   }
   const handleChange  = (event) => {
     console.log(event);
@@ -122,9 +122,9 @@ export default function BusinessIdea() {
     event.preventDefault();
 
     appendTags();
-    setTimeout(1000);
-    console.log("handle company", companyTags);
-    console.log("selected image", selectedImage);
+    // setTimeout(1000);
+    // console.log("handle company", companyTags);
+    // console.log("selected image", selectedImage);
     // routeChange();
   
     // console.log(user);
@@ -141,7 +141,7 @@ export default function BusinessIdea() {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if (res.status === 200) {
+        if (res.status == 200) {
           // this.setState({ isSignedUp: true });
           // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
           routeChange();

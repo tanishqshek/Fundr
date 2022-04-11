@@ -1,5 +1,8 @@
 import * as React from 'react';
 import vid from '../assets/bgvid.mp4';
+import im from '../assets/mission.png';
+import im2 from '../assets/working.png';
+import im3 from '../assets/about.jpeg';
 import {Button,Grid,Container,Typography,Box,Divider} from '@mui/material';
 import Footer from './Footer';
 export default function Login(){ 
@@ -40,12 +43,22 @@ export default function Login(){
    <Container maxWidth="lg">
        <br/>
     <Grid container  >
+    
         <Grid item xs={6}>
         <Box sx={{ fontWeight: 'bold', marginTop: 5, fontSize: 'h3.fontSize',paddingLeft:'5vw' }}> Our Mission </Box>
             <Typography  sx={{paddingLeft:'5vw'}}variant="body1" >
          In the current generation, where time is a very limited resource, it is very essential to have an application which will serve the purpose of matching the founders of upcoming startups with the investors in the most convenient approach.
         </Typography>
         </Grid>
+        <Grid align="center" item xs={6}>
+
+
+<img src={im} style={{
+    aspectRatio: 4,
+    width: "65%"
+}}></img>
+
+</Grid>
     </Grid>
 
     <br/><br/><br/><br/><br/><br/><Divider /><br/>
@@ -53,7 +66,10 @@ export default function Login(){
           <Grid align="center" item xs={6}>
 
 
-            <i class="fas fa-plane-departure fa-9x licon"></i>
+            <img src={im2} style={{
+                aspectRatio: 4,
+                width: "65%"
+            }}></img>
 
           </Grid>
         <Grid item xs={6}>
@@ -82,6 +98,15 @@ export default function Login(){
           Dhairya Patel </body1><br/>
         </Typography>
         </Grid>
+        <Grid align="center" item xs={6}>
+
+
+<img src={im3} style={{
+    aspectRatio: 4,
+    width: "65%"
+}}></img>
+
+</Grid>
     </Grid>
    </Container> 
   <Footer/>
