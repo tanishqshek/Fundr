@@ -70,7 +70,7 @@ func SignIn(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
 		"message": "Signed in successfully.",
-		"user":    fetched_user,
+		"user":    fetched_user.Username,
 	})
 	return
 }
