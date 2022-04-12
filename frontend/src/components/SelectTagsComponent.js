@@ -8,6 +8,8 @@ import { TAGS } from "../assets/tags";
 import axios from 'axios';
 import CreatableSelect from 'react-select/creatable';
 import { Navigate } from "react-router-dom";
+import { withRouter } from "./withRouter";
+import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 
@@ -47,6 +49,7 @@ class SelectTagsComponent extends Component{
       lastDirection: "",
       companyTags: [],
       tempArray: [],
+      redirect:false,
         // isSignedIn: false,
         userType: "",
         tempList: [],
@@ -81,6 +84,7 @@ class SelectTagsComponent extends Component{
     this.setState({ tagSet: true});
     
     this.appendTags();
+    this.state.redirect && <Navigate to='/home' replace={true} />
     // axios.post('/api/auth/postpitch', { 
     //   // "Id": this.state.id,
     //   // "LastName": this.state.lname,
@@ -105,7 +109,7 @@ class SelectTagsComponent extends Component{
     //     // if(error.response.status == 400)
     //     //   alert("Please enter all the required information");
     //   });
-    
+    // this.props.navigate('/home');
 
   };
 
@@ -127,7 +131,7 @@ class SelectTagsComponent extends Component{
                   placeholder="Select tags"
                   styles={colourStyles}
                   />
-                  <Button
+                  {/* <Button
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -135,9 +139,14 @@ class SelectTagsComponent extends Component{
                 // onClick={()=> this.props.history.push('/signup')}
               >
                 Submit
-              </Button>
+              </Button> */}
+              <Link to="/home" className="btn btn-primary">Submit</Link>
                   </ThemeProvider>
+                  
         )
+        
     }
+    
 }
+
 export default SelectTagsComponent;
