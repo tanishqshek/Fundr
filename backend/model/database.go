@@ -45,5 +45,6 @@ func (a *App) Initialize(dbDriver string, dbURI string) {
 		&Investor_likes{},
 		&Founder_targets{},
 		&Pitch_tags{},
+		&User_tags{},
 	)
 }
