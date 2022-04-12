@@ -14,6 +14,7 @@ import PrivacyPage from "./Pages/Settings/PrivacySettings";
 import FounderDashboard from "./FounderDashboard";
 import Process from "./process";
 import ErrorPage from "./ErrorPage";
+import SelectTagsComponent from "./SelectTagsComponent";
 
 function Main() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -34,6 +35,7 @@ function Main() {
           <Route path="/process" element={<Process />}></Route>
           <Route path="/settings" element={<SettingsPage user={user}/>}></Route>
           <Route path="/errorpage" element={<ErrorPage />}></Route>
+          <Route path="/tagselect" element={<SelectTagsComponent />}></Route>
 
         </Routes>
       </div>

@@ -15,9 +15,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import img1 from './img1.jpeg';
-import { renderMatches, useNavigate } from "react-router-dom";
+// import { renderMatches, useNavigate } from "react-router-dom";
 import img2 from "../assets/img2.jpeg";
-import Dashboard from "./DashboardComponent";
+// import Dashboard from "./DashboardComponent";
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -95,7 +95,7 @@ render(){
   // console.log(this.userType);
   if (this.state.userType == "Investor") {
     // redirect to home if signed up
-    return <Navigate to = {{ pathname: "/home" }} />;
+    return <Navigate to = {{ pathname: "/tagselect" }} />;
   }
   else if (this.state.userType == "Founder"){
     return <Navigate to = {{ pathname: "/businessidea" }} />;
