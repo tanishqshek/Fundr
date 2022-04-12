@@ -39,7 +39,7 @@ func PostTags(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "201",
-		"message": "Pitch added successfully.",
+		"message": "tags added successfully.",
 	})
 	return
 }
