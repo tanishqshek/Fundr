@@ -19,7 +19,7 @@ func SetRouter() *gin.Engine {
 	// store, _ := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
 	// router.Use(sessions.Sessions("mysession", store))
 	middleware.SessionMap = make(map[string]string)
-
+	middleware.ResetTokenMap = make(map[string]string)
 	router.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 
 	router.GET("/ping", func(c *gin.Context) {
@@ -35,6 +35,7 @@ func SetRouter() *gin.Engine {
 
 		api.POST("/signup", API.SignUp)
 		api.POST("/signin", API.SignIn)
+		api.POST("/genresettoken", API.GenResetToken)
 		auth := api.Group("/auth")
 		auth.Use(middleware.AuthRequired)
 		{
