@@ -16,8 +16,7 @@ import (
 func SetRouter() *gin.Engine {
 	// Creates default gin router with Logger and Recovery middleware already attached
 	router := gin.Default()
-	// store, _ := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
-	// router.Use(sessions.Sessions("mysession", store))
+
 	middleware.SessionMap = make(map[string]string)
 	middleware.ResetTokenMap = make(map[string]string)
 	router.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
