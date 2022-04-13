@@ -47,8 +47,8 @@ class SelectTagsComponent extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       lastDirection: "",
-      companyTags: [],
       tempArray: [],
+      finalList: [],
       redirect:false,
         // isSignedIn: false,
         userType: "",
@@ -60,12 +60,13 @@ class SelectTagsComponent extends Component{
 
   appendTags(){
     let tempList = [];
-    // for(let e of this.tempArray){
-    //   tempList.push(e.value);
+    for(let e of this.state.tempArray){
+      tempList.push(e.value);
       
-    // }
+    }
     // setCompanyTags(tempList);
-    this.setState({ companyTags: tempList});
+    this.setState({ finalList: tempList});
+    console.log("companyTags", this.finalList);
   }
   handleChange(event) {
     console.log(event);
@@ -84,14 +85,12 @@ class SelectTagsComponent extends Component{
     this.setState({ tagSet: true});
     
     this.appendTags();
-    this.state.redirect && <Navigate to='/home' replace={true} />
-    // axios.post('/api/auth/postpitch', { 
+    // this.state.redirect && <Navigate to='/home' replace={true} />
+    // axios.post('/api/auth/posttags', { 
     //   // "Id": this.state.id,
     //   // "LastName": this.state.lname,
-    //   "company_name": companyName,
-    //   "tags": companyTags.toString(),
-    //   "description": description,
-    //   "image_url":   companyImageUrl   
+    //   "tags": this.state.finalList.toString()
+
     // })
     //   .then(res => {
     //     console.log(res);
@@ -99,7 +98,7 @@ class SelectTagsComponent extends Component{
     //     if (res.status == 200) {
     //       // this.setState({ isSignedUp: true });
     //       // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
-    //       routeChange();
+
     //     }
       
     //   })
@@ -122,16 +121,16 @@ class SelectTagsComponent extends Component{
                   isMulti
                   // required
                   name="Tags"
-                  // value={companyTags}
-                  // {console.log("Event Message", )}
-                  // onChange={this.handleChange}
+                  onChange={this.handleChange}
+
                   fullWidth
                   label="Tags"
                   id="Tags"
                   placeholder="Select tags"
                   styles={colourStyles}
                   />
-                  {/* <Button
+                  <Button
+
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -139,8 +138,9 @@ class SelectTagsComponent extends Component{
                 // onClick={()=> this.props.history.push('/signup')}
               >
                 Submit
-              </Button> */}
-              <Link to="/home" className="btn btn-primary">Submit</Link>
+              </Button>
+              {/* <Link to="/home" className="btn btn-primary">Submit</Link> */}
+
                   </ThemeProvider>
                   
         )
