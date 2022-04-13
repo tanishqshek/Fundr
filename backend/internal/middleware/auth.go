@@ -23,6 +23,7 @@ import (
 // }
 
 var SessionMap map[string]string
+var ResetTokenMap map[string]string
 
 const (
 	SESSIONKEY = "SessionKey"
