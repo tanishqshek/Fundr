@@ -93,6 +93,7 @@ export default function BusinessIdea() {
     // setCompanyTags(companyTags.push(event[0].value));
     // setCompanyTags([...companyTags, event[0].value])
     setTempArray(event);
+    console.log("tempArray: ",tempArray);
 
   };
 
