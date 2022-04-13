@@ -1,12 +1,13 @@
 package API
 
 import (
-	//"github.com/gin-contrib/sessions"
 	"fmt"
 	"math/rand"
 
 	"github.com/tanishqshek/Fundr/backend/model"
 	mail "github.com/xhit/go-simple-mail/v2"
+
+	"github.com/tanishqshek/Fundr/backend/constants"
 
 	"github.com/tanishqshek/Fundr/backend/internal/middleware"
 
@@ -53,15 +54,15 @@ func GenResetToken(c *gin.Context) {
 	middleware.ResetTokenMap[fetched_user.Username] = random_token
 
 	server := mail.NewSMTPClient()
-	server.Host = "smtp.gmail.com"
-	server.Port = 587
-	server.Username = "noreply.fundr@gmail.com"
-	server.Password = "Fundr@1234"
+	server.Host = constants.EMAIL_SERVER
+	server.Port = constants.EMAIL_PORT
+	server.Username = constants.EMAIL_SENDER
+	server.Password = constants.EMAIL_PASSWORD
 	server.Encryption = mail.EncryptionTLS
 
 	smtpClient, err := server.Connect()
 	if err != nil {
-		// log.Fatal(err)
+
 		fmt.Println(err)
 	}
 
@@ -78,21 +79,19 @@ func GenResetToken(c *gin.Context) {
 	   <p> ` + random_token + `</p>
 	</body>
 	`
-	// Create email
+
 	email := mail.NewMSG()
-	email.SetFrom("noreply.fundr@gmail.com")
+	email.SetFrom(constants.EMAIL_SENDER)
 	email.AddTo(fetched_user.Username)
-	// email.AddCc("another_you@example.com")
+
 	email.SetSubject("Match Notification")
 
 	email.SetBody(mail.TextHTML, htmlBody)
-	// email.AddAttachment("super_cool_file.png")
 
-	// Send email
 	fmt.Println("Sending mail to " + fetched_user.Username)
 	err = email.Send(smtpClient)
 	if err != nil {
-		// log.Fatal(err)
+
 		fmt.Println(err)
 	}
 	fmt.Println("Mail Sent")
