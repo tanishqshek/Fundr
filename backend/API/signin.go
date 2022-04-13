@@ -54,10 +54,22 @@ func SignIn(c *gin.Context) {
 		return
 	}
 
+	var fetched_tags []model.User_tags
+	var tags []string
+	model.DB.DB.Find(&fetched_tags, "user_id = ?", fetched_user.UserId)
+	for _, tag := range fetched_tags {
+		tags = append(tags, tag.TagId)
+	}
+
+	if tags == nil {
+		tags = append(tags, "")
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
 		"message": "Signed in successfully.",
 		"user":    fetched_user.Username,
+		"tags":    tags,
 	})
 	return
 }
