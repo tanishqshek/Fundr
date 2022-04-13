@@ -18,7 +18,6 @@ import (
 func HandleSwipe(c *gin.Context) {
 
 	var req struct {
-		// Username string `json:"username" binding:"required,email"`
 		Action  string `json:"action" binding:"required"`
 		Target  string `json:"target" binding:"required"`
 		PitchId string `json:"pitch_id" binding:"required"`
@@ -36,6 +35,17 @@ func HandleSwipe(c *gin.Context) {
 	key := session.Get(middleware.SESSIONKEY)
 
 	UserId := middleware.SessionMap[key.(string)]
+
+	var fetched_user model.User
+
+	model.DB.DB.Find(&fetched_user, "user_id = ?", UserId)
+
+	if fetched_user.UserType != "Investor" {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "Unauthorized",
+		})
+	}
 
 	action := ""
 	if req.Action == "right" {
@@ -124,7 +134,7 @@ func sendMail(to model.User, founder model.User, pitch model.Pitch_description) 
 
 	smtpClient, err := server.Connect()
 	if err != nil {
-		// log.Fatal(err)
+
 		fmt.Println(err)
 	}
 
@@ -143,22 +153,20 @@ func sendMail(to model.User, founder model.User, pitch model.Pitch_description) 
 	   <p> Email: ` + founder.Username + `</p>
 	</body>
 	`
-	// Create email
+
 	email := mail.NewMSG()
 	email.SetFrom("noreply.fundr@gmail.com")
 	email.AddTo(to.Username)
-	// email.AddCc("another_you@example.com")
+
 	email.SetSubject("Match Notification")
 
 	email.SetBody(mail.TextHTML, htmlBody)
-	// email.AddAttachment("super_cool_file.png")
 
-	// Send email
 	fmt.Println("Sending mail to " + to.Username)
 	err = email.Send(smtpClient)
 	if err != nil {
-		// log.Fatal(err)
 		fmt.Println(err)
 	}
+
 	fmt.Println("Mail Sent")
 }

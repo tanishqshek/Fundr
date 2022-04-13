@@ -32,6 +32,17 @@ func PostPitch(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
+	var fetched_user model.User
+
+	model.DB.DB.Find(&fetched_user, "user_id = ?", UserId)
+
+	if fetched_user.UserType != "Founder" {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "Unauthorized",
+		})
+	}
+
 	pitchId := uuid.NewString()
 	pitch := model.Pitch_master{
 		PitchId: pitchId,
