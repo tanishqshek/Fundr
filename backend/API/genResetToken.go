@@ -1,9 +1,10 @@
 package API
 
 import (
-	//"github.com/gin-contrib/sessions"
 	"fmt"
 	"math/rand"
+
+	"github.com/gin-contrib/sessions"
 
 	"github.com/tanishqshek/Fundr/backend/model"
 	mail "github.com/xhit/go-simple-mail/v2"
@@ -11,6 +12,8 @@ import (
 	"github.com/tanishqshek/Fundr/backend/internal/middleware"
 
 	"net/http"
+
+	"github.com/google/uuid"
 
 	"github.com/gin-gonic/gin"
 	//"time"
@@ -49,8 +52,20 @@ func GenResetToken(c *gin.Context) {
 	// generate random token
 
 	random_token := randSeq(6)
+	fmt.Println(random_token)
 
 	middleware.ResetTokenMap[fetched_user.Username] = random_token
+
+	session := sessions.Default(c)
+	sessionToken := uuid.NewString()
+	session.Set(middleware.SESSIONKEY, sessionToken)
+	middleware.SessionMap[sessionToken] = fetched_user.UserId
+	if err := session.Save(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  "500",
+			"message": "Failed to save session"})
+		return
+	}
 
 	server := mail.NewSMTPClient()
 	server.Host = "smtp.gmail.com"

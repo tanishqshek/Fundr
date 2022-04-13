@@ -36,6 +36,7 @@ func SetRouter() *gin.Engine {
 		api.POST("/signup", API.SignUp)
 		api.POST("/signin", API.SignIn)
 		api.POST("/genresettoken", API.GenResetToken)
+		api.POST("/postverifytoken", API.PostVerifyToken)
 		auth := api.Group("/auth")
 		auth.Use(middleware.AuthRequired)
 		{
