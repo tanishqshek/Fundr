@@ -90,6 +90,7 @@ class SelectTagsComponent extends Component{
     //   // "Id": this.state.id,
     //   // "LastName": this.state.lname,
     //   "tags": this.state.finalList.toString()
+
     // })
     //   .then(res => {
     //     console.log(res);
@@ -97,8 +98,7 @@ class SelectTagsComponent extends Component{
     //     if (res.status == 200) {
     //       // this.setState({ isSignedUp: true });
     //       // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
-    //       // routeChange();
-    //       console.log("API response: " ,res);
+
     //     }
       
     //   })
@@ -122,6 +122,7 @@ class SelectTagsComponent extends Component{
                   // required
                   name="Tags"
                   onChange={this.handleChange}
+
                   fullWidth
                   label="Tags"
                   id="Tags"
@@ -129,6 +130,7 @@ class SelectTagsComponent extends Component{
                   styles={colourStyles}
                   />
                   <Button
+
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -138,6 +140,7 @@ class SelectTagsComponent extends Component{
                 Submit
               </Button>
               {/* <Link to="/home" className="btn btn-primary">Submit</Link> */}
+
                   </ThemeProvider>
                   
         )
