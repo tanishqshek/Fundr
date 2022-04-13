@@ -28,6 +28,17 @@ func PostTags(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
+	var fetched_user model.User
+
+	model.DB.DB.Find(&fetched_user, "user_id = ?", UserId)
+
+	if fetched_user.UserType != "Investor" {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "Unauthorized",
+		})
+	}
+
 	var user_tags model.User_tags
 	tags := strings.Split(req.Tags, ",")
 	for i := 0; i < len(tags); i++ {
