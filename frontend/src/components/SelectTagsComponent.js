@@ -86,6 +86,7 @@ class SelectTagsComponent extends Component{
     
     this.appendTags();
     // this.state.redirect && <Navigate to='/home' replace={true} />
+<<<<<<< HEAD
     // axios.post('/api/auth/posttags', { 
     //   // "Id": this.state.id,
     //   // "LastName": this.state.lname,
@@ -100,14 +101,30 @@ class SelectTagsComponent extends Component{
     //       // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
 
     //     }
+=======
+    axios.post('/api/auth/posttags', { 
+      // "Id": this.state.id,
+      // "LastName": this.state.lname,
+      "tags": this.state.finalList.toString()
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.status == 200) {
+          // this.setState({ isSignedUp: true });
+          // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
+          // routeChange();
+          console.log("API response: " ,res);
+        }
+>>>>>>> b59d737 (working postTags call)
       
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error.toJSON());
-    //     // alert(error);
-    //     // if(error.response.status == 400)
-    //     //   alert("Please enter all the required information");
-    //   });
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+        // alert(error);
+        // if(error.response.status == 400)
+        //   alert("Please enter all the required information");
+      });
     // this.props.navigate('/home');
 
   };

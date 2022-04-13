@@ -95,7 +95,7 @@ render(){
   // console.log(this.userType);
   if (this.state.userType == "Investor") {
     // redirect to home if signed up
-    return <Navigate to = {{ pathname: "/tagselect" }} />;
+    return <Navigate to = {{ pathname: "/tagfilter" }} />;
   }
   else if (this.state.userType == "Founder"){
     return <Navigate to = {{ pathname: "/businessidea" }} />;
