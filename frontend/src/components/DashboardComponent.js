@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
-import { SUMMARIES } from "../assets/summaries";
-import Button from "@mui/material/Button";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+// import { SUMMARIES } from "../assets/summaries";
+// import Button from "@mui/material/Button";
+// import axios from 'axios';
+// import Cookies from 'js-cookie';
 import { Component } from "react";
-import { renderMatches } from "react-router-dom";
+// import { renderMatches } from "react-router-dom";
 
-let companies = SUMMARIES;
-var temp = [];
+// let companies = SUMMARIES;
+// var temp = [];
 // var tempList = [];
 
 class Dashboard extends Component {
