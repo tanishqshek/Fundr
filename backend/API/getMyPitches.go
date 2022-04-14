@@ -32,7 +32,7 @@ func GetMyPitch(c *gin.Context) {
 	// 	CompanyName string `json:"company_name"`
 	// }
 
-	model.DB.DB.First(&fetched_pitches, "user_id = ?", UserId)
+	model.DB.DB.Find(&fetched_pitches, "user_id = ?", UserId)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
