@@ -11,7 +11,7 @@ import (
 	//"time"
 )
 
-func PostVerifyToken(c *gin.Context) {
+func VerifyToken(c *gin.Context) {
 
 	// session := sessions.Default(c)
 
