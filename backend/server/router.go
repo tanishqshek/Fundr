@@ -35,7 +35,7 @@ func SetRouter() *gin.Engine {
 		api.POST("/signup", API.SignUp)
 		api.POST("/signin", API.SignIn)
 		api.POST("/genresettoken", API.GenResetToken)
-		api.POST("/postverifytoken", API.PostVerifyToken)
+		api.POST("/verifytoken", API.VerifyToken)
 		auth := api.Group("/auth")
 		auth.Use(middleware.AuthRequired)
 		{
@@ -47,6 +47,7 @@ func SetRouter() *gin.Engine {
 			auth.GET("/getmypitches", API.GetMyPitch)
 			auth.POST("/posttags", API.PostTags)
 			auth.GET("/getuserdata", API.GetUserData)
+			auth.GET("/verifytags", API.VerifyTags)
 		}
 	}
 
