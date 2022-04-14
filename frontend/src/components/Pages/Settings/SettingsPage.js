@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-function SettingsPage({user}) {
+function SettingsPage() {
     let navigate = useNavigate();
 
 const routeChange = (url) => {
@@ -20,10 +20,10 @@ const routeChange = (url) => {
       "Authorization": Cookies.get('mysession')
     }
   }).then(res => {
-      console.log(res)
+      console.log("Response: ", res);
   })
 
-   console.log(user);
+  //  console.log(user);
     return (
         <div className="settings-page">
             <div className="settings-page-leftpanel">
@@ -41,10 +41,10 @@ const routeChange = (url) => {
             </Typography>
 
             <div className='settings-card1' style={{m: 1, width: '110ch'}}>
-                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> Name:  {user.name}</p>
-                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> E-mail ID:  {user.username}</p>
-                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> Contact Number:  {user.mobile}</p>
-                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> User Type:  {user.usertype}</p>
+                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> Name:  </p>
+                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> E-mail ID:  </p>
+                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> Contact Number:  </p>
+                    <p style={{m: 1, width: '110ch', paddingLeft: '40px', textAlign: 'left'}}> User Type:  </p>
             </div>
             </div>
             </div>
