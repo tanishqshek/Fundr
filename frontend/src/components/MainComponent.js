@@ -14,6 +14,7 @@ import PrivacyPage from "./Pages/Settings/PrivacySettings";
 import FounderDashboard from "./FounderDashboard";
 import Process from "./process";
 import ErrorPage from "./ErrorPage";
+// import ProtectedRoute from './ProtectedRoute';
 
 function Main() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -29,10 +30,10 @@ function Main() {
           <Route path="/signin" element={<Signin isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} setUser={setUser}/>}></Route>
           <Route path="/businessidea" element={<BusinessIdea />}></Route>
           <Route path="/tagfilter" element={<TagFilter />}></Route>
-          <Route path="/privacy" element={<PrivacyPage />}></Route>
+          <Route path="/privacy" element={<PrivacyPage user={user}/>}></Route>
           <Route path="/founderdash" element={<FounderDashboard />}></Route>
           <Route path="/process" element={<Process />}></Route>
-          <Route path="/settings" element={<SettingsPage user={user}/>}></Route>
+          <Route path="/settings" element={<SettingsPage/>}></Route>
           <Route path="/errorpage" element={<ErrorPage />}></Route>
 
         </Routes>
