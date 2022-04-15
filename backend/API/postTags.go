@@ -37,6 +37,7 @@ func PostTags(c *gin.Context) {
 			"status":  "401",
 			"message": "Unauthorized",
 		})
+		return
 	}
 
 	var user_tags model.User_tags
