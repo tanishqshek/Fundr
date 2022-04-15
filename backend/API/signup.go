@@ -73,8 +73,8 @@ func SignUp(c *gin.Context) {
 
 	if createdUser.Error != nil {
 		fmt.Println(errMessage1)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  "400",
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  "500",
 			"message": "User could not be created.",
 		})
 		return
@@ -85,8 +85,9 @@ func SignUp(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status":  "200",
-		"message": "Signed up successfully.",
+		"status":  "201",
+		"message": "User created successfully.",
 	})
+	return
 
 }

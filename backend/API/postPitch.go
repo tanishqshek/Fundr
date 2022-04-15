@@ -41,6 +41,7 @@ func PostPitch(c *gin.Context) {
 			"status":  "401",
 			"message": "Unauthorized",
 		})
+		return
 	}
 
 	pitchId := uuid.NewString()

@@ -46,6 +46,7 @@ func HandleSwipe(c *gin.Context) {
 			"status":  "401",
 			"message": "Unauthorized",
 		})
+		return
 	}
 
 	action := ""
