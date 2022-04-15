@@ -25,8 +25,8 @@ type type_resp struct {
 func TestSignin(t *testing.T) {
 
 	var jsonData = []byte(`{
-		"Username": "tanishq@gmail.com",
-		"Password": "tan1"
+		"Username": "sumeet2807b@gmail.com",
+		"Password": "pass8"
 	}`)
 
 	resp := type_resp{}
