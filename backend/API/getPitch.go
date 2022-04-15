@@ -30,7 +30,9 @@ func GetPitch(c *gin.Context) {
 
 		sub3 := model.DB.DB.Table("archives").Select("pitch_id").Where("investor_id = ?", UserId).SubQuery()
 
-		model.DB.DB.Table("pitch_descriptions").Where("pitch_id NOT IN ?", sub1).Where("pitch_id NOT IN ?", sub2).Where("pitch_id NOT IN ?", sub3).Find(&pitches)
+		sub4 := model.DB.DB.Table("user_tags").Select("tag_id").Where("user_id = ?", UserId).SubQuery()
+
+		model.DB.DB.Table("pitch_descriptions").Where("pitch_id NOT IN ?", sub1).Where("pitch_id NOT IN ?", sub2).Where("pitch_id NOT IN ?", sub3).Where("tags IN ?", sub4).Find(&pitches)
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "200",
