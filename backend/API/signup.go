@@ -40,7 +40,6 @@ func SignUp(c *gin.Context) {
 
 	user := model.User{
 		UserId:   user_id,
-		Name:     req.Name,
 		Username: req.Username,
 		Password: password,
 		Mobile:   req.Mobile,

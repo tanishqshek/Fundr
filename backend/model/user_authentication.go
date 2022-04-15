@@ -7,8 +7,8 @@ type User struct {
 	CreatedAt time.Time
 	UserId    string
 	AuthId    string
-	Name      string `json:"name" binding:"required"`
-	Password  string `json:"password" binding:"required"`
-	Mobile    string `json:"mobile" binding:"required"`
-	UserType  string `json:"usertype" binding:"required"`
+	// Name      string `json:"name" binding:"required"`
+	Password string `json:"password" binding:"required"`
+	Mobile   string `json:"mobile" binding:"required"`
+	UserType string `json:"usertype" binding:"required"`
 }

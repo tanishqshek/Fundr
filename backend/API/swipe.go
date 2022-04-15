@@ -37,7 +37,7 @@ func HandleSwipe(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
-	var fetched_user model.User
+	var fetched_user model.User_description
 
 	model.DB.DB.Find(&fetched_user, "user_id = ?", UserId)
 
@@ -68,8 +68,8 @@ func HandleSwipe(c *gin.Context) {
 			})
 			return
 		}
-		var fetched_investor model.User
-		var fetched_founder model.User
+		var fetched_investor model.User_description
+		var fetched_founder model.User_description
 		var fetched_pitch model.Pitch_description
 		model.DB.DB.First(&fetched_investor, "user_id = ?", UserId)
 		model.DB.DB.First(&fetched_founder, "user_id = ?", req.Target)
@@ -124,7 +124,7 @@ func HandleSwipe(c *gin.Context) {
 	return
 }
 
-func sendMail(to model.User, founder model.User, pitch model.Pitch_description) {
+func sendMail(to model.User_description, founder model.User_description, pitch model.Pitch_description) {
 
 	server := mail.NewSMTPClient()
 	server.Host = constants.EMAIL_SERVER

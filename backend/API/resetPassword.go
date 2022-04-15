@@ -18,7 +18,7 @@ import (
 
 func resetPassword(c *gin.Context) {
 
-	var fetched_user model.User
+	var fetched_user model.User_description
 
 	var req struct {
 		Username string `json:"username" binding:"required,email"`

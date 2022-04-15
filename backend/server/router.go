@@ -48,6 +48,8 @@ func SetRouter() *gin.Engine {
 			auth.POST("/posttags", API.PostTags)
 			auth.GET("/getuserdata", API.GetUserData)
 			auth.GET("/verifytags", API.VerifyTags)
+			auth.POST("/postuserdata", API.PostUserData)
+
 		}
 	}
 

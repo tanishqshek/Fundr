@@ -35,7 +35,7 @@ func GenResetToken(c *gin.Context) {
 
 	// session := sessions.Default(c)
 
-	var fetched_user model.User
+	var fetched_user model.User_description
 	// var w http.ResponseWriter
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
