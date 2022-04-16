@@ -14,6 +14,8 @@ import styles from "./dashboard.module.css";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { TAGS } from "../assets/tags";
+import { Buffer } from "buffer";
+// import imageToBase64 from "image-to-base64";
 const theme = createTheme();
 
 const businesscategory = TAGS;
@@ -52,16 +54,43 @@ export default function BusinessIdea() {
   const [companyImageUrl, setCompanyImageUrl] = useState('');
   const [tempArray, setTempArray] = useState([]);
 
-  useEffect(() => {
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
+  //
+  const [images, setImages] = useState('');
+  // const [imageURLs, setImageURLs] = useState([]);
+
+
+
+  // useEffect(() => {
+  //   if (selectedImage) {
+  //     setImageUrl(URL.createObjectURL(selectedImage));
+  //   }
+  // }, [selectedImage]);
+
+  //
+  useEffect(() =>{
+    if(images.length <1) return;
+    // const newImageUrls = [];
+    // images.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
+    // setImageURLs(newImageUrls);
+    // setImages(...e.target.files[0]);
+  },[images]);
+
+  function onImageChange(e){
+    setImages(e.target.files[0]);
+    
+  }
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/founderdash`;
     navigate(path);
   };
+
+  function getBase64(file, callback) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => callback(reader.result);
+    reader.onerror = error => {};
+  }
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -99,7 +128,13 @@ export default function BusinessIdea() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("image: ", images);
+    // return new Promise((resolve, reject) => {
+    //   getBase64(images, data => resolve({ data: { link: data } }));
+    // });
 
+    // let stringbase = Buffer.from(stringToBase64, 'base64').toString('utf-8');
+    // console.log("Decoded ", stringbase);
     appendTags();
     // setTimeout(1000);
     // console.log("handle company", companyTags);
@@ -213,7 +248,7 @@ export default function BusinessIdea() {
                 multiline              
                 />
                 </div>
-                <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
+                {/* <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
                 // required
                 fullWidth
                 id="companyImageUrl"
@@ -224,21 +259,27 @@ export default function BusinessIdea() {
                 autoComplete="companyImageUrl"
                 placeholder="Enter image URL"
                 autoFocus
-              />
+              /> */}
               {/* <input 
                 accept="image/*" 
                 type="file" 
                 id="select-image"
                 style={{ display: 'none' }}
-                value={companyImageUrl}
+                value={selectedImage}
                 // onChange={(companyTags) => { this.setState({ companyTags }) }}
                 onChange={e => setSelectedImage(e.target.files[0])}
+                // onChange={(event) => {
+                //   // console.log(event.target.files[0].toString());
+                //   setSelectedImage(event.target.files[0]);
+                // }}
                 
               /> */}
+              <input type="file" accept="image/*" onChange={onImageChange} style={{ display: 'none' }} id="select-image"/>
+              {/* {<img src={images} />} */}
               <label htmlFor="select-image">
-                {/* <Button variant="contained" color="primary" component="span">
+                <Button variant="contained" color="primary" component="span">
                   Upload Image
-                </Button> */}
+                </Button>
               </label>
               {/* <div>{imageUrl && selectedImage && (
                 <Box mt={2} textAlign="center">

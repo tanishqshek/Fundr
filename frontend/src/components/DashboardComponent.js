@@ -3,7 +3,7 @@ import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
 // import { SUMMARIES } from "../assets/summaries";
 // import Button from "@mui/material/Button";
-// import axios from 'axios';
+import axios from 'axios';
 // import Cookies from 'js-cookie';
 import { Component } from "react";
 // import { renderMatches } from "react-router-dom";
@@ -30,41 +30,42 @@ class Dashboard extends Component {
 };
   
   
+  swiped (direction, nameToDelete, pitchid, userid)  {
+    console.log("removing: " + nameToDelete);
+    // setLastDirection(direction);
+    this.setState({ lastDirection: direction});
+    // this.state.lastDirection = direction;
+
+    if(direction == "right"){
+      console.log("You swiped right")
+      axios.post('/api/auth/swipe', { 
+        // "Id": this.state.id,
+        // "LastName": this.state.lname,
+        "action":direction,
+        "target":userid,
+        "pitch_id": pitchid     
+      })
+        .then(res => {
+          // console.log(res);
+          console.log(res.data);
+          if (res.status === 200) {
+            
+          }
+        
+        })
+        .catch(function (error) {
+          console.log(error.toJSON());
+          
+        });
+    }
+  };
+
   // swiped (direction, nameToDelete)  {
   //   console.log("removing: " + nameToDelete);
   //   // setLastDirection(direction);
-  //   this.state.lastDirection = direction;
-
-  //   if(direction == "right"){
-  //     console.log("You swiped right")
-  //     axios.post('/api/auth/swipe', { 
-  //       // "Id": this.state.id,
-  //       // "LastName": this.state.lname,
-  //       "action":"right",
-  //       "target":"285da091-c54d-418c-a510-f75402251e2b",
-  //       "pitch_id": "4c9eb48e-1895-4e60-b40a-8d7d435dc746"     
-  //     })
-  //       .then(res => {
-  //         console.log(res);
-  //         console.log(res.data);
-  //         if (res.status === 200) {
-            
-  //         }
-        
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error.toJSON());
-          
-  //       });
-  //   }
-  // };
-
-  swiped (direction, nameToDelete)  {
-    console.log("removing: " + nameToDelete);
-    // setLastDirection(direction);
-    // this.state.lastDirection = direction;
-    this.setState({lastDirection : direction});
-  }
+  //   // this.state.lastDirection = direction;
+  //   this.setState({lastDirection : direction});
+  // }
 
   outOfFrame (name) {
     console.log(name + " left the screen!");
@@ -134,7 +135,7 @@ render(){
             <TinderCard
               className={styles.swipe}
               key={company.PitchId}
-              onSwipe={(dir) => this.swiped(dir, company.CompanyName)}
+              onSwipe={(dir) => this.swiped(dir, company.CompanyName, company.PitchId, company.UserId)}
               onCardLeftScreen={() => this.outOfFrame(company.CompanyName)}
             >
               
