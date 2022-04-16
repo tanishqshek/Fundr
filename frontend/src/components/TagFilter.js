@@ -71,6 +71,7 @@ export default function TagFilter() {
     
     appendTags();
 
+    
     axios.post('/api/auth/posttags', { 
       "tags": finalTagsList.toString()
     })
@@ -88,6 +89,11 @@ export default function TagFilter() {
       });
   };
 
+
+  axios.get('/api/auth/getuserdata')
+    .then(response =>{
+      console.log("User data: " ,response.data.message[0].UserId);
+    });
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh"}} id={styles["idea"]}
