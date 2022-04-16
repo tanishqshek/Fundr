@@ -44,12 +44,12 @@ func SetRouter() *gin.Engine {
 			auth.POST("/postpitch", API.PostPitch)
 			auth.GET("/getpitch", API.GetPitch)
 			auth.GET("/getmatches", API.GetMatches)
+			auth.GET("/getarchive", API.GetArchive)
 			auth.GET("/getmypitches", API.GetMyPitch)
 			auth.POST("/posttags", API.PostTags)
 			auth.GET("/getuserdata", API.GetUserData)
 			auth.GET("/verifytags", API.VerifyTags)
 			auth.POST("/postuserdata", API.PostUserData)
-
 		}
 	}
 
