@@ -81,35 +81,35 @@ class Login extends Component {
         console.log(res.data);
         if (res.status == 200) {
           this.setState({ isSignedIn: true });
-          this.setState({ isSignedIn: true }, function() {
-            console.log("signin: ",this.state.isSignedIn);
-            <Main data={this.state.isSignedIn}/>
-          });
+          // this.setState({ isSignedIn: true }, function() {
+          //   console.log("signin: ",this.state.isSignedIn);
+          //   <Main data={this.state.isSignedIn}/>
+          // });
           // userType = localStorage.getItem(); 
           // console.log("Local: ", localStorage.getItem(this.state.email));
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
-          
-          axios.get('/api/auth/getuserdata')
-          .then(response =>{
-            console.log("User data: " ,response.data.message[0].UserId);
-            if(response.data.message[0].UserId !== undefined || response.data.message[0].UserId !== ""){
-              // <Navigate to="/home"/>;
-              // this.setState({ tagSet: true });              
+          console.log("User: " , localStorage);
+          // axios.get('/api/auth/getuserdata')
+          // .then(response =>{
+          //   console.log("User data: " ,response.data.message[0].UserId);
+          //   if(response.data.message[0].UserId !== undefined || response.data.message[0].UserId !== ""){
+          //     // <Navigate to="/home"/>;
+          //     // this.setState({ tagSet: true });              
 
-              this.setState({ tagSet: true }, function() {
-                console.log("Mystate: ",this.state.tagSet);
-              });
-              // console.log("Mystate: ", this.state.tagSet);
-              // return <Navigate to={home}/>
-              // con
+          //     this.setState({ tagSet: true }, function() {
+          //       console.log("Mystate: ",this.state.tagSet);
+          //     });
+          //     // console.log("Mystate: ", this.state.tagSet);
+          //     // return <Navigate to={home}/>
+          //     // con
               
-            }
+          //   }
 
-            // if(this.state.tagSet == true){
+          //   // if(this.state.tagSet == true){
 
-            // }
-            // else{<Navigate to="/tagfilter"/>;}
-          });
+          //   // }
+          //   // else{<Navigate to="/tagfilter"/>;}
+          // });
         }
       
       })

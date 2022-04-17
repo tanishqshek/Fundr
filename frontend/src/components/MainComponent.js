@@ -27,16 +27,13 @@ function Main() {
         <Routes>
         
           <Route path="/" element={<Login />}></Route>
-          
-              <Route path="/businessidea" element={<BusinessIdea />}></Route>
-              <Route path="/tagfilter" element={<TagFilter />}></Route>
-              <Route path="/home" element={<Dashboard />}></Route>
-              <Route path="/privacy" element={<PrivacyPage user={user}/>}></Route>
-              <Route path="/founderdash" element={<FounderDashboard />}></Route>
-              <Route path="/process" element={<Process />}></Route>
-              <Route path="/settings" element={<SettingsPage/>}></Route>
-            
-          
+          <Route path="/businessidea" element={<BusinessIdea />}></Route>
+          <Route path="/tagfilter" element={<TagFilter />}></Route>
+          <Route path="/home" element={<Dashboard />}></Route>
+          <Route path="/privacy" element={<PrivacyPage user={user}/>}></Route>
+          <Route path="/founderdash" element={<FounderDashboard />}></Route>
+          <Route path="/process" element={<Process />}></Route>
+          <Route path="/settings" element={<SettingsPage/>}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signin" element={<Signin isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} setUser={setUser}/>}></Route>
           

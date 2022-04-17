@@ -82,12 +82,16 @@ class SignUpComponent extends Component {
       "UserType": this.state.typeOfUser
      })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
         if (res.status === 200) {
+          console.log("EMAIL: ", this.state.email);
+          console.log("TYPE: ", this.state.typeOfUser);
           this.setState({ isSignedUp: true });
           localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
+          console.log("Local: ", localStorage);
         }
+        
       
       })
       .catch(function (error) {
