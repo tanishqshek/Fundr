@@ -57,23 +57,31 @@ export default function BusinessIdea() {
   //
   const [images, setImages] = useState('');
   // const [imageURLs, setImageURLs] = useState([]);
+  const [base64File, setBase64URL] = useState('');
 
+  const [postData, setPostData] = useState({ 
+    createdBy : 'user1', 
+    content : '', tag : '', 
+    attachments : ''
+});  
 
+  const handleFileInputChange = e => {
+    console.log(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = function() {
+        setBase64URL(reader.result);
+        // setPostData({...postData, attachments : reader.result })
+        setImages(reader.result);
 
-  // useEffect(() => {
-  //   if (selectedImage) {
-  //     setImageUrl(URL.createObjectURL(selectedImage));
-  //   }
-  // }, [selectedImage]);
+    console.log('result', reader.result);
+    console.log("file result", base64File);
+    }
+    if(e.target.files[0]){
+    reader.readAsDataURL(e.target.files[0]);
+    console.log('reader',reader);
+    }
+  };
 
-  //
-  useEffect(() =>{
-    if(images.length <1) return;
-    // const newImageUrls = [];
-    // images.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
-    // setImageURLs(newImageUrls);
-    // setImages(...e.target.files[0]);
-  },[images]);
 
   function onImageChange(e){
     setImages(e.target.files[0]);
@@ -85,23 +93,7 @@ export default function BusinessIdea() {
     navigate(path);
   };
 
-  function getBase64(file, callback) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => callback(reader.result);
-    reader.onerror = error => {};
-  }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     companyname: data.get("companyname"),
-  //     tags: data.get("tags"),
-  //     idea: data.get("idea"),
-  //   });
-  // };
+  
   const appendTags = () =>{
     let tempList = [];
     for(let e of tempArray){
@@ -150,7 +142,7 @@ export default function BusinessIdea() {
       "company_name": companyName,
       "tags": companyTags.toString(),
       "description": description,
-      "image_url":   companyImageUrl   
+      "image_url":   images   
     })
       .then(res => {
         console.log(res);
@@ -164,9 +156,7 @@ export default function BusinessIdea() {
       })
       .catch(function (error) {
         console.log(error.toJSON());
-        // alert(error);
-        // if(error.response.status == 400)
-        //   alert("Please enter all the required information");
+        
       });
   };
 
@@ -274,7 +264,7 @@ export default function BusinessIdea() {
                 // }}
                 
               /> */}
-              <input type="file" accept="image/*" onChange={onImageChange} style={{ display: 'none' }} id="select-image"/>
+              <input type="file" accept="image/*" onChange = {handleFileInputChange} style={{ display: 'none' }} id="select-image"/>
               {/* {<img src={images} />} */}
               <label htmlFor="select-image">
                 <Button variant="contained" color="primary" component="span">

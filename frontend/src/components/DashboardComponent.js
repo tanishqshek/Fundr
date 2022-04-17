@@ -84,34 +84,7 @@ class Dashboard extends Component {
     })
     .then(response => response.json())
     .then(data => this.setState({ tempList: [...this.state.tempList, data.message] }))
-    // .then(console.log("templist: " ,this.state.tempList))
-      // console.log(res);
-      // console.log(res.data.message);
-  //     if (res.status == 200) {
-  //       // this.setState({ isSignedUp: true });
-  //       // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
-  //       // this.setState.companyData = res.data.message;
-  //       console.log(res.json());
-  //       this.setState({ tempList: [...this.state.tempList, res.data.message] })
-  //       // temp.push(res.data.message);
-        
-  //       // for(let x of temp){
-  //       //   // console.log("companyDataX: ", x);
-  //       //   // tempList = x;
-  //       //   this.setState({ tempList: [...this.state.tempList, x] })
-  //       //   console.log("tempList: ", this.state.tempList);
-          
-  //       // }
-        
-  //       console.log("SAMPLE: ", companies);
-  //     }
     
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  //   // temp.map((items, index) =>{console.log("companyData: ", items );})
-  //   console.log("tempList: ", this.state.tempList);
   }
 
 
