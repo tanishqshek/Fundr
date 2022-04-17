@@ -3,6 +3,7 @@ package fundrtest
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -16,23 +17,25 @@ import (
 func TestUserdata(t *testing.T) {
 
 	var signin_json = []byte(`{
-		"Username": "sumeet2807e@gmail.com",
-		"Password": "tan1"
+		"Username": "testuser@gmail.com",
+		"Password": "test1"
 	}`)
 
-	// var signup_json = []byte(`{
-	// 	"Name":"Yo1",
-	// 	"Username": "sumeet2807e@gmail.com",
-	// 	"Password": "tan1",
-	// 	"Mobile": "999999999",
-	// 	"UserType": "Founder"
-	// }`)
+	var signup_json = []byte(`{
+		"Name":"Yo1",
+		"Username": "testuser@gmail.com",
+		"Password": "test1",
+		"Mobile": "999999999",
+		"UserType": "Founder"
+	}`)
 
 	var userdata_json = []byte(`{
 		"name":"Yo1",
-		"address": "sumeet2807e@gmail.com",
+		"address": "221B baker street, hogwarts",
 		"education": "10th Fail"
 	}`)
+
+	var testuser model.User_description
 
 	resp := type_resp{}
 	w_signup := httptest.NewRecorder()
@@ -40,14 +43,19 @@ func TestUserdata(t *testing.T) {
 	w_userdata := httptest.NewRecorder()
 
 	req_signin, _ := http.NewRequest("POST", "/api/signin", bytes.NewBuffer(signin_json))
-	// req_signup, _ := http.NewRequest("POST", "/api/signup", bytes.NewBuffer(signup_json))
+	req_signup, _ := http.NewRequest("POST", "/api/signup", bytes.NewBuffer(signup_json))
 	req_postuser, _ := http.NewRequest("POST", "/api/auth/postuserdata", bytes.NewBuffer(userdata_json))
 
 	router := server.SetRouter()
 
 	model.DB_init()
-	// router.ServeHTTP(w_signup, req_signup)
+	model.DB.DB.First(&testuser, "Username = ?", "testuser@gmail.com")
+	if testuser.Username == "" {
+		router.ServeHTTP(w_signup, req_signup)
+	}
+
 	router.ServeHTTP(w_signin, req_signin)
+	fmt.Println(w_signin.Result().Cookies())
 	cookie_val := w_signin.Result().Cookies()[0].Value
 	req_postuser.AddCookie(&http.Cookie{Name: "mysession", Value: cookie_val})
 	router.ServeHTTP(w_userdata, req_postuser)
