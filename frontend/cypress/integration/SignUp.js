@@ -40,12 +40,7 @@ describe('Sign Up', () => {
         cy.contains('Register')
           .should('be.visible')
           .click()
-        cy.visit(Cypress.config("baseUrl") + "/businessidea");
-  
-        cy.contains('Logout')
-        .should('be.visible')
-        .click()
-        cy.visit(Cypress.config("baseUrl"));
+        cy.visit(Cypress.config("baseUrl") + "/signin");
   
       })
   })
