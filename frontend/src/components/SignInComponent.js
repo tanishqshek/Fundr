@@ -1,5 +1,3 @@
-
-
 import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -81,6 +79,7 @@ class Login extends Component {
         console.log(res.data);
         if (res.status == 200) {
           this.setState({ isSignedIn: true });
+          localStorage.setItem("isSignedIn",true);
           // this.setState({ isSignedIn: true }, function() {
           //   console.log("signin: ",this.state.isSignedIn);
           //   <Main data={this.state.isSignedIn}/>
@@ -89,6 +88,7 @@ class Login extends Component {
           // console.log("Local: ", localStorage.getItem(this.state.email));
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
           console.log("User: " , localStorage);
+          // console.log(isSignedIn)
           // axios.get('/api/auth/getuserdata')
           // .then(response =>{
           //   console.log("User data: " ,response.data.message[0].UserId);
