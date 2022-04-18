@@ -19,11 +19,11 @@ describe('Sign In', () => {
         cy.contains('Sign In')
           .should('be.visible')
           .click()
-        cy.visit(Cypress.config("baseUrl") + "/Dashboard");
+        cy.visit(Cypress.config("baseUrl") + "/businessidea");
   
-        cy.contains('Logout')
+        cy.get('.MuiAvatar-root').click()
+        cy.contains('Login')
         .should('be.visible')
-        .click()
         cy.visit(Cypress.config("baseUrl"));
   
       })
