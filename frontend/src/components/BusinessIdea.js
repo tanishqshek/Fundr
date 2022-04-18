@@ -13,32 +13,12 @@ import { useNavigate } from "react-router-dom";
 import styles from "./dashboard.module.css";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { TAGS } from "../assets/tags";
+import { Buffer } from "buffer";
+// import imageToBase64 from "image-to-base64";
 const theme = createTheme();
 
-const businesscategory = [
-  { label: 'Automotive', value: 'Automotive' },
-  { label: 'Banking', value: 'Banking' },
-  { label: 'Financial Services', value: 'Financial Service' },
-  { label: 'Cement', value: 'Cement' },
-  { label: 'Chemicals', value: 'Chemicals' },
-  { label: 'Conglomerates', value: 'Conglomerates' },
-  { label: 'Consumer Durables', value: 'Consumer Durables' },
-  { label: 'Consumer Non-Durables', value: 'Consumer Non-Durables' },
-  { label: 'Engineering', value: 'Engineering' },
-  { label: 'Food & Beverage', value: 'Food & Beverage' },
-  { label: 'Technology', value: 'Technology' },
-  { label: 'Manufacturing', value: 'Manufacturing' },
-  { label: 'Media', value: 'Media' },
-  { label: 'Metals & Mining', value: 'Metals & Mining' },
-  { label: 'Oil & Gas', value: 'Oil & Gas' },
-  { label: 'Pharmaceuticals', value: 'Pharmaceuticals' },
-  { label: 'Real Estate', value: 'Real Estate' },
-  { label: 'Services', value: 'Services' },
-  { label: 'Telecom', value: 'Telecom' },
-  { label: 'Tobacco', value: 'Tobacco' },
-  { label: 'Utilities', value: 'Utilities' },
-  { label: 'Miscellaneous', value: 'Miscellaneous' }
-];
+const businesscategory = TAGS;
 
 <CreatableSelect
   options={businesscategory}
@@ -74,27 +54,46 @@ export default function BusinessIdea() {
   const [companyImageUrl, setCompanyImageUrl] = useState('');
   const [tempArray, setTempArray] = useState([]);
 
-  useEffect(() => {
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
+  //
+  const [images, setImages] = useState('');
+  // const [imageURLs, setImageURLs] = useState([]);
+  const [base64File, setBase64URL] = useState('');
+
+  const [postData, setPostData] = useState({ 
+    createdBy : 'user1', 
+    content : '', tag : '', 
+    attachments : ''
+});  
+
+  const handleFileInputChange = e => {
+    console.log(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = function() {
+        setBase64URL(reader.result);
+        // setPostData({...postData, attachments : reader.result })
+        setImages(reader.result);
+
+    console.log('result', reader.result);
+    console.log("file result", base64File);
     }
-  }, [selectedImage]);
+    if(e.target.files[0]){
+    reader.readAsDataURL(e.target.files[0]);
+    console.log('reader',reader);
+    }
+  };
+
+
+  function onImageChange(e){
+    setImages(e.target.files[0]);
+    
+  }
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/founderdash`;
     navigate(path);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     companyname: data.get("companyname"),
-  //     tags: data.get("tags"),
-  //     idea: data.get("idea"),
-  //   });
-  // };
+  
   const appendTags = () =>{
     let tempList = [];
     for(let e of tempArray){
@@ -103,8 +102,8 @@ export default function BusinessIdea() {
       
     }
     setCompanyTags(tempList);
-    console.log("Temp list: ", tempList);
-    console.log("Company tags: ", companyTags);
+    // console.log("Temp list: ", tempList);
+    // console.log("Company tags: ", companyTags);
   }
   const handleChange  = (event) => {
     console.log(event);
@@ -115,16 +114,23 @@ export default function BusinessIdea() {
     // setCompanyTags(companyTags.push(event[0].value));
     // setCompanyTags([...companyTags, event[0].value])
     setTempArray(event);
+    console.log("tempArray: ",tempArray);
 
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("image: ", images);
+    // return new Promise((resolve, reject) => {
+    //   getBase64(images, data => resolve({ data: { link: data } }));
+    // });
 
+    // let stringbase = Buffer.from(stringToBase64, 'base64').toString('utf-8');
+    // console.log("Decoded ", stringbase);
     appendTags();
-    setTimeout(1000);
-    console.log("handle company", companyTags);
-    console.log("selected image", selectedImage);
+    // setTimeout(1000);
+    // console.log("handle company", companyTags);
+    // console.log("selected image", selectedImage);
     // routeChange();
   
     // console.log(user);
@@ -136,12 +142,12 @@ export default function BusinessIdea() {
       "company_name": companyName,
       "tags": companyTags.toString(),
       "description": description,
-      "image_url":   companyImageUrl   
+      "image_url":   images   
     })
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if (res.status === 200) {
+        if (res.status == 200) {
           // this.setState({ isSignedUp: true });
           // localStorage.setItem(this.state.email, this.state.typeOfUser);  // after signing up, set the state to true. This will trigger a re-render
           routeChange();
@@ -150,9 +156,7 @@ export default function BusinessIdea() {
       })
       .catch(function (error) {
         console.log(error.toJSON());
-        // alert(error);
-        // if(error.response.status == 400)
-        //   alert("Please enter all the required information");
+        
       });
   };
 
@@ -218,6 +222,7 @@ export default function BusinessIdea() {
                   styles={colourStyles}
                   />
               </div>
+              <div  style={{m: 1, width: '61ch', paddingLeft: '10px', textAlign: 'left'}}>
               <TextField
                 // required
                 name="Description"
@@ -232,7 +237,8 @@ export default function BusinessIdea() {
                 placeholder="Enter your business idea in not more than 10 lines"
                 multiline              
                 />
-                <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
+                </div>
+                {/* <TextField style=  {{textAlign: "center", display: "flex", alignItems: "center" }}
                 // required
                 fullWidth
                 id="companyImageUrl"
@@ -243,21 +249,27 @@ export default function BusinessIdea() {
                 autoComplete="companyImageUrl"
                 placeholder="Enter image URL"
                 autoFocus
-              />
+              /> */}
               {/* <input 
                 accept="image/*" 
                 type="file" 
                 id="select-image"
                 style={{ display: 'none' }}
-                value={companyImageUrl}
+                value={selectedImage}
                 // onChange={(companyTags) => { this.setState({ companyTags }) }}
                 onChange={e => setSelectedImage(e.target.files[0])}
+                // onChange={(event) => {
+                //   // console.log(event.target.files[0].toString());
+                //   setSelectedImage(event.target.files[0]);
+                // }}
                 
               /> */}
+              <input type="file" accept="image/*" onChange = {handleFileInputChange} style={{ display: 'none' }} id="select-image"/>
+              {/* {<img src={images} />} */}
               <label htmlFor="select-image">
-                {/* <Button variant="contained" color="primary" component="span">
+                <Button variant="contained" color="primary" component="span">
                   Upload Image
-                </Button> */}
+                </Button>
               </label>
               {/* <div>{imageUrl && selectedImage && (
                 <Box mt={2} textAlign="center">

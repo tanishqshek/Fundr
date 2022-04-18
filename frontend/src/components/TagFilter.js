@@ -10,37 +10,12 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import styles from "./dashboard.module.css";
+import { TAGS } from "../assets/tags";
+import { useState } from "react";
+import axios from 'axios';
 
 const theme = createTheme();
-
-const businesscategory = [
-  { label: 'Automotive', value: 'Automotive' },
-  { label: 'Banking', value: 'Banking' },
-  { label: 'Financial Services', value: 'Financial Service' },
-  { label: 'Cement', value: 'Cement' },
-  { label: 'Chemicals', value: 'Chemicals' },
-  { label: 'Conglomerates', value: 'Conglomerates' },
-  { label: 'Consumer Durables', value: 'Consumer Durables' },
-  { label: 'Consumer Non-Durables', value: 'Consumer Non-Durables' },
-  { label: 'Engineering', value: 'Engineering' },
-  { label: 'Food & Beverage', value: 'Food & Beverage' },
-  { label: 'Technology', value: 'Technology' },
-  { label: 'Manufacturing', value: 'Manufacturing' },
-  { label: 'Media', value: 'Media' },
-  { label: 'Metals & Mining', value: 'Metals & Mining' },
-  { label: 'Oil & Gas', value: 'Oil & Gas' },
-  { label: 'Pharmaceuticals', value: 'Pharmaceuticals' },
-  { label: 'Real Estate', value: 'Real Estate' },
-  { label: 'Services', value: 'Services' },
-  { label: 'Telecom', value: 'Telecom' },
-  { label: 'Tobacco', value: 'Tobacco' },
-  { label: 'Utilities', value: 'Utilities' },
-  { label: 'Miscellaneous', value: 'Miscellaneous' }
-];
-
-<Creatable
-  options={businesscategory}
-/>
+let companyTags = TAGS;
 
 const colourStyles = {
   menuList: styles => ({
@@ -63,23 +38,62 @@ const colourStyles = {
   }
 
 export default function TagFilter() {
+
+  const [finalTagsList, setfinalTagsList] = useState([]);
+  // const [companyImageUrl, setCompanyImageUrl] = useState('');
+  const [tempArray, setTempArray] = useState([]);
+
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/home`;
     navigate(path);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      companyname: data.get("companyname"),
-      tags: data.get("tags"),
-      idea: data.get("idea"),
-    });
+  const appendTags = () => {
+    let tempList = [];
+    for(let e of tempArray){
+      tempList.push(e.value);
+      
+    }
+    // setCompanyTags(tempList);
+    setfinalTagsList(tempList);
+    console.log("companyTags", finalTagsList);
   };
 
+  const handleChange = (event) => {
+    console.log(event);
+    setTempArray(event);
+
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    appendTags();
+
+    
+    axios.post('/api/auth/posttags', { 
+      "tags": finalTagsList.toString()
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.status == 200) {
+          console.log("API response: " ,res);
+          routeChange();
+        }
+      
+      })
+      .catch(function (error) {
+        console.log(error.toJSON());
+      });
+  };
+
+
+  axios.get('/api/auth/getuserdata')
+    .then(response =>{
+      console.log("User data: " ,response.data.message[0].UserId);
+    });
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh"}} id={styles["idea"]}
@@ -116,14 +130,14 @@ export default function TagFilter() {
 
               <div  style={{m: 1, width: '61ch', paddingLeft: '10px', textAlign: 'left'}}>
                   <Creatable
-                  options={businesscategory}
+                  options={companyTags}
                   isMulti
-                  onChange={(opt, meta) => console.log(opt, meta)}
+                  onChange={handleChange}
                   required
-                  name="tags"
+                  name="Tags"
                   fullWidth
                   label="Tags"
-                  id="tags"
+                  id="Tags"
                   placeholder="Select tags here"
                   styles={colourStyles}
                   />
@@ -133,7 +147,7 @@ export default function TagFilter() {
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={routeChange}
+                onClick={handleSubmit}
               >
                 Submit
               </Button>

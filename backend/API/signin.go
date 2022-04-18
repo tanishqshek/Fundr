@@ -1,7 +1,6 @@
 package API
 
 import (
-	//"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions"
 	"github.com/tanishqshek/Fundr/backend/model"
 
@@ -13,7 +12,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	//"time"
 )
 
 func SignIn(c *gin.Context) {
@@ -21,7 +19,7 @@ func SignIn(c *gin.Context) {
 	session := sessions.Default(c)
 
 	var fetched_user model.User
-	// var w http.ResponseWriter
+
 	var req struct {
 		Username string `json:"username" binding:"required,email"`
 		Password string `json:"password" binding:"required"`
@@ -50,27 +48,28 @@ func SignIn(c *gin.Context) {
 	session.Set(middleware.SESSIONKEY, sessionToken)
 	middleware.SessionMap[sessionToken] = fetched_user.UserId
 	if err := session.Save(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save session"})
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  "500",
+			"message": "Failed to save session"})
 		return
 	}
 
-	// session := sessions.Default(c)
-	// session.Set("id", sessionToken)
-	// session.Set("email", req.Username)
-	// session.Save()
+	var fetched_tags []model.User_tags
+	var tags []string
+	model.DB.DB.Find(&fetched_tags, "user_id = ?", fetched_user.UserId)
+	for _, tag := range fetched_tags {
+		tags = append(tags, tag.TagId)
+	}
 
-	// http.SetCookie(c.Writer, &http.Cookie{
-	// 	Name:    req.Username,
-	// 	Value:   sessionToken,
-	// 	Expires: time.Now().Add(120 * time.Second),
-	// })
-
-	// c.SetCookie(req.Username, sessionToken, 9999999, "/", "localhost", false, true)
+	if tags == nil {
+		tags = append(tags, "")
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
 		"message": "Signed in successfully.",
-		"user":    fetched_user,
+		"user":    fetched_user.Username,
+		"tags":    tags,
 	})
 	return
 }

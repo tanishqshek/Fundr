@@ -34,8 +34,6 @@ func (a *App) Initialize(dbDriver string, dbURI string) {
 	// Migrate the schema.
 	a.DB.AutoMigrate(
 		&User{},
-		// &Founder{},
-		// &Investor{},
 		&Pitch_master{},
 		&Pitch_description{},
 		&Matches{},
@@ -45,5 +43,6 @@ func (a *App) Initialize(dbDriver string, dbURI string) {
 		&Investor_likes{},
 		&Founder_targets{},
 		&Pitch_tags{},
+		&User_tags{},
 	)
 }

@@ -18,20 +18,61 @@ func GetMatches(c *gin.Context) {
 
 	var fetched_user model.User
 
-	var matches []model.Matches
+	var fetched_matches []model.Matches
+
+	type investor_match struct {
+		Founder     string `json:"founder"`
+		CompanyName string `json:"company_name"`
+		Description string `json:"description"`
+		ImageUrl    string `json:"image_url"`
+	}
+
+	type founder_match struct {
+		Investor    string `json:"investor"`
+		CompanyName string `json:"company_name"`
+	}
 
 	model.DB.DB.First(&fetched_user, "user_id = ?", UserId)
 
 	if fetched_user.UserType == "Investor" {
-		model.DB.DB.Find(&matches, "investor_id = ?", UserId)
+		model.DB.DB.Find(&fetched_matches, "investor_id = ?", UserId)
+		var matches []investor_match
+		var pitch model.Pitch_description
+		var founder model.User
+		for _, match := range fetched_matches {
+			model.DB.DB.Find(&pitch, "pitch_id = ?", match.PitchId)
+			model.DB.DB.Find(&founder, "user_id = ?", match.FounderId)
+			temp_match := investor_match{
+				Founder:     founder.Username,
+				CompanyName: pitch.CompanyName,
+				Description: pitch.Description,
+				ImageUrl:    pitch.ImageUrl,
+			}
+			matches = append(matches, temp_match)
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "200",
+			"message": matches,
+		})
+		return
 	} else {
-		model.DB.DB.Find(&matches, "founder_id = ?", UserId)
+		model.DB.DB.Find(&fetched_matches, "founder_id = ?", UserId)
+		var matches []founder_match
+		var pitch model.Pitch_description
+		var investor model.User
+		for _, match := range fetched_matches {
+			model.DB.DB.Find(&pitch, "pitch_id = ?", match.PitchId)
+			model.DB.DB.Find(&investor, "user_id = ?", match.InvestorId)
+			temp_match := founder_match{
+				Investor:    investor.Username,
+				CompanyName: pitch.CompanyName,
+			}
+			matches = append(matches, temp_match)
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "200",
+			"message": matches,
+		})
+		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"status":  "200",
-		"message": matches,
-	})
-	return
-
 }

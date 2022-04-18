@@ -1,78 +1,147 @@
-import React, { useState } from "react";
+import React from "react";
 import TinderCard from "react-tinder-card";
 import styles from "./dashboard.module.css";
-import { SUMMARIES } from "../assets/summaries";
-import Button from "@mui/material/Button";
+// import { SUMMARIES } from "../assets/summaries";
+// import Button from "@mui/material/Button";
 import axios from 'axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
+import { Component } from "react";
+// import { renderMatches } from "react-router-dom";
 
-function Dashboard() {
-  const companies = SUMMARIES;
-  const [lastDirection, setLastDirection] = useState();
+// let companies = SUMMARIES;
+// var temp = [];
+// var tempList = [];
 
-  const swiped = (direction, nameToDelete) => {
+class Dashboard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.swiped = this.swiped.bind(this);
+    this.outOfFrame = this.outOfFrame.bind(this);
+    this.saveClicked = this.saveClicked.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      lastDirection: "",
+      companyData: [],
+        isSignedIn: false,
+        userType: "",
+        tempList: []
+    };
+};
+  
+  
+  swiped (direction, nameToDelete, pitchid, userid)  {
     console.log("removing: " + nameToDelete);
-    setLastDirection(direction);
+    // setLastDirection(direction);
+    this.setState({ lastDirection: direction});
+    // this.state.lastDirection = direction;
+
+    if(direction == "right"){
+      console.log("You swiped right")
+      axios.post('/api/auth/swipe', { 
+        // "Id": this.state.id,
+        // "LastName": this.state.lname,
+        "action":direction,
+        "target":userid,
+        "pitch_id": pitchid     
+      })
+        .then(res => {
+          // console.log(res);
+          console.log(res.data);
+          if (res.status === 200) {
+            
+          }
+        
+        })
+        .catch(function (error) {
+          console.log(error.toJSON());
+          
+        });
+    }
   };
 
-  const outOfFrame = (name) => {
+  // swiped (direction, nameToDelete)  {
+  //   console.log("removing: " + nameToDelete);
+  //   // setLastDirection(direction);
+  //   // this.state.lastDirection = direction;
+  //   this.setState({lastDirection : direction});
+  // }
+
+  outOfFrame (name) {
     console.log(name + " left the screen!");
   };
 
-  const saveClicked = (direction, nameToDelete) => {
+  saveClicked(direction, nameToDelete) {
     console.log("removing: " + nameToDelete);
     // setLastDirection(direction);
   };
 
-  axios.get("/api/auth/getpitch",{
-    headers: {
-      "Cookie": Cookies.get('mysession')
-    }
-  })
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  async componentDidMount(){
+    await fetch("/api/auth/getpitch",{
+      // headers: {
+      //   "Cookie": Cookies.get('mysession')
+      // }
+    })
+    .then(response => response.json())
+    .then(data => this.setState({ tempList: [...this.state.tempList, data.message] }))
+    
+  }
 
 
+render(){
+
+  console.log("templist: " ,this.state.tempList[0]);
   return (
+    
     <div className={styles.test}>
       <div id={styles["root"]}>
-        
+      
         <div className={styles.cardContainer}>
-          {companies.map((company) => (
+          
+          {
+          this.state.tempList.length !== 0 
+          ?
+          <>
+          {
+          this.state.tempList[0].map((company) => (
+            // console.log("Return: ", company.ImageUrl)
             <TinderCard
               className={styles.swipe}
-              key={company.name}
-              onSwipe={(dir) => swiped(dir, company.name)}
-              onCardLeftScreen={() => outOfFrame(company.name)}
+              key={company.PitchId}
+              onSwipe={(dir) => this.swiped(dir, company.CompanyName, company.PitchId, company.UserId)}
+              onCardLeftScreen={() => this.outOfFrame(company.CompanyName)}
             >
+              
               <div className={styles.card}>
-                <h3 className={styles.card_h3}>{company.name}
+                <h3 className={styles.card_h3}>{company.CompanyName}
                 </h3>
-                <h3 className={styles.h3}>Tags: {company.tags}
+                <h3 className={styles.h3}>Tags: {company.Tags}
                 </h3>
                 <div className={styles.cardImagediv} >
                   {/* <div  > */}
                   
-                  <img className={styles.cardImage} src={company.image} />
+                  <img className={styles.cardImage} src={company.ImageUrl} alt={"test"} />
                   {/* </div>, */}
                 </div>
-                <p className={styles.para}>{company.description}</p>
+                <p className={styles.para}>{company.Description}</p>
               </div>
             </TinderCard>
-          ))}
+          ))
+}
+          </>
+          :
+          <> Loading...</>
+        }
         </div>
-        {lastDirection != 'down' ? (
-          <h2 className={styles.infoText}>You swiped {lastDirection}</h2>
+        {this.lastDirection !== 'down' ? (
+          <h2 className={styles.infoText}>You swiped {this.lastDirection}</h2>
         ) : (
           <h2 className={styles.infoText} >This item has been saved for later</h2>
         )}
       </div>
     </div>
   );
-}
+        }}
+
 
 export default Dashboard;

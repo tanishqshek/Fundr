@@ -1,24 +1,24 @@
 package API
 
 import (
+	"fmt"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/tanishqshek/Fundr/backend/constants"
 	"github.com/tanishqshek/Fundr/backend/internal/middleware"
 	"github.com/tanishqshek/Fundr/backend/model"
 
 	"github.com/google/uuid"
 
 	"net/http"
+
+	mail "github.com/xhit/go-simple-mail/v2"
 )
 
 func HandleSwipe(c *gin.Context) {
 
-	// var fetched_user model.User
-	// var investor model.Investor
-	// var founder model.Founder
-
 	var req struct {
-		// Username string `json:"username" binding:"required,email"`
 		Action  string `json:"action" binding:"required"`
 		Target  string `json:"target" binding:"required"`
 		PitchId string `json:"pitch_id" binding:"required"`
@@ -37,10 +37,17 @@ func HandleSwipe(c *gin.Context) {
 
 	UserId := middleware.SessionMap[key.(string)]
 
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Username)
-	// model.DB.DB.Model(&investor).Association("user").Find(&investor.User)
-	// model.DB.DB.First(&fetched_user, "Username = ?", req.Target)
-	// model.DB.DB.Model(&founder).Association("user").Find(&founder.User)
+	var fetched_user model.User_description
+
+	model.DB.DB.Find(&fetched_user, "user_id = ?", UserId)
+
+	if fetched_user.UserType != "Investor" {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"status":  "401",
+			"message": "Unauthorized",
+		})
+		return
+	}
 
 	action := ""
 	if req.Action == "right" {
@@ -62,6 +69,13 @@ func HandleSwipe(c *gin.Context) {
 			})
 			return
 		}
+		var fetched_investor model.User_description
+		var fetched_founder model.User_description
+		var fetched_pitch model.Pitch_description
+		model.DB.DB.First(&fetched_investor, "user_id = ?", UserId)
+		model.DB.DB.First(&fetched_founder, "user_id = ?", req.Target)
+		model.DB.DB.First(&fetched_pitch, "pitch_id = ?", req.PitchId)
+		sendMail(fetched_investor, fetched_founder, fetched_pitch)
 
 	} else if req.Action == "left" {
 
@@ -106,7 +120,55 @@ func HandleSwipe(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "200",
-		"message": action + " Succesfull",
+		"message": action + " Succesful",
 	})
 	return
+}
+
+func sendMail(to model.User_description, founder model.User_description, pitch model.Pitch_description) {
+
+	server := mail.NewSMTPClient()
+	server.Host = constants.EMAIL_SERVER
+	server.Port = constants.EMAIL_PORT
+	server.Username = constants.EMAIL_SENDER
+	server.Password = constants.EMAIL_PASSWORD
+	server.Encryption = mail.EncryptionTLS
+
+	smtpClient, err := server.Connect()
+	if err != nil {
+
+		fmt.Println(err)
+	}
+
+	var htmlBody = `
+	<html>
+	<head>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	   <title>Match Notification</title>
+	</head>
+	<body>
+	   <p>Hello ` + to.Name + `,</p>
+	   <p></p>
+	   <p>You have matched with the following Company:</p>
+	   <p> Company: ` + pitch.CompanyName + `</p>
+	   <p> Founder: ` + founder.Name + `</p>
+	   <p> Email: ` + founder.Username + `</p>
+	</body>
+	`
+
+	email := mail.NewMSG()
+	email.SetFrom(constants.EMAIL_SENDER)
+	email.AddTo(to.Username)
+
+	email.SetSubject("Match Notification")
+
+	email.SetBody(mail.TextHTML, htmlBody)
+
+	fmt.Println("Sending mail to " + to.Username)
+	err = email.Send(smtpClient)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("Mail Sent")
 }
