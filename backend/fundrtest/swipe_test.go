@@ -85,13 +85,13 @@ func TestSwipe(t *testing.T) {
 
 	log.Println(resp)
 
-	err = json.Unmarshal(wSignIn.Body.Bytes(), &resp)
+	err = json.Unmarshal(wSwipe.Body.Bytes(), &resp)
 	if err != nil {
 		log.Println(err.Error())
 	}
 
 	log.Println(resp)
 
-	assert.Equal(t, 200, wSignIn.Code)
-	assert.Equal(t, "Signed in successfully.", resp.Message)
+	assert.Equal(t, 200, wSwipe.Code)
+	assert.Equal(t, "Match Succesful", resp.Message)
 }
