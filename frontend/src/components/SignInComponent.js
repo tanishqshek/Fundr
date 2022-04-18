@@ -1,3 +1,5 @@
+
+
 import React, {Component} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -13,13 +15,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import img1 from './img1.jpeg';
-import { renderMatches, useNavigate } from "react-router-dom";
+// import { renderMatches, useNavigate } from "react-router-dom";
 import img2 from "../assets/img2.jpeg";
-import Dashboard from "./DashboardComponent";
+// import Dashboard from "./DashboardComponent";
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
+import home from "./DashboardComponent";
+import Main from "./MainComponent";
 
 const theme = createTheme();
+const temp = false;
 
 class Login extends Component {
 
@@ -31,7 +36,9 @@ class Login extends Component {
         email: "",
         password: "",
         isSignedIn: false,
-        userType: ""
+        tagSet: false,
+        userType: "",
+        companyData: ""
     };
 };
 
@@ -72,12 +79,39 @@ class Login extends Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if (res.status === 200) {
+        if (res.status == 200) {
           this.setState({ isSignedIn: true });
-          this.props.setIsSignedIn(true);
-          this.props.setUser(res.data.user)
+          localStorage.setItem("isSignedIn",true);
+          // this.setState({ isSignedIn: true }, function() {
+          //   console.log("signin: ",this.state.isSignedIn);
+          //   <Main data={this.state.isSignedIn}/>
+          // });
           // userType = localStorage.getItem(); 
+          // console.log("Local: ", localStorage.getItem(this.state.email));
           this.setState({userType : localStorage.getItem(this.state.email)})// after signing up, set the state to true. This will trigger a re-render
+          console.log("User: " , localStorage);
+          // console.log(isSignedIn)
+          // axios.get('/api/auth/getuserdata')
+          // .then(response =>{
+          //   console.log("User data: " ,response.data.message[0].UserId);
+          //   if(response.data.message[0].UserId !== undefined || response.data.message[0].UserId !== ""){
+          //     // <Navigate to="/home"/>;
+          //     // this.setState({ tagSet: true });              
+
+          //     this.setState({ tagSet: true }, function() {
+          //       console.log("Mystate: ",this.state.tagSet);
+          //     });
+          //     // console.log("Mystate: ", this.state.tagSet);
+          //     // return <Navigate to={home}/>
+          //     // con
+              
+          //   }
+
+          //   // if(this.state.tagSet == true){
+
+          //   // }
+          //   // else{<Navigate to="/tagfilter"/>;}
+          // });
         }
       
       })
@@ -89,14 +123,17 @@ class Login extends Component {
 
 render(){
 
+  // console.log(this.userType);
   if (this.state.userType == "Investor") {
-    // redirect to home if signed up
-    return <Navigate to = {{ pathname: "/home" }} />;
+    
+    return <Navigate to = {{ pathname: "/tagfilter" }} />;
+      
   }
   else if (this.state.userType == "Founder"){
     return <Navigate to = {{ pathname: "/businessidea" }} />;
   }
-  else{  return (
+  else{
+  return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />

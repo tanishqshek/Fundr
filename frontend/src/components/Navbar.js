@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar({isSignedIn, setIsSignedIn}) {
+
+  isSignedIn = localStorage.getItem("isSignedIn") ? true : false
+  
+  console.log(isSignedIn)
+  console.log(setIsSignedIn)
   let navigate = useNavigate();
   const routeChange = (url) => {
     let path = `/` + url;
