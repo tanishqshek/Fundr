@@ -14,7 +14,7 @@ import (
 	"github.com/tanishqshek/Fundr/backend/server"
 )
 
-func TestUserdata(t *testing.T) {
+func TestGetUserdata(t *testing.T) {
 
 	var signin_json = []byte(`{
 		"Username": "testuser@gmail.com",
@@ -44,7 +44,7 @@ func TestUserdata(t *testing.T) {
 
 	req_signin, _ := http.NewRequest("POST", "/api/signin", bytes.NewBuffer(signin_json))
 	req_signup, _ := http.NewRequest("POST", "/api/signup", bytes.NewBuffer(signup_json))
-	req_postuser, _ := http.NewRequest("POST", "/api/auth/postuserdata", bytes.NewBuffer(userdata_json))
+	req_postuser, _ := http.NewRequest("POST", "/api/auth/getuserdata", bytes.NewBuffer(userdata_json))
 
 	router := server.SetRouter()
 
@@ -75,8 +75,8 @@ func TestUserdata(t *testing.T) {
 		log.Println(err.Error())
 	}
 
-	log.Println(resp)
+	fmt.Println(resp)
 
 	assert.Equal(t, 200, w_signin.Code)
-	assert.Equal(t, "User updated successfully.", resp.Message)
+	assert.Equal(t, "Signed in successfully.", resp.Message)
 }

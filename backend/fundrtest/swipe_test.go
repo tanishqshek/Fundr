@@ -3,6 +3,7 @@ package fundrtest
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -45,6 +46,8 @@ func TestSwipe(t *testing.T) {
 		"pitch_id": "4c9eb48e-1895-4e60-b40a-8d7d435dc746"
 	}`)
 
+	var testuser model.User_description
+
 	resp := type_resp{}
 	wSignUp := httptest.NewRecorder()
 	wSignIn := httptest.NewRecorder()
@@ -57,8 +60,15 @@ func TestSwipe(t *testing.T) {
 	router := server.SetRouter()
 
 	model.DB_init()
-	router.ServeHTTP(wSignUp, signUpReq)
+	model.DB.DB.First(&testuser, "Username = ?", "investor@gmail.com")
+	if testuser.Username == "" {
+		router.ServeHTTP(wSignUp, signUpReq)
+	}
+
 	router.ServeHTTP(wSignIn, signInReq)
+	fmt.Println(wSignIn.Result().Cookies())
+	cookie_val := wSignIn.Result().Cookies()[0].Value
+	swipeReq.AddCookie(&http.Cookie{Name: "mysession", Value: cookie_val})
 	router.ServeHTTP(wSwipe, swipeReq)
 
 	err := json.Unmarshal(wSignUp.Body.Bytes(), &resp)
