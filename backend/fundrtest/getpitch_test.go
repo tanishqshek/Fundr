@@ -3,7 +3,6 @@ package fundrtest
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -49,31 +48,28 @@ func TestGetPitch(t *testing.T) {
 	}
 
 	router.ServeHTTP(wSignIn, signInReq)
-	fmt.Println(wSignIn.Result().Cookies())
 	cookie_val := wSignIn.Result().Cookies()[0].Value
 	getPitchReq.AddCookie(&http.Cookie{Name: "mysession", Value: cookie_val})
 	router.ServeHTTP(wgetPitch, getPitchReq)
 
 	err := json.Unmarshal(wSignUp.Body.Bytes(), &resp)
 	if err != nil {
-		log.Println("1", err.Error())
+		// log.Println("1", err.Error())
 	}
-
-	log.Println("1 resp", resp)
 
 	err = json.Unmarshal(wSignIn.Body.Bytes(), &resp)
 	if err != nil {
-		log.Println(err.Error())
+		// log.Println(err.Error())
 	}
 
 	log.Println(resp)
 
 	err = json.Unmarshal(wgetPitch.Body.Bytes(), &resp)
 	if err != nil {
-		log.Println(err.Error())
+		// log.Println(err.Error())
 	}
 
-	log.Println(resp)
+	// log.Println(resp)
 
 	assert.Equal(t, 200, wgetPitch.Code)
 	// assert.Equal(t, "Match Succesful", resp.Message)
