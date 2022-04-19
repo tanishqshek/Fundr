@@ -40,7 +40,6 @@ func SignUp(c *gin.Context) {
 
 	user := model.User{
 		UserId:   user_id,
-		Name:     req.Name,
 		Username: req.Username,
 		Password: password,
 		Mobile:   req.Mobile,
@@ -58,6 +57,14 @@ func SignUp(c *gin.Context) {
 	if res := model.DB.DB.Exec("PRAGMA foreign_keys = ON", nil); res.Error != nil {
 		fmt.Println(res.Error)
 	}
+	var fetched_user model.User
+	if res := model.DB.DB.Find(&fetched_user, "username = ?", req.Username); res.Error == nil {
+		c.JSON(http.StatusConflict, gin.H{
+			"status":  "409",
+			"message": "User Already Exists.",
+		})
+		return
+	}
 
 	createdUser := model.DB.DB.Create(&user)
 	var errMessage1 = createdUser.Error
@@ -66,8 +73,8 @@ func SignUp(c *gin.Context) {
 
 	if createdUser.Error != nil {
 		fmt.Println(errMessage1)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  "400",
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  "500",
 			"message": "User could not be created.",
 		})
 		return
@@ -77,34 +84,10 @@ func SignUp(c *gin.Context) {
 		fmt.Println(errMessage2)
 	}
 
-	// if req.UserType == "Founder" {
-	// 	founder := model.Founder{
-	// 		FounderId: uuid.NewString(),
-	// 		//			User:      user,
-	// 	}
-	// 	createFounder := model.DB.DB.Create(&founder)
-	// 	var errFounder = createFounder.Error
-
-	// 	if errFounder != nil {
-	// 		fmt.Println(errFounder)
-	// 	}
-
-	// } else {
-	// 	investor := model.Investor{
-	// 		InvestorId: uuid.NewString(),
-	// 		//			User:       user,
-	// 	}
-	// 	createInvestor := model.DB.DB.Create(&investor)
-	// 	var errInvestor = createInvestor.Error
-
-	// 	if errInvestor != nil {
-	// 		fmt.Println(errInvestor)
-	// 	}
-	// }
-
 	c.JSON(http.StatusOK, gin.H{
-		"status":  "200",
-		"message": "Signed up successfully.",
+		"status":  "201",
+		"message": "User created successfully.",
 	})
+	return
 
 }

@@ -9,6 +9,4 @@ type Investor_likes struct {
 	Investor_id string `gorm:"primary_key"`
 	Founder_id  string `gorm:"primary_key"`
 	CreatedAt   time.Time
-	// Creation_date time.Time
-	// Creation_time time.Time
 }
