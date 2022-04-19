@@ -140,6 +140,7 @@ function Navbar({isSignedIn, setIsSignedIn}) {
         <MenuItem  onClick= {() => {
           if (isSignedIn) {
             routeChange('')
+            localStorage.removeItem("isSignedIn")
             setIsSignedIn(false)
           } else {
             routeChange('signin')
