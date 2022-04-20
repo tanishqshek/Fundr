@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f2f75e63.css",
+    "main.js": "/static/js/main.d7575619.js",
+    "static/media/bgvid.mp4": "/static/media/bgvid.813133847d017533c5c1.mp4",
+    "static/media/funding.jpeg": "/static/media/funding.4585fb0531dbe5af80e7.jpeg",
+    "static/media/Header.png": "/static/media/Header.9dcad2ecac4ffb7afdc3.png",
+    "static/media/img2.jpeg": "/static/media/img2.cf19e2952513e3e84647.jpeg",
+    "static/media/build.jpeg": "/static/media/build.77ef27b45d0057a0543a.jpeg",
+    "static/media/extend.png": "/static/media/extend.675d758d3622c78ef71d.png",
+    "static/media/working.png": "/static/media/working.4de5ce9c0283433bc79d.png",
+    "static/media/mission.png": "/static/media/mission.c20b85308173d43bbc96.png",
+    "static/media/about.jpeg": "/static/media/about.0f89a47879621c218edf.jpeg",
+    "index.html": "/index.html",
+    "main.f2f75e63.css.map": "/static/css/main.f2f75e63.css.map",
+    "main.d7575619.js.map": "/static/js/main.d7575619.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2f75e63.css",
+    "static/js/main.d7575619.js"
+  ]
+}
