@@ -3,7 +3,6 @@ package fundrtest
 import (
 	"bytes"
 	"encoding/json"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,7 +12,7 @@ import (
 	"github.com/tanishqshek/Fundr/backend/server"
 )
 
-func TestGettags(t *testing.T) {
+func TestVerifytags(t *testing.T) {
 
 	var signUpJson = []byte(`{
 		"name": "Investor",
@@ -33,11 +32,11 @@ func TestGettags(t *testing.T) {
 	resp := type_resp{}
 	wSignUp := httptest.NewRecorder()
 	wSignIn := httptest.NewRecorder()
-	wgetPitch := httptest.NewRecorder()
+	wgetverify := httptest.NewRecorder()
 
 	signUpReq, _ := http.NewRequest("POST", "/api/signup", bytes.NewBuffer(signUpJson))
 	signInReq, _ := http.NewRequest("POST", "/api/signin", bytes.NewBuffer(signInJson))
-	getPitchReq, _ := http.NewRequest("GET", "/api/auth/getpitch", nil)
+	getVerifytagsReq, _ := http.NewRequest("GET", "/api/auth/getpitch", nil)
 
 	router := server.SetRouter()
 
@@ -49,8 +48,8 @@ func TestGettags(t *testing.T) {
 
 	router.ServeHTTP(wSignIn, signInReq)
 	cookie_val := wSignIn.Result().Cookies()[0].Value
-	getPitchReq.AddCookie(&http.Cookie{Name: "mysession", Value: cookie_val})
-	router.ServeHTTP(wgetPitch, getPitchReq)
+	getVerifytagsReq.AddCookie(&http.Cookie{Name: "mysession", Value: cookie_val})
+	router.ServeHTTP(wgetverify, getVerifytagsReq)
 
 	err := json.Unmarshal(wSignUp.Body.Bytes(), &resp)
 	if err != nil {
@@ -62,15 +61,15 @@ func TestGettags(t *testing.T) {
 		// log.Println(err.Error())
 	}
 
-	log.Println(resp)
+	// log.Println(resp)
 
-	err = json.Unmarshal(wgetPitch.Body.Bytes(), &resp)
+	err = json.Unmarshal(wgetverify.Body.Bytes(), &resp)
 	if err != nil {
 		// log.Println(err.Error())
 	}
 
 	// log.Println(resp)
 
-	assert.Equal(t, 200, wgetPitch.Code)
-	// assert.Equal(t, "Match Succesful", resp.Message)
+	assert.Equal(t, 200, wgetverify.Code)
+	assert.Equal(t, "Signed in successfully.", resp.Message)
 }
