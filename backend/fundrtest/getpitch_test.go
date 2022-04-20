@@ -3,7 +3,6 @@ package fundrtest
 import (
 	"bytes"
 	"encoding/json"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -28,15 +27,21 @@ func TestGetPitch(t *testing.T) {
 		"password": "pass123"
 	}`)
 
+	var postTagsJson = []byte(`{
+		"Tags":"Automotice,Financial"
+	}`)
+
 	var testuser model.User_description
 
 	resp := type_resp{}
 	wSignUp := httptest.NewRecorder()
 	wSignIn := httptest.NewRecorder()
+	wPostTags := httptest.NewRecorder()
 	wgetPitch := httptest.NewRecorder()
 
 	signUpReq, _ := http.NewRequest("POST", "/api/signup", bytes.NewBuffer(signUpJson))
 	signInReq, _ := http.NewRequest("POST", "/api/signin", bytes.NewBuffer(signInJson))
+	postTagsReq, _ := http.NewRequest("POST", "/api/auth/posttags", bytes.NewBuffer(postTagsJson))
 	getPitchReq, _ := http.NewRequest("GET", "/api/auth/getpitch", nil)
 
 	router := server.SetRouter()
@@ -62,7 +67,11 @@ func TestGetPitch(t *testing.T) {
 		// log.Println(err.Error())
 	}
 
-	log.Println(resp)
+	router.ServeHTTP(wPostTags, postTagsReq)
+	err = json.Unmarshal(wPostTags.Body.Bytes(), &resp)
+	if err != nil {
+		// log.Println(err.Error())
+	}
 
 	err = json.Unmarshal(wgetPitch.Body.Bytes(), &resp)
 	if err != nil {
