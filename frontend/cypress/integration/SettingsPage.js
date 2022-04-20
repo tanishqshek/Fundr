@@ -1,4 +1,4 @@
-describe("renders the account settings page", () => {
+describe("renders the settings page", () => {
     it("renders correctly", () => {
       cy.visit(Cypress.config("baseUrl") + "/settings");
   
