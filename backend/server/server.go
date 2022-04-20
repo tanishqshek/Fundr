@@ -14,5 +14,5 @@ func Start() {
 	router := SetRouter()
 	model.DB_init()
 	// Start listening and serving requests
-	router.Run(":8080")
+	router.Run(":8768")
 }
