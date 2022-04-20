@@ -12,17 +12,6 @@ import (
 	"github.com/tanishqshek/Fundr/backend/server"
 )
 
-type swipe_request struct {
-	Action  string
-	Target  string
-	PitchId string
-}
-
-type swipe_response struct {
-	Message string
-	Status  string
-}
-
 func TestSwipe(t *testing.T) {
 
 	var signUpJson = []byte(`{
