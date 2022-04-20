@@ -21,7 +21,7 @@ describe('Sign In', () => {
           .click()
         cy.visit(Cypress.config("baseUrl") + "/businessidea");
   
-        cy.get('.MuiAvatar-root').click()
+        cy.get('[data-testid="PersonIcon"] > path').click()
         cy.contains('Login')
         .should('be.visible')
         cy.visit(Cypress.config("baseUrl"));

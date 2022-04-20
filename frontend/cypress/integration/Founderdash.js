@@ -1,4 +1,4 @@
-describe("renders the process page", () => {
+describe("renders the founder dash page", () => {
     it("renders correctly", () => {
       cy.visit(Cypress.config("baseUrl") + "/founderdash");
   
