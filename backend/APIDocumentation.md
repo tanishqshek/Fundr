@@ -152,6 +152,8 @@
 
                 "Description": "Nidera provides financial independence to Generation Z. Nidera allows children to make payments on their own, saving parents the inconvenience of handing them cash or a debit/credit card. Have the flexibility of paying anytime, anyplace without a bank account, with safety and security, while also providing children with financial freedom in a regulated manner. Manage your finances, save money, and earn incentives on every purchase. Nidera offers a limitless number of cards to improve your online and smartphone buying experience. Our goal is to move the smart generation away from cash and toward digital. From ordering your favourite burgers to purchasing gifts for friends, parents, or those special ones (shhhh - we got it for you), the possibilities are limitless"
 
+                "Tags": "Financial Services"
+
                 }
 
             ],
@@ -197,4 +199,121 @@
 
             "status": "200"
         
-        }  
+        }
+
+ #### **ENDPOINT –** api/auth/posttags
+
+- **As a Investor, add prefered filter the pitch cards according to tags**
+
+**Method:** 
+- POST
+
+**Fields:**
+| Key | Description | Type | Required |
+| --- | --- | --- | --- |
+| Tags | tags | string | yes |
+
+**Sample Request:**
+
+    {
+
+        "Tags":"Banking,Automotive"
+
+    }
+
+**Sample Response:**
+
+  - **Success:**
+
+        {
+
+            "message": "tags added successfully.",
+
+            "status":  "201",
+
+        }
+
+#### **ENDPOINT –** api/auth/getmatches
+
+- **Retrieve matches for a particular user**
+
+**Method:** 
+- GET
+
+**Sample Response:**
+
+  - **Success:**
+
+        {
+         
+            "message": [
+         
+                {
+                    "founder": "Founder1@gmail.com",
+
+                    "company_name": "Milo Insurance",
+                    
+                    "description": "The worldwide pet insurance market is expected to rise from USD 3.62 billion in 2021 to USD 6.65 billion by 2026. The market is expected to develop at a 13.73 percent CAGR. The pet insurance market is being driven by rising demand and expenditure on pets. Scooby Doos pet insurance is a type of specialised property and casualty insurance plan purchased by pet owners to cover unforeseen expenditures like as surgical treatments, injury accidents, and prescription pet medications. Milo insurance provides pet owners with useful pet plans. The market has experienced promising expansion, bringing with it sophisticated service options to satisfy large new appetites.",
+                    
+                    "image_url": "https://images-platform.99static.com/HzlkUAaKpZPZ5G18Sg4CqVo9J28=/163x114:1078x1029/500x500/top/smart/99designs-contests-attachments/99/99833/attachment_99833222"
+                
+                },
+            
+                {
+
+                    "founder": "Founder2@gmail.com"
+
+                    "company_name": "Nidera",
+
+                    "description": "Nidera provides financial independence to Generation Z. Nidera allows children to make payments on their own, saving parents the inconvenience of handing them cash or a debit/credit card. Have the flexibility of paying anytime, anyplace without a bank account, with safety and security, while also providing children with financial freedom in a regulated manner. Manage your finances, save money, and earn incentives on every purchase. Nidera offers a limitless number of cards to improve your online and smartphone buying experience. Our goal is to move the smart generation away from cash and toward digital. From ordering your favourite burgers to purchasing gifts for friends, parents, or those special ones (shhhh - we got it for you), the possibilities are limitless"
+
+                    image_url": "https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fnidera&amp;psig=AOvVaw1nkVVKEnyrcGGb0LwVHUC7&amp;ust=1644094107900000&amp;source=images&amp;cd=vfe&amp;ved=0CAsQjRxqFwoTCLDCpP315vUCFQAAAAAdAAAAABAD",
+
+                }
+            
+            ]
+
+        }
+
+#### **ENDPOINT –** api/auth/getarchive
+
+- **Retrieve matches for a particular user**
+
+**Method:** 
+- GET
+
+**Sample Response:**
+
+  - **Success:**
+
+        {
+         
+            "message": [
+         
+                {
+                    "founder": "Founder1@gmail.com",
+
+                    "company_name": "Milo Insurance",
+                    
+                    "description": "The worldwide pet insurance market is expected to rise from USD 3.62 billion in 2021 to USD 6.65 billion by 2026. The market is expected to develop at a 13.73 percent CAGR. The pet insurance market is being driven by rising demand and expenditure on pets. Scooby Doos pet insurance is a type of specialised property and casualty insurance plan purchased by pet owners to cover unforeseen expenditures like as surgical treatments, injury accidents, and prescription pet medications. Milo insurance provides pet owners with useful pet plans. The market has experienced promising expansion, bringing with it sophisticated service options to satisfy large new appetites.",
+                    
+                    "image_url": "https://images-platform.99static.com/HzlkUAaKpZPZ5G18Sg4CqVo9J28=/163x114:1078x1029/500x500/top/smart/99designs-contests-attachments/99/99833/attachment_99833222"
+                
+                },
+            
+                {
+
+                    "founder": "Founder2@gmail.com"
+
+                    "company_name": "Nidera",
+
+                    "description": "Nidera provides financial independence to Generation Z. Nidera allows children to make payments on their own, saving parents the inconvenience of handing them cash or a debit/credit card. Have the flexibility of paying anytime, anyplace without a bank account, with safety and security, while also providing children with financial freedom in a regulated manner. Manage your finances, save money, and earn incentives on every purchase. Nidera offers a limitless number of cards to improve your online and smartphone buying experience. Our goal is to move the smart generation away from cash and toward digital. From ordering your favourite burgers to purchasing gifts for friends, parents, or those special ones (shhhh - we got it for you), the possibilities are limitless"
+
+                    image_url": "https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fnidera&amp;psig=AOvVaw1nkVVKEnyrcGGb0LwVHUC7&amp;ust=1644094107900000&amp;source=images&amp;cd=vfe&amp;ved=0CAsQjRxqFwoTCLDCpP315vUCFQAAAAAdAAAAABAD",
+
+                }
+            
+            ]
+
+        }        
+
