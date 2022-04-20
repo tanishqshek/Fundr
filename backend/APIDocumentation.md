@@ -271,13 +271,15 @@
 
                 }
             
-            ]
+            ],
+
+            "status" : "200"
 
         }
 
 #### **ENDPOINT –** api/auth/getarchive
 
-- **Retrieve matches for a particular user**
+- **Retrieve archive for a particular investor**
 
 **Method:** 
 - GET
@@ -313,7 +315,8 @@
 
                 }
             
-            ]
+            ],
 
-        }        
+            "status" : "200"            
 
+        }
