@@ -51,3 +51,6 @@ https://user-images.githubusercontent.com/41968239/164370005-402d5fb0-3472-4fbc-
 
 https://user-images.githubusercontent.com/41968239/164370370-55236aa1-7ca3-4c80-b6ff-12dfcf95afc7.mp4
 
+## Hosted URL
+
+https://fundrapp.netlify.app/
