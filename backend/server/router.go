@@ -13,6 +13,13 @@ import (
 	"github.com/gin-contrib/sessions"
 )
 
+func Cors() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Add("Access-Control-Allow-Origin", "*")
+		// fmt.Println("Here!")
+		c.Next()
+	}
+}
 func SetRouter() *gin.Engine {
 	// Creates default gin router with Logger and Recovery middleware already attached
 	router := gin.Default()
@@ -20,7 +27,7 @@ func SetRouter() *gin.Engine {
 	middleware.SessionMap = make(map[string]string)
 	middleware.ResetTokenMap = make(map[string]string)
 	router.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
-
+	router.Use(Cors())
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
