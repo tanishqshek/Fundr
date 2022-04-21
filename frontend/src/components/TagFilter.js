@@ -42,6 +42,7 @@ export default function TagFilter() {
   const [finalTagsList, setfinalTagsList] = useState([]);
   // const [companyImageUrl, setCompanyImageUrl] = useState('');
   const [tempArray, setTempArray] = useState([]);
+  const [companyTag, setCompanyTag] = useState('');
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -62,7 +63,8 @@ export default function TagFilter() {
 
   const handleChange = (event) => {
     console.log(event);
-    setTempArray(event);
+    // setTempArray(event);
+    setCompanyTag(event);
 
   };
 
@@ -73,7 +75,7 @@ export default function TagFilter() {
 
     
     axios.post('/api/auth/posttags', { 
-      "tags": finalTagsList.toString()
+      "Tags": companyTag.value
     })
       .then(res => {
         console.log(res);
@@ -92,7 +94,9 @@ export default function TagFilter() {
 
   axios.get('/api/auth/getuserdata')
     .then(response =>{
-      console.log("User data: " ,response.data.message[0].UserId);
+      if (response.status === 200){
+
+      }
     });
   return (
     <ThemeProvider theme={theme}>
@@ -131,7 +135,7 @@ export default function TagFilter() {
               <div  style={{m: 1, width: '61ch', paddingLeft: '10px', textAlign: 'left'}}>
                   <Creatable
                   options={companyTags}
-                  isMulti
+                  // isMulti
                   onChange={handleChange}
                   required
                   name="Tags"
