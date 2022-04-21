@@ -20,13 +20,11 @@ describe('Sign In', () => {
           .should('be.visible')
           .click()
         cy.visit(Cypress.config("baseUrl") + "/businessidea");
-
-        cy.setCookie('mysession', )
   
-        // cy.get('.MuiAvatar-root').click()
-        // cy.contains('Login')
-        // .should('be.visible')
-        // cy.visit(Cypress.config("baseUrl"));
+        cy.get('[data-testid="PersonIcon"] > path').click()
+        cy.contains('Login')
+        .should('be.visible')
+        cy.visit(Cypress.config("baseUrl"));
   
       })
   })

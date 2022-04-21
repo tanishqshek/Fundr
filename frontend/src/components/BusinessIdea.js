@@ -50,9 +50,8 @@ export default function BusinessIdea() {
   const [imageUrl, setImageUrl] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [description, setDescription] = useState('');
-  const [companyTag, setCompanyTag] = useState('');
   const [companyTags, setCompanyTags] = useState([]);
-  // const [companyImageUrl, setCompanyImageUrl] = useState('');
+  const [companyImageUrl, setCompanyImageUrl] = useState('');
   const [tempArray, setTempArray] = useState([]);
 
   //
@@ -60,7 +59,11 @@ export default function BusinessIdea() {
   // const [imageURLs, setImageURLs] = useState([]);
   const [base64File, setBase64URL] = useState('');
 
-  
+  const [postData, setPostData] = useState({ 
+    createdBy : 'user1', 
+    content : '', tag : '', 
+    attachments : ''
+});  
 
   const handleFileInputChange = e => {
     console.log(e.target.files[0]);
@@ -110,9 +113,8 @@ export default function BusinessIdea() {
 
     // setCompanyTags(companyTags.push(event[0].value));
     // setCompanyTags([...companyTags, event[0].value])
-    // setTempArray(event);
-    // console.log("tempArray: ",tempArray);
-    setCompanyTag(event);
+    setTempArray(event);
+    console.log("tempArray: ",tempArray);
 
   };
 
@@ -138,7 +140,7 @@ export default function BusinessIdea() {
       // "Id": this.state.id,
       // "LastName": this.state.lname,
       "company_name": companyName,
-      "tags": companyTag,
+      "tags": companyTags.toString(),
       "description": description,
       "image_url":   images   
     })
@@ -207,7 +209,7 @@ export default function BusinessIdea() {
                 {/* {console.log("Company tags", companyTags) } */}
                   <CreatableSelect
                   options={businesscategory}
-                  // isMulti
+                  isMulti
                   // required
                   name="Tags"
                   // value={companyTags}
@@ -216,7 +218,7 @@ export default function BusinessIdea() {
                   fullWidth
                   label="Tags"
                   id="Tags"
-                  placeholder="Select tag for investors to find you"
+                  placeholder="Select tags for investors to find you"
                   styles={colourStyles}
                   />
               </div>
@@ -262,13 +264,13 @@ export default function BusinessIdea() {
                 // }}
                 
               /> */}
-              <input type="file" accept="image/*" onChange = {handleFileInputChange}  id="company_image"/>
+              <input type="file" accept="image/*" onChange = {handleFileInputChange} style={{ display: 'none' }} id="select-image"/>
               {/* {<img src={images} />} */}
-              {/* <label htmlFor="company_image">
+              <label htmlFor="select-image">
                 <Button variant="contained" color="primary" component="span">
                   Upload Image
                 </Button>
-              </label> */}
+              </label>
               {/* <div>{imageUrl && selectedImage && (
                 <Box mt={2} textAlign="center">
                   <div>Image Preview:</div>

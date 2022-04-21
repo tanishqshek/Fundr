@@ -1,7 +1,4 @@
-
 describe('Sign Up', () => {
-    
-
     beforeEach(() => {
       cy.visit('http://localhost:3000/signup')
       cy.get('.MuiToolbar-root > .MuiTypography-root').should('be.visible')
