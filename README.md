@@ -41,6 +41,13 @@ Our application focuses on fulfilling this purpose with the help of a card-swipi
 
 ## Demo video
 
+https://user-images.githubusercontent.com/41968239/164370104-f64e7909-9134-41bc-afcf-0c9c38d1b788.mp4
+
 ## Frontend testing
 
+https://user-images.githubusercontent.com/41968239/164370005-402d5fb0-3472-4fbc-a169-411742e5d5b2.mp4
+
 ## Backend testing
+
+https://user-images.githubusercontent.com/41968239/164370370-55236aa1-7ca3-4c80-b6ff-12dfcf95afc7.mp4
+
