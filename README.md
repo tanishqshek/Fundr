@@ -23,3 +23,24 @@ Our application focuses on fulfilling this purpose with the help of a card-swipi
 
 - Golang
 - ReactJs
+
+## How to run
+
+1. Clone the repository and change directory to 'backend'
+2. Run 'go run main.go'
+3. Change directory to 'frontend'
+4. Run 'yarn start'
+
+## Flow of the application
+
+1. Founder signs up and then logs in.
+2. Founder enters the pitch details accompanied by the tags.
+3. Investor signs up and logs in.
+4. Investor enters the desired tags and cards are rendered accordingly.
+5. On a successful match, an email is sent with the founder's contact to the investor to carry on the deal further.
+
+## Demo video
+
+## Frontend testing
+
+## Backend testing
