@@ -241,18 +241,15 @@ class SignUpComponent extends Component {
                 displayEmpty
                 name="typeOfUser"
                 value={this.state.typeOfUser}
-                defaultValue="Investor"
+                // defaultValue="Investor"
                 label="Select Founder or investor*"
                 floatingLabelText="Founder or Investor"
                 onChange={this.handleChange}
               >
-                <MenuItem value="Founder" primaryText="Founder" selected>
-                  Founder
-                </MenuItem>
-                <MenuItem value="Investor" primaryText="Investor">
-                  Investor
-                </MenuItem>
+                <MenuItem value={'Founder'}>Founder</MenuItem>
+                <MenuItem value={'Investor'}>Investor</MenuItem>
               </Select>
+              
               <Button
                 type="submit"
                 fullWidth
